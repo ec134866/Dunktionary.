@@ -17,7 +17,7 @@
     <body>
         <div class= "container">
             <div class = "row">
-                <div class = "col-sm-3">
+                <div class = "col-sm-2">
                     <ul class="list-unstyled">
                         <br>
                         <h4 style= "font-size:1.5vw"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h5>
@@ -29,22 +29,18 @@
                     </ul>
                 </div>
               <div class = "col-sm-6">
-                <div style="width: 37vw; height: 25vw; float: none; clear: both; margin: 2px auto;">
-                  <embed
-                    src="{{pass.video}}?&mute=1&rel=0"
-                    wmode="transparent"
-                    type="video/mp4"
-                    width="100%" height="100%"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    allowfullscreen
-                    title="{{pass.name | capfirst }}"
-                  >
+                <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
+                  <video style="width: 100%; height: auto; display: block;" controls loop>
+                      <source src="{{pass.video}}" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </div>   
                   <h1>{{pass.name | capfirst }} pass </h1>
                   <h1>Hierarchy : {{pass.hierarchy}} </h1>
                   <h1>Prerequistes : {{pass.prereq}} </h1>
                   <h1>Passer : {{pass.dunker}} </h1>
               </div>
-              <div class = "col-sm-3" align=right>
+              <div class = "col-sm-4" align=right>
                     <div class= "row">
                       {% for pass in passes %}
                               <a href= {% url 'passlib' %}{{pass.altName}}>
