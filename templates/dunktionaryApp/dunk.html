@@ -29,6 +29,17 @@
                     </ul>
                 </div>
               <div class = "col-sm-6">
+                <div style="width: 37vw; height: 25vw; float: none; clear: both; margin: 2px auto;">
+                  <embed
+                    src="{{dunk.video}}?&mute=1&rel=0"
+                    wmode="transparent"
+                    type="video/mp4"
+                    width="100%" height="100%"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen
+                    title="{{dunk.name | capfirst }}"
+                  >
+                </div>
                 <div style="width: 37vw; height: 25vw; margin: 2px auto;">
                   <video id="custom-video" width="100%" height="100%" controls>
                     <source src="{{dunk.video}}" type="video/mp4">
@@ -78,6 +89,12 @@
                 
                   videoElement.parentNode.appendChild(controlContainer);
                 </script>
+                <div style="width: 37vw; height: 25vw; margin: 2px auto;">
+                  <video width="100%" height="100%" controls>
+                    <source src="{{dunk.video}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>                
                 
                   <h1>{{dunk.name | capfirst }} dunk </h1>
                   <h1>Hierarchy : {{dunk.hierarchy}} </h1>
