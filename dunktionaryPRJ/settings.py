@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Dunktionary$pass',
         'USER': 'Dunktionary',
-        'PASSWORD': 'dunkteam!',
+        'PASSWORD': 'password',
         'HOST': 'Dunktionary.mysql.pythonanywhere-services.com',
     }
 }
