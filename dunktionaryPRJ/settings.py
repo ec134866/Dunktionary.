@@ -76,17 +76,17 @@ WSGI_APPLICATION = 'dunktionaryPRJ.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Database engine
-        'NAME': BASE_DIR / 'db.sqlite3',        # Database file path
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'Dunktionary$default',
-    #     'USER': 'Dunktionary',
-    #     'PASSWORD': 'dunkteam!',
-    #     'HOST': 'Dunktionary.mysql.pythonanywhere-services.com',
+    #     'ENGINE': 'django.db.backends.sqlite3',  # Database engine
+    #     'NAME': BASE_DIR / 'db.sqlite3',        # Database file path
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Dunktionary$pass',
+        'USER': 'Dunktionary',
+        'PASSWORD': 'dunkteam!',
+        'HOST': 'Dunktionary.mysql.pythonanywhere-services.com',
+    }
 }
 
 
