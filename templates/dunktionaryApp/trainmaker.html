@@ -1,0 +1,103 @@
+{% extends 'base.html'%}
+      
+        {% block title %}
+          <title> Train Maker </title>
+        {% endblock %}
+        
+        {% block search %}
+        <h1> Search </h1>
+          <form method ="get" action="{% url 'search' %}">
+              <label for= "name"> Dunk Name </label>
+              <input type="text" id="name" placeholder="Search..." name = "name">
+          </form>
+        {% endblock %}
+
+{% block content %}
+  <main>
+    <body>
+        <div class= "container">
+            <div class = "row">
+                <div class = "col-sm-3">
+                    <ul class="list-unstyled">
+                        <br>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
+                            <br>
+                            <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
+                            <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
+                            <h6 style= "font-size:1vw"><a href="../DunkTheory" class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
+                    </ul>
+                </div>
+                <div class = "col-sm-6">
+                      <br><br><br><br><br>
+                      <h4>
+                      {% if train %}
+                          <ul>
+                              {% for item in train %}
+                              <li>{{ item }}</li>
+                              {% endfor %}
+                          </ul>
+                      {% else %}
+                          <p>No valid train could be generated.</p>
+                      {% endif %}
+                    </h4>
+                  </div>
+                  <div class = "col-sm-3">
+                          <br><br><br><br>
+                          <form method="post" action="{% url 'makeATrain' %}">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm">
+                                        <span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'0' }}</span>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'0' }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-sm">
+                                        <span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'0' }}</span>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'0' }}">
+                                </div>
+                            </div>
+                            <br>
+                            <input type="submit" value="Generate Train" class="btn btn-primary">
+                        </form>
+                                
+                        <script>
+                          function incrementNumber(inputId) {
+                            var inputDisplayElement = document.getElementById(inputId + "_display");
+                            var inputElement = document.getElementById(inputId);
+                            var currentValue = parseInt(inputElement.value);
+                            inputElement.value = currentValue + 1;
+                            inputDisplayElement.innerText = currentValue + 1;
+                        }
+                    
+                        function decrementNumber(inputId) {
+                            var inputDisplayElement = document.getElementById(inputId + "_display");
+                            var inputElement = document.getElementById(inputId);
+                            var currentValue = parseInt(inputElement.value);
+                            if (currentValue > 0) {
+                                inputElement.value = currentValue - 1;
+                                inputDisplayElement.innerText = currentValue - 1;
+                            }
+                        }
+                        </script>
+                  </div>          
+            </div>
+        </div>
+    </body>
+  </main>
+{% endblock %}
