@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8=(fpzavrjks!j2(ld7w5m@7z*^-s08e&6)gq@)_pru1r^(6#1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dunktionary.pythonanywhere.com']
+ALLOWED_HOSTS = ['dunktionary.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -73,15 +73,15 @@ WSGI_APPLICATION = 'dunktionaryPRJ.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Dunktionary$default',
-        'USER': 'Dunktionary',
-        'PASSWORD': 'dunkteam!',
-        'HOST': 'Dunktionary.mysql.pythonanywhere-services.com',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Dunktionary$default',
+#         'USER': 'Dunktionary',
+#         'PASSWORD': 'dunkteam!',
+#         'HOST': 'Dunktionary.mysql.pythonanywhere-services.com',
+#     }
+# }
 
 
 
