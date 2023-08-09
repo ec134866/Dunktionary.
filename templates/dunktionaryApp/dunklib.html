@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+      
+        {% block title %}
+          <title> Dunk Library </title>
+        {% endblock %}
+        
+        {% block search %}
+        <h1> Search </h1>
+          <form method ="get" action="{% url 'search' %}">
+              <label for= "name"> Dunk Name </label>
+              <input type="text" id="name" placeholder="Search..." name = "name">
+          </form>
+        {% endblock %}
+
+{% block content %}
+<main>
+    <body>
+        <div class= "container">
+            <div class = "row">
+                <div class = "col-sm-3">
+                    <ul class="list-unstyled">
+                        <br> <br> <br> <br>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
+                            <br>
+                            <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
+                            <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
+                            <h6 style= "font-size:1vw"><a href="../DunkTheory" class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
+                    </ul>
+                </div>
+                <div class = "col-sm-9">
+                    <br><br><br><br>
+                    <div class= "row">
+                        {% for dunk in dunks %}
+                            <div class = "col-sm-4">
+                                <a href= ../Dunks/{{dunk.altName}}>
+                                    <div class="card">
+                                        <img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
+                                        <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
+                                            <h4 class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>       
+                </div> 
+            </div>
+        </div>
+        <br> <br><br> <br><br> <br><br> <br>
+    </body>
+</main>
+
+{% endblock %}

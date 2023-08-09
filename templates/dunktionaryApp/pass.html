@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+      
+        {% block title %}
+          <title> {{pass.name}} Pass </title>
+        {% endblock %}
+        {% block search %}
+        <h1> Search </h1>
+          <form method ="get" action="{% url 'search' %}">
+              <label for= "name"> Dunk Name </label>
+              <input type="text" id="name" placeholder="Search..." name = "name">
+          </form>
+        {% endblock %}
+        
+
+{% block content %}
+  <main>
+    <body>
+        <div class= "container">
+            <div class = "row">
+                <div class = "col-sm-3">
+                    <ul class="list-unstyled">
+                        <br>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h5>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h5>
+                            <br>
+                            <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
+                            <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
+                            <h6 style= "font-size:1vw"><a href="../DunkTheory" class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
+                    </ul>
+                </div>
+              <div class = "col-sm-6">
+                <div style="width: 37vw; height: 25vw; float: none; clear: both; margin: 2px auto;">
+                  <embed
+                    src="{{pass.video}}?&mute=1&rel=0"
+                    wmode="transparent"
+                    type="video/mp4"
+                    width="100%" height="100%"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen
+                    title="{{pass.name | capfirst }}"
+                  >
+                </div>
+                  <h1>{{pass.name | capfirst }} pass </h1>
+                  <h1>Hierarchy : {{pass.hierarchy}} </h1>
+                  <h1>Prerequistes : {{pass.prereq}} </h1>
+                  <h1>Passer : {{pass.dunker}} </h1>
+              </div>
+              <div class = "col-sm-3" align=right>
+                    <div class= "row">
+                      {% for pass in passes %}
+                              <a href= {% url 'passlib' %}{{pass.altName}}>
+                                    <div class="card" style= "width: 17vw; height: 8vw" align=center>
+                                      <img class="card-img" src={{pass.image}} alt={{pass.name}}>
+                                      <div class="card-img-overlay position-absolute top-50 start-50 translate-middle text-white">
+                                          <p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{pass.name}}<p>
+                                      </div>
+                                  </div>
+                              </a>
+                      {% endfor %}
+                    </div>       
+              </div>    
+          </div>
+      </div>
+    </body>
+  </main>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html'%}
+        {% block title %}
+          <title> The Dunktionary </title>
+        {% endblock %}
+        
+        {% block search %}
+        <h1> Search </h1>
+          <form method ="get" action="{% url 'search' %}">
+              <label for= "name"> Dunk Name </label>
+              <input type="text" id="name" placeholder="Search Dunktionary..." name = "name">
+          </form>
+        {% endblock %}
+        
+        
+{% block content %}
+
+{% comment %} search feature - change to IF statement {% endcomment %}
+{% comment %} search feature - add full-text search {% endcomment %}
+{% comment %} dunk/pass title cards - variable sizing text {% endcomment %}
+{% comment %} index view - updated images for Passes, Dunks, Variations, and Dunk Theory {% endcomment %}
+{% comment %} index view - increase text size & make it responsive "all inclusive guide"  {% endcomment %}
+{% comment %} pass & dunk view Add alternate names to model {% endcomment %}
+{% comment %} pass & dunk view - 1st column smaller width {% endcomment %}
+{% comment %} pass & dunk view - update text size underneath video {% endcomment %}
+{% comment %} pass & dunk view add prereq link {% endcomment %}
+{% comment %} pass & dunk view - 3rd column right justified pic links {% endcomment %}
+{% comment %} pass & dunk view - 3rd column make sure only populates 4 videos all at same size {% endcomment %}
+{% comment %} variations & theory view - CREATE {% endcomment %}
+{% comment %} variations & theory view - update url routes in Base, Index, & Dunk/Pass | href= {% url '' %} | {% endcomment %}
+{% comment %} deploy using textbook {% endcomment %}
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <div class= "card"> 
+            <div class= align-middle>
+              <img class="card-img-top" src= "https://drive.google.com/uc?id=1hlbhJoSK6EbfANIWnOOQy9tmmgWxbzbt&export=download">
+              <div class= "card-img-overlay card-inverse">
+                <h1 class="jumbotron-heading text-white" style= "font-size:4vw"> The Dunktionary </h1> 
+              </div>
+            </div>  
+          </div>   
+            <p class="lead text-muted" style="font-size:2vw;" >The all-inclusive guide to Acrobatic Dunking: <br> covering terminology and theory </p>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                  <a href= {% url 'passlib'%}>
+                    <img class="h-100 img-responsive"  style="height: 125px; width: 100%; display: block;" src= "https://drive.google.com/uc?id=1OrDjONTtCZKAb55Jh77Siccgow6pzXVm&export=download" alt="Really cool image" >
+                    <div class="position-absolute top-50 start-50 translate-middle link-light">
+                      <h1>Passes</h1>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a href= {% url 'makeATrain'%}>
+                    <img class="h-50 img-responsive"  style="height: 125px; width: 100%; display: block;" src= "https://drive.google.com/uc?id=1nfgxSSR6Kek8-8uHz4sB9I055hIDz0Ur&export=download">
+                    <div class="position-absolute top-0 start-50 text-dark translate-middle-x link-dark">
+                      <h1>Train Maker</h1>
+                    </div>
+                  </a>
+                  <a href= "../DunkTheory">
+                    <img class="h-50 img-responsive"  style="height: 125px; width: 100%; display: block;" src= "https://lh3.googleusercontent.com/drive-viewer/AFGJ81qIwG1AA0hBuq-yN-Es8ibMh-PXFGzmxnGjyG6fYN6vue3z3OH385yRBXcOnD9bh_celshBaPZ6edUClZEeR4bc6pcXew=s1600">
+                    <div class="position-absolute bottom-0 start-50 text-dark translate-middle-x link-dark">
+                      <h1>Dunk Theory & Safety</h1>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <a href= {% url 'dunklib'%}>
+                    <img class="h-100 img-responsive"  style="height: 125px; width: 100%; display: block;" src= "https://drive.google.com/uc?id=1WuAerArBvjG4qasVs-YZ_3TdW14VIprX&export=download"  >
+                    <div class="position-absolute top-50 start-50  translate-middle link-light">
+                    <h1>Dunks</h1>
+                  </div>
+                </a>
+                </div>
+            </div>
+          </div>
+        </div>    
+      </div>
+          
+    </main>
+    
+
+    <footer class="text-muted">
+      <div class="container">
+
+      </div>
+    </footer>
+
+{% endblock %}
+
+
+
