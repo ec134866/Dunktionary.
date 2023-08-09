@@ -75,10 +75,14 @@ WSGI_APPLICATION = 'dunktionaryPRJ.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Dunktionary$<your_database_name>',
+        'USER': 'Dunktionary',
+        'PASSWORD': '<dunkteam!>',
+        'HOST': 'Dunktionary.mysql.pythonanywhere-services.com',
     }
 }
+
 
 
 # Password validation
