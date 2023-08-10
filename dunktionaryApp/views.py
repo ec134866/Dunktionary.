@@ -91,15 +91,23 @@ def passPageView(request, pass_altName):
 #     return render(request, "dunktionaryApp/search.html", context)
 
 def searchPageView(request):
-    query = request.GET.get('name', '')
+    try:
+        name = request.GET['name']
 
-    # Perform full-text search on the 'name' field using MySQL's MATCH AGAINST
-    db_dunks = Dunk.objects.filter(
-        Q(name__search=query) | Q(name__icontains=query)
-    )
-    db_passes = Pass.objects.filter(
-        Q(name__search=query) | Q(name__icontains=query)
-    )
+        db_dunks = Dunk.objects.filter(
+            Q(name__search=name) | Q(name__icontains=name)
+        )
+    except:
+        db_dunks = Dunk.objects.all()
+
+    try:
+        name = request.GET['name']
+
+        db_passes = Pass.objects.filter(
+            Q(name__search=name) | Q(name__icontains=name)
+        )
+    except: 
+        db_passes = Pass.objects.all()
 
     context = {
         'dunks': db_dunks,
