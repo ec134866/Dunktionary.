@@ -3,10 +3,13 @@ from .models import Dunk, Pass
 
 
 
+class FilterPass(admin.ModelAdmin):
+    list_display = ("name", "image", "video", "dunker")
+    list_filter = ("dunker",)
 
-class Filter(admin.ModelAdmin):
-    list_display = ("Image", "Video", "Dunker")
-    list_filter = ("dunker")
+class FilterDunk(admin.ModelAdmin):
+    list_display = ("name", "image", "video", "dunker")
+    list_filter = ("dunker",)
 
-admin.site.register(Dunk, Filter)
-admin.site.register(Pass, Filter)
+admin.site.register(Dunk, FilterDunk)
+admin.site.register(Pass, FilterPass)
