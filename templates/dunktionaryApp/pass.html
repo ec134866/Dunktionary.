@@ -37,7 +37,11 @@
                 </div>   
                   <h1>{{pass.name | capfirst }} pass </h1>
                   <h1>Hierarchy : {{pass.hierarchy}} </h1>
-                  <h1>Prerequistes : {{pass.prereq}} </h1>
+                  <h1>
+                    <a href={% url 'passlib'%}{{pass.prereq}} class="text-dark text-decoration-none">
+                        Prerequisites: {{ pass.prereq|replace_underscore }}
+                    </a>
+                  </h1>
                   <h1>Passer : {{pass.dunker}} </h1>
               </div>
               <div class = "col-sm-4" align=right>
