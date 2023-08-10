@@ -68,7 +68,7 @@ def searchPageView(request):
     try: 
         name = request.GET['name']
         
-        db_dunks = Dunk.objects.filter(name=name) 
+        db_dunks = Dunk.objects.filter(name__icontains=name) 
         
     except: 
         db_dunks = Dunk.objects.all()
@@ -76,7 +76,7 @@ def searchPageView(request):
     try: 
         name = request.GET['name']
         
-        db_passes = Pass.objects.filter(name=name) 
+        db_passes = Pass.objects.filter(name__icontains=name) 
         
     except: 
         db_passes = Pass.objects.all()
