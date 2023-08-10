@@ -37,7 +37,11 @@
             </div>            
               <h1>{{dunk.name | capfirst }} dunk </h1>
               <h1>Hierarchy : {{dunk.hierarchy}} </h1>
-              <h1><a href="" class="text-dark text-decoration-none">Prerequistes : {{dunk.prereq}}</a></h1>
+              <h1>
+                <a href={% url 'dunklib'%}{{dunk.prereq}} class="text-dark text-decoration-none">
+                    Prerequisites: {{ dunk.prereq|replace:"_":" " }}
+                </a>
+              </h1>
               <h1>Dunker : {{dunk.dunker}} </h1>
           </div>
           <div class = "col-sm-4">
