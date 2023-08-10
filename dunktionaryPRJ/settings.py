@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dunktionaryApp.apps.DunktionaryappConfig',
-    'django_mysql',
 ]
 
 MIDDLEWARE = [
