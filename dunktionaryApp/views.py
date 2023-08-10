@@ -5,6 +5,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 from .trainmaker import make_a_train
 from django.db.models import Q
 from django.contrib.postgres.search import SearchQuery, SearchRank
+from django.db import connection
 
 
 def indexPageView(request):
@@ -90,21 +91,58 @@ def passPageView(request, pass_altName):
 
 #     return render(request, "dunktionaryApp/search.html", context)
 
-def searchPageView(request):
+# def searchPageView(request):
 
-    name = request.GET['name']
+#     name = request.GET['name']
 
-    db_dunks = Dunk.objects.filter(
-        Q(name__search=name) | Q(name__icontains=name)
-    )
+#     db_dunks = Dunk.objects.filter(
+#         Q(name__search=name) | Q(name__icontains=name)
+#     )
 
-    db_passes = Pass.objects.filter(
-        Q(name__search=name) | Q(name__icontains=name)
-    )
+#     db_passes = Pass.objects.filter(
+#         Q(name__search=name) | Q(name__icontains=name)
+#     )
 
+#     context = {
+#         'dunks': db_dunks,
+#         'passes': db_passes,
+#     }
+
+#     return render(request, "dunktionaryApp/search.html", context)
+
+
+def searchPageView(request): 
+    try: 
+        name = request.GET['name']
+        
+        # Perform full-text search using raw SQL query
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT * FROM dunktionaryApp_dunk WHERE MATCH(name) AGAINST(%s IN BOOLEAN MODE)",
+                [name]
+            )
+            db_dunks = cursor.fetchall()
+        
+    except: 
+        db_dunks = Dunk.objects.all()
+    
+    try: 
+        name = request.GET['name']
+        
+        # Perform full-text search using raw SQL query
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT * FROM dunktionaryApp_pass WHERE MATCH(name) AGAINST(%s IN BOOLEAN MODE)",
+                [name]
+            )
+            db_passes = cursor.fetchall()
+        
+    except: 
+        db_passes = Pass.objects.all()
+    
     context = {
         'dunks': db_dunks,
-        'passes': db_passes,
+        'passes': db_passes
     }
 
     return render(request, "dunktionaryApp/search.html", context)
