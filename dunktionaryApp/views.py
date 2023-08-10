@@ -14,20 +14,6 @@ def indexPageView(request):
 
     return render(request, 'dunktionaryApp/index.html', context)
 
-def search2PageView(request):
-    q = request.GET.get('q')
-
-    if q:
-        dunks = Dunk.objects.filter(name__search=q)
-        passes = Pass.objects.filter(name__search=q)
-    else:
-        dunks = None
-        passes = None
-
-    context = {'dunks' : dunks }
-    context = {'passes' : passes } 
-
-    return render(request, "dunktionaryApp/search2.html", context)
 
 def passLibPageView(request):
     db_passes = Pass.objects.all()
