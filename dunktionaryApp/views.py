@@ -64,46 +64,33 @@ def passPageView(request, pass_altName):
     return render(request, "dunktionaryApp/pass.html", context)
 
 
-# def searchPageView(request): 
-#     try: 
-#         name = request.GET['name']
-        
-#         db_dunks = Dunk.objects.filter(name=name) 
-        
-#     except: 
-#         db_dunks = Dunk.objects.all()
-    
-#     try: 
-#         name = request.GET['name']
-        
-#         db_passes = Pass.objects.filter(name=name) 
-        
-#     except: 
-#         db_passes = Pass.objects.all()
-    
-    
-
-#     context = {
-#         'dunks' : db_dunks,
-#         'passes' : db_passes
-#     }
-
-#     return render(request, "dunktionaryApp/search.html", context)
-# ^^ this is not full-text search
-
-
 def searchPageView(request): 
-    name = request.get('name')
-    qd = Pass.objects.filter(name__contains=name)
-    qd = Dunk.objects.filter(name__contains=name)
-
+    try: 
+        name = request.GET['name']
+        
+        db_dunks = Dunk.objects.filter(name=name) 
+        
+    except: 
+        db_dunks = Dunk.objects.all()
+    
+    try: 
+        name = request.GET['name']
+        
+        db_passes = Pass.objects.filter(name=name) 
+        
+    except: 
+        db_passes = Pass.objects.all()
+    
+    
 
     context = {
-        'dunks' : qd,
-        'passes' : qd
+        'dunks' : db_dunks,
+        'passes' : db_passes
     }
 
     return render(request, "dunktionaryApp/search.html", context)
+# ^^ this is not full-text search
+
     
 
 def trainPageView(request):
