@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block search %}
+    <h1> Search </h1>
+    <form method ="get" action="{% url 'search' %}">
+        <label for= "name"> Dunk Name </label>
+        <input type="text" id="name" placeholder="Search..." name = "name">
+    </form>
 {% endblock %}
 
 {% block content %}
