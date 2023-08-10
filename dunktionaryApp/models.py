@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.models import Lookup
+from django.contrib.postgres.search import SearchVector, SearchQuery
 
 class Search(Lookup):
     lookup_name = 'search'
