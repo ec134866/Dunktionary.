@@ -2,5 +2,11 @@ from django.contrib import admin
 from .models import Dunk, Pass
 
 
-admin.site.register(Dunk)
-admin.site.register(Pass)
+
+
+class Filter(admin.ModelAdmin):
+    list_display = ("Image", "Video", "Dunker")
+    list_filter = ("Dunker")
+
+admin.site.register(Dunk, Filter)
+admin.site.register(Pass, Filter)
