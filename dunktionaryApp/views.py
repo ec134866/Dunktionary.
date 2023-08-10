@@ -4,9 +4,7 @@ from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from .trainmaker import make_a_train
 from django.db.models import Q
-from django.contrib.postgres.search import SearchQuery, SearchRank
-from django.db import connection
-from django.contrib.postgres.search import SearchVector
+
 
 
 def indexPageView(request):
@@ -94,19 +92,18 @@ def passPageView(request, pass_altName):
 # ^^ this is not full-text search
 
 
-def searchPageView(request):
-    query = request.GET.get('name', '')
+def searchPageView(request): 
+    name = request.get('name')
+    qd = Pass.objects.filter(name__contains=name)
+    qd = Dunk.objects.filter(name__contains=name)
 
-    db_dunks = Dunk.objects.annotate(search=SearchVector('name')).filter(search=query)
-    db_passes = Pass.objects.annotate(search=SearchVector('name')).filter(search=query)
 
     context = {
-        'dunks': db_dunks,
-        'passes': db_passes,
+        'dunks' : qd,
+        'passes' : qd
     }
 
     return render(request, "dunktionaryApp/search.html", context)
-
     
 
 def trainPageView(request):
