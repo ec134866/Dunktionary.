@@ -113,44 +113,26 @@ def passPageView(request, pass_altName):
 
 #     return render(request, "dunktionaryApp/search.html", context)
 
-# def searchPageView(request): 
-#     try:
-#         query = request.GET.get('name')
-#         if query:
-#             db_dunks = Dunk.objects.filter(name__search=query)
-#             db_passes = Pass.objects.filter(name__search=query)
-#         else:
-#             db_dunks = Dunk.objects.none()
-#             db_passes = Pass.objects.none()
+def searchPageView(request): 
+    try:
+        query = request.GET.get('name')
+        if query:
+            db_dunks = Dunk.objects.filter(name__search=query)
+            db_passes = Pass.objects.filter(name__search=query)
+        else:
+            db_dunks = Dunk.objects.none()
+            db_passes = Pass.objects.none()
 
-#     except Exception as e:
-#         db_dunks = Dunk.objects.none()
-#         db_passes = Pass.objects.none()
-
-#     context = {
-#         'dunks': db_dunks,
-#         'passes': db_passes,
-#     }
-
-#     return render(request, "dunktionaryApp/search.html", context)
-
-def searchPageView(request):
-    name = request.GET.get('name', '') 
-
-    if name:
-        db_dunks = Dunk.objects.filter(name__search=name)
-        db_passes = Pass.objects.filter(name__search=name)
-    else:
-        db_dunks = Dunk.objects.none()  
-        db_passes = Pass.objects.none()  
+    except Exception as e:
+        db_dunks = Dunk.objects.none()
+        db_passes = Pass.objects.none()
 
     context = {
         'dunks': db_dunks,
-        'passes': db_passes
+        'passes': db_passes,
     }
 
     return render(request, "dunktionaryApp/search.html", context)
-
 
     
 
