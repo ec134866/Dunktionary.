@@ -110,27 +110,16 @@ def passPageView(request, pass_altName):
 
 #     return render(request, "dunktionaryApp/search.html", context)
 
+def searchPageView(request):
+    name = request.GET.get('name', '') 
 
-def searchPageView(request): 
-    name = request.GET['name']
-    
-    # Perform full-text search using raw SQL query
-    with connection.cursor() as cursor:
-        cursor.execute(
-            "SELECT * FROM dunktionaryApp_dunk WHERE MATCH(name) AGAINST(%s IN BOOLEAN MODE)",
-            [name]
-        )
-        db_dunks = cursor.fetchall()
+    if name:
+        db_dunks = Dunk.objects.filter(name__search=name)
+        db_passes = Pass.objects.filter(name__search=name)
+    else:
+        db_dunks = Dunk.objects.none()  
+        db_passes = Pass.objects.none()  
 
-    # Perform full-text search using raw SQL query
-    with connection.cursor() as cursor:
-        cursor.execute(
-            "SELECT * FROM dunktionaryApp_pass WHERE MATCH(name) AGAINST(%s IN BOOLEAN MODE)",
-            [name]
-        )
-        db_passes = cursor.fetchall()
-        
-    
     context = {
         'dunks': db_dunks,
         'passes': db_passes
