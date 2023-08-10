@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from .trainmaker import make_a_train
+from django.db.models import Q
+from django.contrib.postgres.search import SearchQuery, SearchRank
 
 
 def indexPageView(request):
@@ -13,6 +15,9 @@ def indexPageView(request):
     }
 
     return render(request, 'dunktionaryApp/index.html', context)
+
+
+
 
 
 def passLibPageView(request):
@@ -32,6 +37,9 @@ def dunkLibPageView(request):
     }
 
     return render(request, 'dunktionaryApp/dunklib.html', context)
+
+
+
 
 def dunkPageView(request, dunk_altName):
     db_dunks = Dunk.objects.get(altName=dunk_altName)
@@ -56,31 +64,51 @@ def passPageView(request, pass_altName):
     return render(request, "dunktionaryApp/pass.html", context)
 
 
-def searchPageView(request): 
-    try: 
-        name = request.GET['name']
+# def searchPageView(request): 
+#     try: 
+#         name = request.GET['name']
         
-        db_dunks = Dunk.objects.filter(name=name) 
+#         db_dunks = Dunk.objects.filter(name=name) 
         
-    except: 
-        db_dunks = Dunk.objects.all()
+#     except: 
+#         db_dunks = Dunk.objects.all()
     
-    try: 
-        name = request.GET['name']
+#     try: 
+#         name = request.GET['name']
         
-        db_passes = Pass.objects.filter(name=name) 
+#         db_passes = Pass.objects.filter(name=name) 
         
-    except: 
-        db_passes = Pass.objects.all()
+#     except: 
+#         db_passes = Pass.objects.all()
     
     
 
+#     context = {
+#         'dunks' : db_dunks,
+#         'passes' : db_passes
+#     }
+
+#     return render(request, "dunktionaryApp/search.html", context)
+
+def searchPageView(request):
+    query = request.GET.get('name', '')
+
+    # Perform full-text search on the 'name' field using MySQL's MATCH AGAINST
+    db_dunks = Dunk.objects.filter(
+        Q(name__search=query) | Q(name__icontains=query)
+    )
+    db_passes = Pass.objects.filter(
+        Q(name__search=query) | Q(name__icontains=query)
+    )
+
     context = {
-        'dunks' : db_dunks,
-        'passes' : db_passes
+        'dunks': db_dunks,
+        'passes': db_passes,
     }
 
     return render(request, "dunktionaryApp/search.html", context)
+
+
     
 
 def trainPageView(request):
