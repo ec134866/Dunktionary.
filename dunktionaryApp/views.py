@@ -90,6 +90,9 @@ def passPageView(request, pass_altName):
 #     }
 
 #     return render(request, "dunktionaryApp/search.html", context)
+# ^^works
+
+
 
 # def searchPageView(request):
 
@@ -102,6 +105,27 @@ def passPageView(request, pass_altName):
 #     db_passes = Pass.objects.filter(
 #         Q(name__search=name) | Q(name__icontains=name)
 #     )
+
+#     context = {
+#         'dunks': db_dunks,
+#         'passes': db_passes,
+#     }
+
+#     return render(request, "dunktionaryApp/search.html", context)
+
+# def searchPageView(request): 
+#     try:
+#         query = request.GET.get('name')
+#         if query:
+#             db_dunks = Dunk.objects.filter(name__search=query)
+#             db_passes = Pass.objects.filter(name__search=query)
+#         else:
+#             db_dunks = Dunk.objects.none()
+#             db_passes = Pass.objects.none()
+
+#     except Exception as e:
+#         db_dunks = Dunk.objects.none()
+#         db_passes = Pass.objects.none()
 
 #     context = {
 #         'dunks': db_dunks,
