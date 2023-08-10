@@ -17,7 +17,7 @@
     <body>
         <div class= "container">
             <div class = "row">
-                <div class = "col-sm-3">
+                <div class = "col-sm-2">
                     <ul class="list-unstyled">
                         <br>
                         <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
@@ -42,7 +42,7 @@
                       {% endif %}
                     </h4>
                   </div>
-                  <div class = "col-sm-3">
+                  <div class = "col-sm-4">
                           <br><br><br><br>
                           <form method="post" action="{% url 'makeATrain' %}">
                             {% csrf_token %}
