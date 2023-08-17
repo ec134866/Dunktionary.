@@ -30,8 +30,8 @@
                 <div class = "col-sm-10">
                     <br><br><br><br>
                     <div class= "row">
-                        {% for pass in passes %}
-                            {% if {{pass.image}} %}
+                        {% if {{pass.image}} %}
+                            {% for pass in passes %}
                                 <div class = "col-sm-4">
                                     <a href= ../Passes/{{pass.altName}}>
                                         <div class="card">
@@ -42,8 +42,8 @@
                                         </div>
                                     </a>
                                 </div>
-                            {% endif %}
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>       
                 </div> 
             </div>
