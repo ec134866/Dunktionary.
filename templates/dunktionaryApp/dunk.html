@@ -32,17 +32,20 @@
           </div>
           <div class = "col-sm-6">
             <div class="container-fluid">
-              <div class="row justify-content-center">
-                  <div class="col-sm-4">
-                      <button class="btn btn-primary" id="playbackButton1x">1x</button>
-                  </div>
-                  <div class="col-sm-4">
-                      <button class="btn btn-primary" id="playbackButton0.5x">0.5x</button>
-                  </div>
-                  <div class="col-sm-4">
-                      <button class="btn btn-primary" id="playbackButton0.25x">0.25x</button>
-                  </div>
-              </div>
+              <button class="btn btn-primary" onclick="togglePlay()">
+                <i class="fa fa-play"></i> Play
+              </button>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
+                    <input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
+                </label>
+                <label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
+                    <input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
+                </label>
+                <label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
+                    <input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
+                </label>
+            </div>
             </div>      
             <div class="row justify-content-center">
               <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
@@ -60,27 +63,35 @@
                 </h1>
                 <h1>Dunker : {{dunk.dunker}} </h1>
             </div>
-            <div class = "col-sm-4">
-              <div class= "row" align=right>
-                {% for dunk in dunks %}
-                        <a href= {% url 'dunklib'%}{{dunk.altName}}>
-                            <div class="card" style= "width: 17vw; height: 8vw" align=center>
-                                <img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
-                                <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
-                                  <p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}<p>
-                                </div>
-                            </div>
-                        </a>
-                {% endfor %}
-              </div>       
-            </div>    
-          </div>
+          <div class = "col-sm-4">
+            <div class= "row" align=right>
+              {% for dunk in dunks %}
+                      <a href= {% url 'dunklib'%}{{dunk.altName}}>
+                          <div class="card" style= "width: 17vw; height: 8vw" align=center>
+                              <img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
+                              <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
+                                <p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}<p>
+                              </div>
+                          </div>
+                      </a>
+              {% endfor %}
+            </div>       
+          </div>    
+        </div>
       </div>
 
       <script>
         var video = document.getElementById('{{dunk.name}}');
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
+        }
+        
+        function togglePlay() {
+          if (video.paused) {
+              video.play();
+          } else {
+              video.pause();
+          }
         }
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
