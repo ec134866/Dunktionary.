@@ -93,10 +93,12 @@ def searchPageView(request):
     
 
 def trainPageView(request):
+    global forbidden_pass_pairs
+    
     if request.method == 'POST':
         num_people = int(request.POST.get('num_people', '0'))
         level = int(request.POST.get('level', '0'))
-        train = make_a_train(num_people, level)
+        train = make_a_train(num_people, level, forbidden_pass_pairs)
         context = {'train': train}
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     else:
