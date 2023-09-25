@@ -30,9 +30,23 @@
                       <h6 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
               </ul>
           </div>
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" id="playbackButton1x">1x</button>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" id="playbackButton0.5x">0.5x</button>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" id="playbackButton0.25x">0.25x</button>
+                </div>
+            </div>
+          </div>      
+          
           <div class = "col-sm-6">
             <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-              <video style="width: 100%; height: auto; display: block;" controls loop>
+              <video id="{{dunk.name}}" style="width: 100%; height: auto; display: block;" controls loop>
                   <source src="{{dunk.video}}" type="video/mp4">
                   Your browser does not support the video tag.
               </video>
@@ -62,6 +76,28 @@
           </div>    
         </div>
       </div>
+
+      <script>
+        var video = document.getElementById('{{dunk.name}}');
+        function setPlaybackRate(rate) {
+            video.playbackRate = rate;
+        }
+
+        document.getElementById('playbackButton1x').addEventListener('click', function () {
+            setPlaybackRate(1.0);
+        });
+    
+        document.getElementById('playbackButton0.5x').addEventListener('click', function () {
+            setPlaybackRate(0.5);
+        });
+    
+        document.getElementById('playbackButton0.25x').addEventListener('click', function () {
+            setPlaybackRate(0.25);
+        });
+        video.play();
+      </script>
+
+
     </body>
   </main>
 {% endblock %}
