@@ -106,12 +106,24 @@ dunks = {
     ],
 }
 
+scoring_table = {
+    "Turn and Bounce": 0.1,
+    "Single Rider Turn and Bounce": 0.2,
+    "Double Rider Turn and Bounce": 0.3,
+    "Dunk": 0.4,
+    "Back Scratcher Dunk": 0.5,
+    "Single Rider Dunk": 0.6,
+}
+
+
 
 
 def make_a_train(num_people, level):
     valid_passes = []
     valid_dunks = []
     train = []
+
+    total_score = 0
 
     for pass_name, pass_variations in passes.items():
         for pass_details in pass_variations:
@@ -147,10 +159,13 @@ def make_a_train(num_people, level):
             if random.random() < variation_probability:
                 variation = random.choice(start_pass.variations)
                 train.append(f"Person 1: {variation} - {start_pass.name}")
+                total_score += scoring_table.get(variation, 0)
             else:
                 train.append(f"Person 1: {start_pass.name}")
+                total_score += scoring_table.get(start_pass.name, 0)
     else:
         train.append(f"Person 1: {start_pass.name}")
+        total_score += scoring_table.get(start_pass.name, 0)
 
     
     # Assign follow passes to the rest of the people
@@ -170,7 +185,11 @@ def make_a_train(num_people, level):
             if random.random() < variation_probability:
                 variation = pass_.get_random_variation()
                 train.append(f"Person {i}: {variation} - {pass_.name}")
-                continue
+                total_score += scoring_table.get(variation, 0)
+            else:
+                train.append(f"Person {i}: {pass_.name}")
+                total_score += scoring_table.get(pass_.name, 0)
+        
 
         train.append(f"Person {i}: {pass_.name}")
 
@@ -190,14 +209,17 @@ def make_a_train(num_people, level):
             if random.random() < variation_probability:
                 variation = dunk.get_random_variation()
                 train.append(f"Dunker: {variation} - {dunk.name}")
+                total_score += scoring_table.get(variation, 0)
             else:
                 train.append(f"Dunker: {dunk.name}")
+                total_score += scoring_table.get(dunk.name, 0)
     else:
         train.append(f"Dunker: {dunk.name}")
+        total_score += scoring_table.get(dunk.name, 0)
     
 
 
-    return train
+    return train, total_score
 
 
 

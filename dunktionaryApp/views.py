@@ -96,8 +96,8 @@ def trainPageView(request):
     if request.method == 'POST':
         num_people = int(request.POST.get('num_people', '0'))
         level = int(request.POST.get('level', '0'))
-        train = make_a_train(num_people, level)
-        context = {'train': train}
+        train, total_score = make_a_train(num_people, level)
+        context = {'train': train, 'total_score': total_score}
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     else:
         return render(request, 'dunktionaryApp/trainmaker.html')    
