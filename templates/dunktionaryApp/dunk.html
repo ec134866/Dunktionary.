@@ -85,6 +85,7 @@
         var video = document.getElementById('{{dunk.name}}');
         var playPauseButton = document.getElementById('playPauseButton');
         var playPauseText = document.getElementById('playPauseText');
+        video.controls = false;
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
         }
@@ -109,6 +110,10 @@
     
         document.getElementById('playbackButton0.25x').addEventListener('click', function () {
             setPlaybackRate(0.25);
+        });
+
+        video.addEventListener('click', function () {
+          video.controls = true;
         });
         video.play();
       </script>
