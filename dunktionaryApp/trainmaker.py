@@ -453,13 +453,16 @@ def make_a_train(num_people, level):
                 variation = pass_.get_random_variation()
                 train.append(f"Person {i}: {variation} - {pass_.name}")
                 total_score += scoring_table.get(f"{variation} {pass_.name}", 0)
+                total_score += .1
             else:
                 train.append(f"Person {i}: {pass_.name}")
                 total_score += scoring_table.get(pass_.name, 0)
+                total_score += .1
         
         else:
             train.append(f"Person {i}: {pass_.name}")
             total_score += scoring_table.get(pass_.name, 0)
+            total_score += .1
 
     # Assign dunk to the dunker
     dunker = [
@@ -478,12 +481,15 @@ def make_a_train(num_people, level):
                 variation = dunk.get_random_variation()
                 train.append(f"Dunker: {variation} - {dunk.name}")
                 total_score += scoring_table.get(f"{variation} {dunk.name}", 0)
+                total_score += .1
             else:
                 train.append(f"Dunker: {dunk.name}")
                 total_score += scoring_table.get(dunk.name, 0)
+                total_score += .1
     else:
         train.append(f"Dunker: {dunk.name}")
         total_score += scoring_table.get(dunk.name, 0)
+        total_score += .1
     
 
 
