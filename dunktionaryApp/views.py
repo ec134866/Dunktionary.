@@ -89,7 +89,6 @@ def searchPageView(request):
     }
 
     return render(request, "dunktionaryApp/search.html", context)
-# ^^ this is not full-text search
 
     
 
@@ -102,3 +101,13 @@ def trainPageView(request):
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     else:
         return render(request, 'dunktionaryApp/trainmaker.html')    
+    
+
+def theoryPageView(request):
+    db_dunks = Dunk.objects.all()
+
+    context = {
+        "dunk" : db_dunks
+    }
+
+    return render(request, 'dunktionaryApp/theory.html', context)

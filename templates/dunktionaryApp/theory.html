@@ -1,8 +1,9 @@
 {% extends 'base.html'%}
       
         {% block title %}
-          <title> Pass Library </title>
+          <title> Dunk Theory & Safety </title>
         {% endblock %}
+        
         {% block search %}
         <h1> Search </h1>
           <form method ="get" action="{% url 'search' %}">
@@ -10,15 +11,15 @@
               <input type="text" id="name" placeholder="Search..." name = "name">
           </form>
         {% endblock %}
-        
+
 {% block content %}
-<main>
+  <main>
     <body>
         <div class= "container">
             <div class = "row">
                 <div class = "col-sm-2">
                     <ul class="list-unstyled">
-                        <br> <br> <br> <br>
+                        <br>
                         <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
                         <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
                             <br>
@@ -27,26 +28,23 @@
                             <h6 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
                     </ul>
                 </div>
-                <div class = "col-sm-10">
-                    <br><br><br><br>
-                    <div class= "row">
-                        {% for pass in passes %}
-                            <div class = "col-sm-4">
-                                <a href= ../Passes/{{pass.altName}}>
-                                    <div class="card">
-                                        <img class="card-img" src={{pass.image}} alt={{pass.name}}>
-                                        <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
-                                            <h4 class="card-title" style = "text-shadow: 2px 1px 2px black;">{{pass.name}}</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>       
-                </div> 
+                <div class = "col-sm-6">
+                    <br><br><br><br><br>
+                    <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
+                    <video style="width: 100%; height: auto; display: block;" controls loop>
+                        <source src="https://drive.google.com/uc?id=188VcZJoa2o6V00Q8vXABIGQtBVQGMWEn&export=download" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    </div>   
+                    <h1> Good approach </h1>
+                    <br><br><br><br><br><br>
+                    <h5> Following passes: </h5>
+
+                </div>
+                  <div class = "col-sm-4">
+                  </div>          
             </div>
         </div>
-        <br> <br><br> <br><br> <br><br> <br>
     </body>
-</main>
+  </main>
 {% endblock %}
