@@ -352,7 +352,7 @@ def make_a_train(num_people, level):
         
         else:
             train.append(f"Person {i}: {pass_.name}")
-            total_score += scoring_table.get(start_pass.name, 0)
+            total_score += scoring_table.get(pass_.name, 0)
 
     # Assign dunk to the dunker
     dunker = [
