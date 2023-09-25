@@ -31,23 +31,15 @@
                 <div class = "col-sm-6">
                       <br><br><br><br><br>
                       <h4>
-                        {% if train %}
-                        <ul>
-                            {% with total_score=0 %}
-                            {% for item in train %}
-                            {% if 'Person' in item %}
-                            {% with parts=item.split(' - ') %}
-                            <li>{{ parts.0 }} ({{ parts.1|floatformat:2 }})</li>
-                            {% endwith %}
-                            {% with total_score=total_score+parts.1|floatformat:2 %}
-                            {% endif %}
-                            {% endfor %}
-                            {% endwith %}
-                        </ul>
-                        Total Score: {{ total_score }}
-                    {% else %}
-                        <p>No valid train could be generated.</p>
-                    {% endif %}
+                      {% if train %}
+                          <ul>
+                              {% for item in train %}
+                              <li>{{ item }}</li>
+                              {% endfor %}
+                          </ul>
+                      {% else %}
+                          <p>No valid train could be generated.</p>
+                      {% endif %}
                     </h4>
                     <br>
                     <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
