@@ -31,11 +31,11 @@
                 <div class = "col-sm-6">
                     <br><br><br><br><br>
                     <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-                    <video style="width: 100%; height: auto; display: block;" controls loop>
-                        <source src="https://drive.google.com/uc?id=188VcZJoa2o6V00Q8vXABIGQtBVQGMWEn&export=download" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    </div>   
+                        <video id="approachVid" style="width: 100%; height: auto; display: block;" controls loop>
+                            <source src="https://drive.google.com/uc?id=188VcZJoa2o6V00Q8vXABIGQtBVQGMWEn&export=download" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>                 
                     <h1> Good approach </h1>
                     <h3> Long hurdle, legs in front, powerful run </h3>
                     <br><br><br><br><br><br>
@@ -69,12 +69,17 @@
                         </div>
                     </div>
                     <br><br><br><br><br>
-
                 </div>
-                  <div class = "col-sm-4">
-                  </div>          
+                <div class = "col-sm-4">
+                </div>          
             </div>
         </div>
+        
+        
+        <script>
+            var video = document.getElementById('approachVid');
+            video.playbackRate = 0.5;
+        </script>
     </body>
   </main>
 {% endblock %}
