@@ -194,7 +194,7 @@ def make_a_train(num_people, level, forbidden_pass_pairs):
                     variation = pass_.get_random_variation()
                     current_pass = f"Person {i}: {variation} - {pass_.name}"
 
-            train.append(f"Person {i}: current_pass")
+            train.append(f"Person {i}: {current_pass}")
             
 
     # Assign dunk to the dunker
