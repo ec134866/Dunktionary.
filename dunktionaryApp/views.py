@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
-from .trainmaker import make_a_train
+from .trainmaker import make_a_train, forbidden_pass_pairs
 from django.db.models import Q
 
 
@@ -93,8 +93,6 @@ def searchPageView(request):
     
 
 def trainPageView(request):
-    global forbidden_pass_pairs
-    
     if request.method == 'POST':
         num_people = int(request.POST.get('num_people', '0'))
         level = int(request.POST.get('level', '0'))
