@@ -202,7 +202,7 @@ scoring_table = {
     "Cradle Rudi Bounce": 0.9,
     "Double Cradle Rudi Bounce": 1.3,
     "Around the World Rudi Bounce": 0.9,
-    "Double Around the World Rudi Bounce": 1.3,
+    "Double Around the World Rfudi Bounce": 1.3,
     "YoYo Rudi Bounce": 1.0,
     "Cradle Pop Rudi Bounce": 1.1,
     # 
@@ -317,7 +317,7 @@ def make_a_train(num_people, level):
             if random.random() < variation_probability:
                 variation = random.choice(start_pass.variations)
                 train.append(f"Person 1: {variation} - {start_pass.name}")
-                total_score += scoring_table.get(variation, 0)
+                total_score += scoring_table.get(f"{variation} {start_pass.name}", 0)
             else:
                 train.append(f"Person 1: {start_pass.name}")
                 total_score += scoring_table.get(start_pass.name, 0)
@@ -343,7 +343,7 @@ def make_a_train(num_people, level):
             if random.random() < variation_probability:
                 variation = pass_.get_random_variation()
                 train.append(f"Person {i}: {variation} - {pass_.name}")
-                total_score += scoring_table.get(variation, 0)
+                total_score += scoring_table.get(f"{variation} {pass_.name}", 0)
             else:
                 train.append(f"Person {i}: {pass_.name}")
                 total_score += scoring_table.get(pass_.name, 0)
@@ -367,7 +367,7 @@ def make_a_train(num_people, level):
             if random.random() < variation_probability:
                 variation = dunk.get_random_variation()
                 train.append(f"Dunker: {variation} - {dunk.name}")
-                total_score += scoring_table.get(variation, 0)
+                total_score += scoring_table.get(f"{variation} {dunk.name}", 0)
             else:
                 train.append(f"Dunker: {dunk.name}")
                 total_score += scoring_table.get(dunk.name, 0)
