@@ -32,17 +32,11 @@
                       <br><br><br><br><br>
                       <h4>
                       {% if train %}
-                        <ul>
-                            {% with total_points=0 %}
-                            {% for item in train %}
-                            {% if "Dunker" not in item %} {# Exclude the Dunker #}
-                            <li>{{ item }} - Points: {{ scoring_table.get(item, 0) }}</li>
-                            {% with total_points=total_points+scoring_table.get(item, 0) %}
-                            {% endif %}
-                            {% endfor %}
-                            {% endwith %}
-                            <li>Dunker: {{ train|last }} - Points: {{ total_points|floatformat:2 }}</li>
-                        </ul>
+                          <ul>
+                              {% for item in train %}
+                              <li>{{ item }}</li>
+                              {% endfor %}
+                          </ul>
                       {% else %}
                           <p>No valid train could be generated.</p>
                       {% endif %}
