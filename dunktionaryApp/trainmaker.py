@@ -107,13 +107,13 @@ dunks = {
 }
 
 forbidden_pass_pairs = [
-    ("Barani Bounce", "Behind the Back Glass", 5),
-    ("Barani Float", "Behind the Back Glass", 5),
-    ("Giddy Up", "Behind the Back Glass", 5),
-    ("Front off the Glass", "Behind the Back Glass", 5),
-    ("Front Float", "Behind the Back Glass", 5),
-    ("Rudy Bounce", "Behind the Back Glass", 5),
-    ("Barani Bounce", "Behind the Back Glass", 5),
+    (("Barani Bounce", "Behind the Back Glass"), 5),
+    (("Barani Float", "Behind the Back Glass"), 5),
+    (("Giddy Up", "Behind the Back Glass"), 5),
+    (("Front off the Glass", "Behind the Back Glass"), 5),
+    (("Front Float", "Behind the Back Glass"), 5),
+    (("Rudy Bounce", "Behind the Back Glass"), 5),
+    (("Barani Bounce", "Behind the Back Glass"), 5),
     # this cannot follow that
 ]
 
@@ -183,11 +183,9 @@ def make_a_train(num_people, level, forbidden_pass_pairs):
                 if (current_pass, train[-1].split(" - ")[-1]) == (pass_name, cannot_follow_name) and level < min_level:
                     # The selected pass is part of a forbidden pair with a level constraint, choose another pass
                     break
-                else:
-                    # No constraint violation, add the pass to the sequence and break the loop
-                    break
-
-            # If there's a constraint violation, try again with a different pass
+            else:
+                # No constraint violation, add the pass to the sequence and break the loop
+                break
 
             # Check if there are variations available for the pass
             if pass_.variations:
