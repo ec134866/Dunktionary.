@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
-from .trainmaker import make_a_train, forbidden_pass_pairs
+from .trainmaker import make_a_train
 from django.db.models import Q
 
 
@@ -96,7 +96,7 @@ def trainPageView(request):
     if request.method == 'POST':
         num_people = int(request.POST.get('num_people', '0'))
         level = int(request.POST.get('level', '0'))
-        train = make_a_train(num_people, level, forbidden_pass_pairs)
+        train = make_a_train(num_people, level)
         context = {'train': train}
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     else:
