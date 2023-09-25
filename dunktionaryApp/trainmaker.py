@@ -328,8 +328,10 @@ def make_a_train(num_people, level):
     
     # Assign follow passes to the rest of the people
     follow_passes = [
-        pass_ for pass_ in valid_passes if pass_.can_follow and pass_.level <= level
+    pass_ for pass_ in valid_passes if pass_.level <= level
     ]
+    
+
     if len(follow_passes) == 0:
         print("No valid follow passes for the specified level.")
         return
