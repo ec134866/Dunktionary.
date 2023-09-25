@@ -1,4 +1,5 @@
 import random
+import logging
 
 
 class Pass:
@@ -346,13 +347,16 @@ def make_a_train(num_people, level):
                 variation = pass_.get_random_variation()
                 train.append(f"Person {i}: {variation} - {pass_.name}")
                 total_score += scoring_table.get(f"{variation} {pass_.name}", 0)
+                logging.debug(f"Assigned {scoring_table.get(f'{variation} {pass_.name}', 0)} points for {variation} {pass_.name}")
             else:
                 train.append(f"Person {i}: {pass_.name}")
                 total_score += scoring_table.get(pass_.name, 0)
+                logging.debug(f"Assigned {scoring_table.get(f'{pass_.name}', 0)} points for {pass_.name}")
         
         else:
             train.append(f"Person {i}: {pass_.name}")
             total_score += scoring_table.get(start_pass.name, 0)
+            logging.debug(f"Assigned {scoring_table.get(f'{pass_.name}', 0)} points for {pass_.name}")
 
     # Assign dunk to the dunker
     dunker = [
