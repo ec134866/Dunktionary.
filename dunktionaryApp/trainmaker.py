@@ -178,14 +178,14 @@ def make_a_train(num_people, level, forbidden_pass_pairs):
             current_pass = f"Person {i}: {pass_.name}"
 
             # Check for forbidden pass pairs with level constraints
-            violated_constraints = [
-                (current_pass, train[-1].split(" - ")[-1]) == pair and level < min_level
-                for pair, min_level in forbidden_pass_pairs
-            ]
-
-            if not any(violated_constraints):
-                # No constraint violation, add the pass to the sequence and break the loop
-                break
+            for forbidden_pair, min_level in forbidden_pass_pairs:
+                pass_name, cannot_follow_name = forbidden_pair
+                if (current_pass, train[-1].split(" - ")[-1]) == (pass_name, cannot_follow_name) and level < min_level:
+                    # The selected pass is part of a forbidden pair with a level constraint, choose another pass
+                    break
+                else:
+                    # No constraint violation, add the pass to the sequence and break the loop
+                    break
 
             # If there's a constraint violation, try again with a different pass
 
