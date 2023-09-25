@@ -4,10 +4,6 @@ from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from .trainmaker import make_a_train
 from django.db.models import Q
-import logging
-
-
-logging.basicConfig(level=logging.DEBUG, filename='trainmaker.log', filemode='w')
 
 
 
