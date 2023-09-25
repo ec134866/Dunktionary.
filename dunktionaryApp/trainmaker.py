@@ -106,9 +106,20 @@ dunks = {
     ],
 }
 
+forbidden_pass_pairs = [
+    ("Barani Bounce", "Behind the Back Glass", 5),
+    ("Barani Float", "Behind the Back Glass", 5),
+    ("Giddy Up", "Behind the Back Glass", 5),
+    ("Front off the Glass", "Behind the Back Glass", 5),
+    ("Front Float", "Behind the Back Glass", 5),
+    ("Rudy Bounce", "Behind the Back Glass", 5),
+    ("Barani Bounce", "Behind the Back Glass", 5),
+    # this cannot follow that
+]
 
 
-def make_a_train(num_people, level):
+
+def make_a_train(num_people, level, forbidden_pass_pairs):
     valid_passes = []
     valid_dunks = []
     train = []
@@ -162,17 +173,31 @@ def make_a_train(num_people, level):
         return
 
     for i in range(2, num_people):
-        pass_ = random.choice(follow_passes)
+         while True:  # Keep trying until a valid pass is chosen
+            pass_ = random.choice(follow_passes)
+            current_pass = f"Person {i}: {pass_.name}"
 
-        # Check if there are variations available for the pass
-        if pass_.variations:
-            variation_probability = min(1.0, 0.5 + (level - pass_.level) * 0.15)  # Adjust scaling factor as needed
-            if random.random() < variation_probability:
-                variation = pass_.get_random_variation()
-                train.append(f"Person {i}: {variation} - {pass_.name}")
-                continue
+            # Check for forbidden pass pairs with level constraints
+            violated_constraints = [
+                (current_pass, train[-1].split(" - ")[-1]) == pair and level < min_level
+                for pair, min_level in forbidden_pass_pairs
+            ]
 
-        train.append(f"Person {i}: {pass_.name}")
+            if not any(violated_constraints):
+                # No constraint violation, add the pass to the sequence and break the loop
+                break
+
+            # If there's a constraint violation, try again with a different pass
+
+            # Check if there are variations available for the pass
+            if pass_.variations:
+                variation_probability = min(1.0, 0.5 + (level - pass_.level) * 0.15)  # Adjust scaling factor as needed
+                if random.random() < variation_probability:
+                    variation = pass_.get_random_variation()
+                    current_pass = f"Person {i}: {variation} - {pass_.name}"
+
+            train.append(f"Person {i}: current_pass")
+            
 
     # Assign dunk to the dunker
     dunker = [
