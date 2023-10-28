@@ -1,4 +1,6 @@
 import random
+from django.shortcuts import render
+from bs4 import BeautifulSoup  # Import BeautifulSoup for HTML parsing
 
 
 class Pass:
@@ -495,7 +497,28 @@ def make_a_train(num_people, level):
 
     return train, total_score
 
+def calculate_total_score(request):
+    # Read the HTML content (replace with your method of reading the content)
+    with open('input.html', 'r') as file:
+        html_content = file.read()
 
+    # Parse the HTML content
+    parsed_html = parse_html(html_content)
+
+    # Extract pass names
+    pass_names = [element.text for element in parsed_html.find_all(name='td', idx=0)]
+
+    total_score = 0
+    not_found_passes = []
+
+    for pass_name in pass_names:
+        score = scoring_table.get(pass_name)
+        if score is not None:
+            total_score += score
+        else:
+            not_found_passes.append(pass_name)
+
+    return render(request, 'total_score_template.html', {'total_score': total_score, 'not_found_passes': not_found_passes})
 
 # How to read what trick was before and make sure you can't always follow, ex. barani bounce after BTB
 # add 2 vs 1 trampoline functions, cross off the glass, cross baranis

@@ -41,6 +41,9 @@
                           <p>No valid train could be generated.</p>
                       {% endif %}
                     </h4>
+                    <div id="custom_train_textboxes" style="display: none;">
+                        <!-- Use JavaScript to dynamically add text boxes for selected number of people -->
+                    </div>
                     <br>
                     <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
                   </div>
@@ -74,6 +77,12 @@
                                     <input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'0' }}">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
+                                <div class="col-sm-6">
+                                    <input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
+                                </div>
+                            </div>
                             <br>
                             <input type="submit" value="Generate Train" class="btn btn-primary">
                         </form>
@@ -96,6 +105,26 @@
                                 inputDisplayElement.innerText = currentValue - 1;
                             }
                         }
+                        
+                        document.getElementById("custom_train_checkbox").addEventListener("change", function() {
+                            var customTrainTextboxes = document.getElementById("custom_train_textboxes");
+                            var numPeople = parseInt(document.getElementById("num_people").value);
+                            
+                            if (this.checked) {
+                                // Show text boxes for each selected number of people
+                                customTrainTextboxes.innerHTML = "";
+                                for (var i = 1; i <= numPeople; i++) {
+                                    var input = document.createElement("input");
+                                    input.type = "text";
+                                    input.name = "custom_train_input_" + i;
+                                    customTrainTextboxes.appendChild(input);
+                                }
+                                customTrainTextboxes.style.display = "block";
+                            } else {
+                                // Hide the text boxes when the checkbox is unchecked
+                                customTrainTextboxes.style.display = "none";
+                            }
+                        });
                         </script>
                   </div>          
             </div>
