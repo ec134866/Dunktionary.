@@ -83,6 +83,10 @@
                                     <input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
                                 </div>
                             </div>
+                            <!-- Hidden text inputs for custom train names within the form -->
+                            <div id="hidden_custom_train_inputs">
+                                <!-- Hidden inputs will be added dynamically by JavaScript -->
+                            </div>
                             <br>
                             <input type="submit" value="Generate Train" class="btn btn-primary">
                         </form>
@@ -106,13 +110,13 @@
                             }
                         }
 
-                        document.getElementById("custom_train_checkbox").addEventListener("change", function() {
-                            var customTrainTextboxes = document.getElementById("custom_train_textboxes");
+                        document.getElementById("custom_train_checkbox").addEventListener("change", function () {
+                            var hiddenCustomTrainInputs = document.getElementById("hidden_custom_train_inputs");
                             var numPeople = parseInt(document.getElementById("num_people").value);
 
                             if (this.checked) {
-                                // Show text boxes for each selected number of people
-                                customTrainTextboxes.innerHTML = "";
+                                // Show text inputs for each selected number of people
+                                hiddenCustomTrainInputs.innerHTML = "";
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
@@ -121,12 +125,13 @@
                                     var div = document.createElement("div");
                                     div.appendChild(input);
 
-                                    customTrainTextboxes.appendChild(div);
+                                    hiddenCustomTrainInputs.appendChild(div);
                                 }
-                                customTrainTextboxes.style.display = "block";
+                                hiddenCustomTrainInputs.style.display = "block";
                             } else {
-                                // Hide the text boxes when the checkbox is unchecked
-                                customTrainTextboxes.style.display = "none";
+                                // Hide the text inputs when the checkbox is unchecked
+                                hiddenCustomTrainInputs.innerHTML = "";  // Clear the hidden inputs
+                                hiddenCustomTrainInputs.style.display = "none";
                             }
                         });
                         
