@@ -100,16 +100,18 @@ def trainPageView(request):
         train, total_score = make_a_train(num_people, level)
         context = {'train': train, 'total_score': total_score}
         
+        custom_train_names = []  # Initialize an empty list
+
         # Check if the "custom_train" checkbox is checked
         if 'custom_train' in request.POST:
             custom_train_names = [request.POST.get(f'custom_train_input_{i}', '') for i in range(1, num_people + 1)]
-            print(custom_train_names)
+            print(custom_train_names)  # Print the custom train names to the console
 
-            # Calculate the total score for the custom train
-            custom_total_score, not_found_passes = custom_train(custom_train_names)
-            
-            context['custom_train_score'] = custom_total_score
-            context['not_found_custom_passes'] = not_found_passes
+        # Calculate the total score for the custom train
+        custom_total_score, not_found_passes = custom_train(custom_train_names)
+        
+        context['custom_train_score'] = custom_total_score
+        context['not_found_custom_passes'] = not_found_passes
 
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     else:
