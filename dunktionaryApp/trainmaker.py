@@ -497,9 +497,34 @@ def make_a_train(num_people, level):
 
     return train, total_score
 
-def calculate_total_score(request):
+def custom_train(request):
+
+    # if request.method == 'POST':
+    #     # Check if the "custom_train" checkbox is checked
+    #     if 'custom_train' in request.POST:
+    #         custom_train = request.POST.dict()
+
+
+    #         # Calculate the total score for the custom train
+    #         total_score = 0
+    #         not_found_passes = []
+
+    #         for pass_name in custom_train.values():
+    #             score = scoring_table.get(pass_name)
+    #             if score is not None:
+    #                 total_score += score
+    #             else:
+    #                 not_found_passes.append(pass_name)
+    #     else:
+    #         # Generate a random train (your existing logic, not provided here)
+    #         total_score = generate_random_train()
+
+    #     return render(request, 'total_score_template.html', {'total_score': total_score, 'not_found_passes': not_found_passes})
+
+    # return render(request, 'total_score_template.html', {'total_score': 0, 'not_found_passes': []})
+
     # Read the HTML content (replace with your method of reading the content)
-    with open('input.html', 'r') as file:
+    with open('trainmaker.html', 'r') as file:
         html_content = file.read()
 
     # Parse the HTML content
@@ -518,7 +543,7 @@ def calculate_total_score(request):
         else:
             not_found_passes.append(pass_name)
 
-    return render(request, 'total_score_template.html', {'total_score': total_score, 'not_found_passes': not_found_passes})
+    return render(request, 'trainmaker.html', {'total_score': total_score, 'not_found_passes': not_found_passes})
 
 # How to read what trick was before and make sure you can't always follow, ex. barani bounce after BTB
 # add 2 vs 1 trampoline functions, cross off the glass, cross baranis
