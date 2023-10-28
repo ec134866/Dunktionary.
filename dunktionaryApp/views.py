@@ -108,10 +108,11 @@ def trainPageView(request):
             print(custom_train_names)  # Print the custom train names to the console
 
         # Calculate the total score for the custom train
-        custom_total_score, not_found_passes = custom_train(custom_train_names)
+        total_score, not_found_passes = custom_train(custom_train_names)
         
-        context['custom_train_score'] = custom_total_score
+        context['custom_train_score'] = total_score
         context['not_found_custom_passes'] = not_found_passes
+        print("Here is the total score: ", total_score, "Here are the not found passes: ", not_found_passes)
 
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     else:
