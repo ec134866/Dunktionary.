@@ -41,9 +41,11 @@
                           <p>No valid train could be generated.</p>
                       {% endif %}
                     </h4>
-                    <div id="custom_train_textboxes" style="display: none;">
-                        <!-- Use JavaScript to dynamically add text boxes for selected number of people -->
-                    </div>
+                    <div id="custom_train">
+                        {% for i in range num_people %}
+                          <input type="text" name="custom_train_{{ i+1 }}">
+                        {% endfor %}
+                      </div>
                     <br>
                     <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
                   </div>
@@ -83,9 +85,8 @@
                                     <input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
                                 </div>
                             </div>
-                            <!-- Hidden text inputs for custom train names within the form -->
-                            <div id="hidden_custom_train_inputs">
-                                <!-- Hidden inputs will be added dynamically by JavaScript -->
+                            <div id="hidden_custom_train">
+                                    {% comment %} added by script {% endcomment %}
                             </div>
                             <br>
                             <input type="submit" value="Generate Train" class="btn btn-primary">
@@ -111,27 +112,27 @@
                         }
 
                         document.getElementById("custom_train_checkbox").addEventListener("change", function () {
-                            var hiddenCustomTrainInputs = document.getElementById("hidden_custom_train_inputs");
+                            var hiddenCustomTrain = document.getElementById("hidden_custom_train");
                             var numPeople = parseInt(document.getElementById("num_people").value);
 
                             if (this.checked) {
                                 // Show text inputs for each selected number of people
-                                hiddenCustomTrainInputs.innerHTML = "";
+                                hiddenCustomTrain.innerHTML = "";
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
-                                    input.name = "custom_train_input_" + i;
+                                    input.name = "custom_train_" + i;
 
                                     var div = document.createElement("div");
                                     div.appendChild(input);
 
-                                    hiddenCustomTrainInputs.appendChild(div);
+                                    hiddenCustomTrain.appendChild(div);
                                 }
-                                hiddenCustomTrainInputs.style.display = "block";
+                                hiddenCustomTrain.style.display = "block";
                             } else {
                                 // Hide the text inputs when the checkbox is unchecked
-                                hiddenCustomTrainInputs.innerHTML = "";  // Clear the hidden inputs
-                                hiddenCustomTrainInputs.style.display = "none";
+                                hiddenCustomTrain.innerHTML = "";  // Clear the hidden inputs
+                                hiddenCustomTrain.style.display = "none";
                             }
                         });
                         
