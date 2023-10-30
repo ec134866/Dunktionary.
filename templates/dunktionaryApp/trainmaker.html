@@ -54,31 +54,6 @@
                     <br>
                     <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
                     <br><br><br><br><br>
-                    {% comment %} <div style="box-sizing: border-box; padding: 0; margin: 0; outline: none;">
-                        <div style="font-family: 'Open Sans'; display: flex; justify-content: center; align-items: center; height: 50vh;overflow: hidden; background: rgb(60, 60, 242); background: linear-gradient(90deg, rgba(60, 60, 242, 1) 0%, rgba(98, 245, 230, 1) 52%, rgba(60, 60, 242, 1) 100%); background-size: cover;">
-                            <div id="mainspinbox" class="mainspinbox">
-                                <div id="spinbox" class="spinbox">
-                                    <div class="spinbox1">
-                                        <div class='spinspan'>
-                                            <div class="spinspan1"><b>Iron Man</b></div>
-                                            <div class="spinspan2"><b>7500</b></div>
-                                            <div class="spinspan3"><b>Bat Man</b></div>
-                                            <div class="spinspan4"><b>Joker</b></div>
-                                        </div>
-                                    </div>
-                                    <div class="spinbox2">
-                                        <div class='spinspan'>
-                                            <div class="spinspan1"><b>Shoplifters</b></div>
-                                            <div class="spinspan2"><b>Inception</b></div>
-                                            <div class="spinspan3"><b>Deadpool</b></div>
-                                            <div class="spinspan4"><b>Terminator</b></div>
-                                        </div>
-                                    </div>
-                                </div> 
-                                <button class="spin" onclick="rotateFunction()">SPIN</button>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
                     <div id="mainspinbox" class="mainspinbox" style="position: relative; width: 500px; height: 500px;">
                         <div id="spinbox" class="spinbox">
                             <div class="spinbox1">
@@ -112,6 +87,17 @@
                             <button class="spin" onclick="rotateFunction()">
                                 SPIN
                             </button>
+                        </div>
+                    </div>
+                    <div id="mainspinbox" class="mainspinbox" style="position: relative; width: 500px; height: 500px;">
+                        <div id="spinbox" class="spinbox">
+                            <div class="spinbox1">
+                                {% for pass_name in pass_names %}
+                                <span class="spinspan1" style="width: 50%; height: 50%; display: inline-block; position: absolute;">
+                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%;">{{ pass_name }}</b>
+                                </span>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
-from .trainmaker import make_a_train, custom_train
+from .trainmaker import make_a_train, custom_train, get_pass_wheel
 from django.db.models import Q
 
 
@@ -114,6 +114,7 @@ def trainPageView(request):
 
         context['total_score'] = total_score
         context['train'] = train
+        context['pass_names'] = get_pass_wheel(level)
         print("Here is the total score: ", total_score, "Here are the not found passes: ", not_found_passes)
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     

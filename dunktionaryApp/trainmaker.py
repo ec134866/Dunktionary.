@@ -510,6 +510,16 @@ def custom_train(custom_train_names):
 
     return total_score, not_found_passes
 
+def get_pass_wheel(level):
+    valid_passes = []
+
+    for pass_name, pass_variations in passes.items():
+        for pass_details in pass_variations:
+            if pass_details["level"] <= level:
+                valid_passes.append(pass_name)
+
+    return valid_passes
+
 # How to read what trick was before and make sure you can't always follow, ex. barani bounce after BTB
 # add 2 vs 1 trampoline functions, cross off the glass, cross baranis
 # Add lay down float, OTB float, ball holds etc
