@@ -41,11 +41,8 @@
                           <p>No valid train could be generated.</p>
                       {% endif %}
                     </h4>
-                    <form id='train'>
+                    <form method='post' id='train_text'>
                         <div id="custom_train_text">
-                            {% comment %} {% for i in num_people_range %}
-                                <input type="text" name="custom_train_{{i}}">
-                            {% endfor %} {% endcomment %}
                         </div>
                     </form>
                     <br>
