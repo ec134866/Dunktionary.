@@ -42,10 +42,10 @@
                       {% endif %}
                     </h4>
                     <form id='train'>
-                        <div id="custom_train">
-                            {% for i in num_people_range %}
+                        <div id="custom_train_text">
+                            {% comment %} {% for i in num_people_range %}
                                 <input type="text" name="custom_train_{{i}}">
-                            {% endfor %}
+                            {% endfor %} {% endcomment %}
                         </div>
                     </form>
                     <br>
@@ -111,12 +111,12 @@
                         }
 
                         document.getElementById("custom_train_checkbox").addEventListener("change", function () {
-                            var CustomTrain = document.getElementById("custom_train");
+                            var CustomTrainText = document.getElementById("custom_train_text");
                             var numPeople = parseInt(document.getElementById("num_people").value);
 
                             if (this.checked) {
                                 // Show text inputs for each selected number of people
-                                CustomTrain.innerHTML = "";
+                                CustomTrainText.innerHTML = "";
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
@@ -125,13 +125,13 @@
                                     var div = document.createElement("div");
                                     div.appendChild(input);
 
-                                    CustomTrain.appendChild(div);
+                                    CustomTrainText.appendChild(div);
                                 }
-                                CustomTrain.style.display = "block";
+                                CustomTrainText.style.display = "block";
                             } else {
                                 // Hide the text inputs when the checkbox is unchecked
-                                CustomTrain.innerHTML = "";  // Clear the  inputs
-                                CustomTrain.style.display = "none";
+                                CustomTrainText.innerHTML = "";  // Clear the  inputs
+                                CustomTrainText.style.display = "none";
                             }
                         });
                         
