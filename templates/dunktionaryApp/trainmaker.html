@@ -41,17 +41,19 @@
                           <p>No valid train could be generated.</p>
                       {% endif %}
                     </h4>
-                    <div id="custom_train">
-                        {% for i in range num_people %}
-                          <input type="text" name="custom_train_{{ i+1 }}">
-                        {% endfor %}
-                      </div>
+                    <form id='train'>
+                        <div id="custom_train">
+                            {% for i in range(num_people) %}
+                            <input type="text" name="custom_train_{{ i+1 }}">
+                            {% endfor %}
+                        </div>
+                    </form>
                     <br>
                     <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
                   </div>
                   <div class = "col-sm-4">
                           <br><br><br><br>
-                          <form method="post" action="{% url 'makeATrain' %}">
+                          <form method="post" action="{% url 'makeATrain' %}" id='train'>
                             {% csrf_token %}
                             <div class="form-group row">
                                 <label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
@@ -85,9 +87,6 @@
                                     <input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
                                 </div>
                             </div>
-                            <div id="hidden_custom_train">
-                                    {% comment %} added by script {% endcomment %}
-                            </div>
                             <br>
                             <input type="submit" value="Generate Train" class="btn btn-primary">
                         </form>
@@ -112,12 +111,12 @@
                         }
 
                         document.getElementById("custom_train_checkbox").addEventListener("change", function () {
-                            var hiddenCustomTrain = document.getElementById("hidden_custom_train");
+                            var CustomTrain = document.getElementById("custom_train");
                             var numPeople = parseInt(document.getElementById("num_people").value);
 
                             if (this.checked) {
                                 // Show text inputs for each selected number of people
-                                hiddenCustomTrain.innerHTML = "";
+                                CustomTrain.innerHTML = "";
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
@@ -126,13 +125,13 @@
                                     var div = document.createElement("div");
                                     div.appendChild(input);
 
-                                    hiddenCustomTrain.appendChild(div);
+                                    CustomTrain.appendChild(div);
                                 }
-                                hiddenCustomTrain.style.display = "block";
+                                CustomTrain.style.display = "block";
                             } else {
                                 // Hide the text inputs when the checkbox is unchecked
-                                hiddenCustomTrain.innerHTML = "";  // Clear the hidden inputs
-                                hiddenCustomTrain.style.display = "none";
+                                CustomTrain.innerHTML = "";  // Clear the  inputs
+                                CustomTrain.style.display = "none";
                             }
                         });
                         
