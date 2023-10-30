@@ -108,12 +108,12 @@ def trainPageView(request):
             print(custom_train_names)
 
             total_score, not_found_passes = custom_train(custom_train_names)
+            context['custom_train_names'] = custom_train_names
         else:
             train, total_score = make_a_train(num_people, level)
 
         context['total_score'] = total_score
         context['train'] = train
-        # context['num_people_range'] = range(num_people)
         print("Here is the total score: ", total_score, "Here are the not found passes: ", not_found_passes)
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     
