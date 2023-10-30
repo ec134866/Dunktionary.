@@ -100,7 +100,8 @@
                             wordList.forEach((word, index) => {
                                 const slice = document.createElement('div');
                                 slice.className = 'slice';
-                                slice.style.transform = `rotate(${angle * index}deg) skew(${angle}deg)`;
+                                slice.style.transform = `rotate(${angle * index}deg)`;
+                                slice.style.width = `100%`;
                                 slice.innerHTML = word;
                                 wheel.appendChild(slice);
                             });
