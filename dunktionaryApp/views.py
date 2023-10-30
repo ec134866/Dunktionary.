@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Dunk, Pass
 from django.contrib.postgres.search import SearchVector, SearchQuery
-from .trainmaker import make_a_train, custom_train, get_pass_wheel
+from .trainmaker import make_a_train, custom_train
+# get_pass_wheel
 from django.db.models import Q
 
 
