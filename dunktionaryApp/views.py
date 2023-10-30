@@ -113,6 +113,7 @@ def trainPageView(request):
 
         context['total_score'] = total_score
         context['train'] = train
+        context['num_people'] = num_people
         print("Here is the total score: ", total_score, "Here are the not found passes: ", not_found_passes)
         return render(request, 'dunktionaryApp/trainmaker.html', context)
     
