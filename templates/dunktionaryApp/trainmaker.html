@@ -243,11 +243,19 @@
                             element.classList.remove('animate');
                             setTimeout(function () {
                                 element.classList.add('animate');
-                                // Generate a random number to select the movie
-                                var randomMovieIndex = Math.floor(Math.random() * 4); // Change the number to match the number of movies
-                                var movieNames = ["Iron Man", "7500", "Bat Man", "Joker"]; // Add movie names as needed
-                                document.getElementById('selectedMovie').innerText = "Selected Movie: " + movieNames[randomMovieIndex];
+                                // Calculate the selected movie based on the rotation angle (3 o'clock mark)
+                                var rotation = (deg + 135) % 360;
+                                var selectedMovie = getSelectedMovie(rotation);
+                                document.getElementById('selectedMovie').innerText = "Selected Movie: " + selectedMovie;
                             }, 5000);
+                        }
+                
+                        // Function to determine the selected movie based on the rotation angle
+                        function getSelectedMovie(rotation) {
+                            var movieNames = ["Iron Man", "7500", "Bat Man", "Joker", "Shoplifters", "Inception", "Deadpool", "Terminator"];
+                            var angleStep = 360 / movieNames.length;
+                            var selectedMovieIndex = Math.floor(rotation / angleStep);
+                            return movieNames[selectedMovieIndex];
                         }
                         
 
