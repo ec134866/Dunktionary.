@@ -113,7 +113,6 @@
                                 SPIN
                             </button>
                         </div>
-                        <div id="selectedMovie" style="font-size: 30px; text-align: center; margin-top: 20px;"></div>
                     </div>
                     
                     
@@ -243,16 +242,7 @@
                             element.classList.remove('animate');
                             setTimeout(function () {
                                 element.classList.add('animate');
-
-                                // Calculate the selected movie based on the rotation angle
-                                var rotation = (360 - (deg + 135)) % 360;
-                                var movieNames = ["Iron Man", "7500", "Bat Man", "Joker", "Shoplifters", "Inception", "Deadpool", "Terminator"];
-                                var angleStep = 45; // 360 degrees divided by the number of movies
-                                var selectedMovieIndex = Math.floor(rotation / angleStep);
-                                var selectedMovie = movieNames[selectedMovieIndex];
-
-                                document.getElementById('selectedMovie').innerText = "Selected Movie: " + selectedMovie;
-                            }, 5000); // 5000 = 5 seconds
+                            }, 3000);
                         }
                         
 
