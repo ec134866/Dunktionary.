@@ -41,11 +41,8 @@
                           <p>No valid train could be generated.</p>
                       {% endif %}
                     </h4>
-                    <form method='post' id='train'>
-                        {% csrf_token %}
-                        <div id="custom_train_text">
-                        </div>
-                    </form>
+                    <div id="custom_train_text">
+                    </div>
                     <br>
                     <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
                   </div>
@@ -86,7 +83,7 @@
                                 </div>
                             </div>
                             <br>
-                            <input type="submit" form='train' value="Generate Train" class="btn btn-primary">
+                            <input type="submit" value="Generate Train" class="btn btn-primary">
                         </form>
                                 
                         <script>
@@ -119,6 +116,7 @@
                                     var input = document.createElement("input");
                                     input.type = "text";
                                     input.name = "custom_train_" + i;
+                                    input.form = 'train'
 
                                     var div = document.createElement("div");
                                     div.appendChild(input);
