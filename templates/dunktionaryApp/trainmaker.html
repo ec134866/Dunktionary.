@@ -110,53 +110,53 @@
 
                         document.getElementById("custom_train_checkbox").addEventListener("change", function () {
                             var CustomTrainText = document.getElementById("custom_train_text");
-                            var numPeople = parseInt(document.getElementById("num_people").value);
-                            var trainForm = document.getElementById('train');
-
-                            if (this.checked) {
-                                // Show text inputs for each selected number of people
-                                CustomTrainText.innerHTML = "";
-                                for (var i = 1; i <= numPeople; i++) {
-                                    var input = document.createElement("input");
-                                    input.type = "text";
-                                    input.name = "custom_train_" + i;
-
-                                    var div = document.createElement("div");
-                                    div.appendChild(input);
-
-                                    CustomTrainText.appendChild(div);
-                                }
-                                CustomTrainText.style.display = "block";
-                            } else {
-                                // Hide the text inputs when the checkbox is unchecked
-                                CustomTrainText.innerHTML = "";  // Clear the  inputs
-                                CustomTrainText.style.display = "none";
-                            }
-                        });
-
-                        document.getElementById("custom_train_checkbox").addEventListener("change", function () {
                             var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
                             var numPeople = parseInt(document.getElementById("num_people").value);
                             var trainForm = document.getElementById('train');
-
+                        
                             if (this.checked) {
-                                HIDDENCustomTrainText.innerHTML = "";
-                                // i will remove this when i can confirm it is being copied correctly HIDDENCustomTrainText.style.display = "none";
+                                CustomTrainText.innerHTML = "";
+                                HIDDENCustomTrainText.innerHTML = ""; 
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
                                     input.name = "custom_train_" + i;
-
+                        
                                     var div = document.createElement("div");
                                     div.appendChild(input);
-
+                        
+                                    CustomTrainText.appendChild(div);
+                        
+                                    var hiddenInput = document.createElement("input");
+                                    hiddenInput.type = "hidden";
+                                    hiddenInput.name = "hidden_custom_train_" + i;
+                                    div = document.createElement("div");
+                                    div.appendChild(hiddenInput);
                                     HIDDENCustomTrainText.appendChild(div);
                                 }
-                                HIDDENCustomTrainText.style.display = "block";
+                                CustomTrainText.style.display = "block";
+                                HIDDENCustomTrainText.style.display = "block"; // 'none'
                             } else {
-                                HIDDENCustomTrainText.innerHTML = "";  
+                                CustomTrainText.innerHTML = "";
+                                HIDDENCustomTrainText.innerHTML = "";
+                                CustomTrainText.style.display = "none";
                                 HIDDENCustomTrainText.style.display = "none";
                             }
+                        });
+
+                        function copyTextToHiddenInputs() {
+                            var numPeople = parseInt(document.getElementById("num_people").value);
+                            for (var i = 1; i <= numPeople; i++) {
+                                var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
+                                var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
+                                if (customTrainInput && hiddenInput) {
+                                    hiddenInput.value = customTrainInput.value;
+                                }
+                            }
+                        }
+                        
+                        document.getElementById('train').addEventListener('submit', function() {
+                            copyTextToHiddenInputs();
                         });
                         
                         </script>
