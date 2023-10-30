@@ -243,19 +243,16 @@
                             element.classList.remove('animate');
                             setTimeout(function () {
                                 element.classList.add('animate');
-                                // Calculate the selected movie based on the rotation angle (3 o'clock mark)
-                                var rotation = (deg + 135) % 360;
-                                var selectedMovie = getSelectedMovie(rotation);
+
+                                // Calculate the selected movie based on the rotation angle
+                                var rotation = (360 - (deg + 135)) % 360;
+                                var movieNames = ["Iron Man", "7500", "Bat Man", "Joker", "Shoplifters", "Inception", "Deadpool", "Terminator"];
+                                var angleStep = 45; // 360 degrees divided by the number of movies
+                                var selectedMovieIndex = Math.floor(rotation / angleStep);
+                                var selectedMovie = movieNames[selectedMovieIndex];
+
                                 document.getElementById('selectedMovie').innerText = "Selected Movie: " + selectedMovie;
-                            }, 5000);
-                        }
-                
-                        // Function to determine the selected movie based on the rotation angle
-                        function getSelectedMovie(rotation) {
-                            var movieNames = ["Iron Man", "7500", "Bat Man", "Joker", "Shoplifters", "Inception", "Deadpool", "Terminator"];
-                            var angleStep = 360 / movieNames.length;
-                            var selectedMovieIndex = Math.floor(rotation / angleStep);
-                            return movieNames[selectedMovieIndex];
+                            }, 5000); // 5000 = 5 seconds
                         }
                         
 
