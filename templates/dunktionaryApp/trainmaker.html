@@ -101,12 +101,12 @@
                                 const slice = document.createElement('div');
                                 slice.className = 'slice';
                                 slice.style.transform = `rotate(${angle * index}deg)`;
-                                slice.style.width = `100%`;
                                 slice.innerHTML = word;
                                 wheel.appendChild(slice);
                             });
                 
                             const spinButton = document.createElement('button');
+                            spinButton.className = 'buttonWheel';
                             spinButton.innerHTML = 'Spin';
                             spinButton.addEventListener('click', () => {
                                 const randomDegree = Math.floor(Math.random() * 360);
