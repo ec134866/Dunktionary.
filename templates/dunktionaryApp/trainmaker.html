@@ -108,6 +108,7 @@
                         document.getElementById("custom_train_checkbox").addEventListener("change", function () {
                             var CustomTrainText = document.getElementById("custom_train_text");
                             var numPeople = parseInt(document.getElementById("num_people").value);
+                            var trainForm = document.getElementById('train');
 
                             if (this.checked) {
                                 // Show text inputs for each selected number of people
@@ -116,7 +117,6 @@
                                     var input = document.createElement("input");
                                     input.type = "text";
                                     input.name = "custom_train_" + i;
-                                    input.form = 'train'
 
                                     var div = document.createElement("div");
                                     div.appendChild(input);
