@@ -104,7 +104,7 @@ def trainPageView(request):
         custom_train_names = []
 
         if 'custom_train' in request.POST:
-            custom_train_names = [request.POST.get(f'HIDDEN_custom_train_{i}', '') for i in range(1, num_people + 1)]
+            custom_train_names = [request.POST.get(f'hidden_custom_train_{i}', '') for i in range(1, num_people + 1)]
             print(custom_train_names)
 
             total_score, not_found_passes = custom_train(custom_train_names)
