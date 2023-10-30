@@ -42,7 +42,6 @@
                       {% endif %}
                     </h4>
                     <form method='post' id='train'>
-                        {% csrf_token %}
                         <div id="custom_train_text">
                         </div>
                     </form>
@@ -51,7 +50,7 @@
                   </div>
                   <div class = "col-sm-4">
                           <br><br><br><br>
-                          <form method="post" action="{% url 'makeATrain' %}" id='train'>
+                          <form method="post" id='train'>
                             {% csrf_token %}
                             <div class="form-group row">
                                 <label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
@@ -86,7 +85,7 @@
                                 </div>
                             </div>
                             <br>
-                            <input type="submit" form='train' value="Generate Train" class="btn btn-primary">
+                            <input type="submit" value="Generate Train" class="btn btn-primary">
                         </form>
                                 
                         <script>
