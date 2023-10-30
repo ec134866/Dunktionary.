@@ -128,14 +128,14 @@
                                     CustomTrainText.appendChild(div);
                         
                                     var hiddenInput = document.createElement("input");
-                                    hiddenInput.type = "text";
+                                    hiddenInput.type = "hidden";
                                     hiddenInput.name = "hidden_custom_train_" + i;
                                     div = document.createElement("div");
                                     div.appendChild(hiddenInput);
                                     HIDDENCustomTrainText.appendChild(div);
                                 }
                                 CustomTrainText.style.display = "block";
-                                HIDDENCustomTrainText.style.display = "block"; // 'none'
+                                HIDDENCustomTrainText.style.display = "none";
                             } else {
                                 CustomTrainText.innerHTML = "";
                                 HIDDENCustomTrainText.innerHTML = "";
