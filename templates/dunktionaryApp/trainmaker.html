@@ -20,8 +20,8 @@
                 <div class = "col-sm-2">
                     <ul class="list-unstyled">
                         <br>
-                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
-                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h4>
+                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h4>
                             <br>
                             <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
                             <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
@@ -43,7 +43,7 @@
                     </h4>
                     <form id='train'>
                         <div id="custom_train">
-                            {% for i in num_people_range %}
+                            {% for i in range(num_people) %}
                                 <input type="text" name="custom_train_{{ i+1 }}">
                             {% endfor %}
                         </div>
