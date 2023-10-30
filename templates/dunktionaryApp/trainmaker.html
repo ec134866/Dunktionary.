@@ -246,7 +246,7 @@
                         
                             // Determine which movie segment the arrow lands on
                             var movieIndex = Math.floor(rotationDegree / degreeInterval);
-                            
+                        
                             // Rotate the wheel
                             element.style.transform = 'rotate(' + deg + 'deg)';
                         
@@ -254,29 +254,29 @@
                             setTimeout(function () {
                                 element.classList.add('animate');
                         
-                                // Call a function to determine the movie based on the degree
+                                // Call a function to determine the movie based on the index
                                 displayMovieByIndex(movieIndex);
                             }, 3000);
                         }
-                            
-                            function displayMovieByIndex(index) {
-                                var movies = [
-                                    'Iron Man',
-                                    '7500',
-                                    'Bat Man',
-                                    'Joker',
-                                    'Shoplifters',
-                                    'Inception',
-                                    'Deadpool',
-                                    'Terminator'
-                                ];
-                            
-                                // Get the selected movie based on the index
-                                var movie = movies[index];
-                            
-                                // Display the selected movie
-                                alert('The arrow landed on: ' + movie);
-                            }
+                        
+                        function displayMovieByIndex(index) {
+                            var movies = [
+                                'Iron Man',
+                                '7500',
+                                'Bat Man',
+                                'Joker',
+                                'Shoplifters',
+                                'Inception',
+                                'Deadpool',
+                                'Terminator'
+                            ];
+                        
+                            // Get the selected movie based on the index
+                            var movie = movies[index];
+                        
+                            // Display the selected movie
+                            alert('The arrow landed on: ' + movie);
+                        }
                         
 
                         </script>
