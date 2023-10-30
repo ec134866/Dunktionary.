@@ -82,6 +82,9 @@
                                     <input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
                                 </div>
                             </div>
+                            <div id="HIDDEN_custom_train_text">
+                                {% comment %} the script should grab what was typed in custom_train_text and place it in the boxes below {% endcomment %}
+                            </div>
                             <br>
                             <input type="submit" value="Generate Train" class="btn btn-primary">
                         </form>
@@ -128,6 +131,31 @@
                                 // Hide the text inputs when the checkbox is unchecked
                                 CustomTrainText.innerHTML = "";  // Clear the  inputs
                                 CustomTrainText.style.display = "none";
+                            }
+                        });
+
+                        document.getElementById("HIDDEN_custom_train_text").addEventListener("change", function () {
+                            var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
+                            var numPeople = parseInt(document.getElementById("num_people").value);
+                            var trainForm = document.getElementById('train');
+
+                            if (this.checked) {
+                                HIDDENCustomTrainText.innerHTML = "";
+                                // i will remove this when i can confirm it is being copied correctly HIDDENCustomTrainText.style.display = "none";
+                                for (var i = 1; i <= numPeople; i++) {
+                                    var input = document.createElement("input");
+                                    input.type = "text";
+                                    input.name = "custom_train_" + i;
+
+                                    var div = document.createElement("div");
+                                    div.appendChild(input);
+
+                                    HIDDENCustomTrainText.appendChild(div);
+                                }
+                                HIDDENCustomTrainText.style.display = "block";
+                            } else {
+                                HIDDENCustomTrainText.innerHTML = "";  
+                                HIDDENCustomTrainText.style.display = "none";
                             }
                         });
                         
