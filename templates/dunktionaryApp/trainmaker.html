@@ -115,8 +115,8 @@
                             var trainForm = document.getElementById('train');
                         
                             if (this.checked) {
-                                CustomTrainText.innerHTML = "";
-                                HIDDENCustomTrainText.innerHTML = ""; 
+                                // CustomTrainText.innerHTML = "";
+                                // HIDDENCustomTrainText.innerHTML = ""; 
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
@@ -128,7 +128,7 @@
                                     CustomTrainText.appendChild(div);
                         
                                     var hiddenInput = document.createElement("input");
-                                    hiddenInput.type = "hidden";
+                                    hiddenInput.type = "text";
                                     hiddenInput.name = "hidden_custom_train_" + i;
                                     div = document.createElement("div");
                                     div.appendChild(hiddenInput);
