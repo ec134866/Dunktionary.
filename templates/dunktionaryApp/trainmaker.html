@@ -42,6 +42,7 @@
                       {% endif %}
                     </h4>
                     <form method='post' id='train'>
+                        {% csrf_token %}
                         <div id="custom_train_text">
                         </div>
                     </form>
