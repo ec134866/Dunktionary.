@@ -100,7 +100,7 @@ def trainPageView(request):
         train = [] 
         total_score = 0  
         not_found_passes = [] 
-        context = {'train': train, 'total_score': total_score, 'not_found_custom_passes': []}
+        context = {'train': train, 'total_score': total_score, 'not_found_custom_passes': [], 'num_people_range': range(num_people)}
         custom_train_names = []
 
         if 'custom_train' in request.POST:

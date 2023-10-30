@@ -43,8 +43,8 @@
                     </h4>
                     <form id='train'>
                         <div id="custom_train">
-                            {% for i in range(num_people) %}
-                                <input type="text" name="custom_train_{{ i+1 }}">
+                            {% for i in num_people_range %}
+                                <input type="text" name="custom_train_{{i}}">
                             {% endfor %}
                         </div>
                     </form>
