@@ -31,22 +31,23 @@
                 <div class = "col-sm-6">
                       <br><br><br><br><br>
                       <h4>
-                      {% if train %}
-                          <ul>
-                              {% for item in train %}
-                              <li>{{ item }}</li>
-                              {% endfor %}
-                          </ul>
-                        {% else %}
-                        {% if custom_train_names %}
+                    {% if train %}
                         <ul>
-                            {% for name in custom_train_names %}
-                            <li>{{ name }}</li>
+                            {% for item in train %}
+                            <li>{{ item }}</li>
                             {% endfor %}
                         </ul>
+                    {% else %}
+                        {% if custom_train_names %}
+                            <ul>
+                                {% for name in custom_train_names %}
+                                <li>{{ name }}</li>
+                                {% endfor %}
+                            </ul>
                         {% else %}
                             <p>No valid train could be generated.</p>
                         {% endif %}
+                    {% endif %}                    
                     </h4>
                     <div id="custom_train_text">
                     </div>
