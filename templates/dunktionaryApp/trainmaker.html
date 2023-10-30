@@ -108,25 +108,30 @@
                         document.getElementById("custom_train_checkbox").addEventListener("change", function () {
                             var CustomTrainText = document.getElementById("custom_train_text");
                             var numPeople = parseInt(document.getElementById("num_people").value);
-
+                            var trainForm = document.getElementById('train'); // Get the form element
+                        
                             if (this.checked) {
                                 // Show text inputs for each selected number of people
                                 CustomTrainText.innerHTML = "";
+                        
                                 for (var i = 1; i <= numPeople; i++) {
                                     var input = document.createElement("input");
                                     input.type = "text";
                                     input.name = "custom_train_" + i;
-                                    input.form = document.getElementById('train');
-
+                        
                                     var div = document.createElement("div");
                                     div.appendChild(input);
-
+                        
                                     CustomTrainText.appendChild(div);
+                        
+                                    // Append the input to the form
+                                    trainForm.appendChild(input);
                                 }
+                        
                                 CustomTrainText.style.display = "block";
                             } else {
                                 // Hide the text inputs when the checkbox is unchecked
-                                CustomTrainText.innerHTML = "";  // Clear the  inputs
+                                CustomTrainText.innerHTML = ""; // Clear the inputs
                                 CustomTrainText.style.display = "none";
                             }
                         });
