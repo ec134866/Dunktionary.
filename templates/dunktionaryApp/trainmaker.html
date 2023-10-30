@@ -89,6 +89,8 @@
                             </button>
                         </div>
                     </div>
+                    <br><br><br><br><br>
+                    <div class="wheel-container" id="wheel">
                     
                     
                   </div>
@@ -219,6 +221,37 @@
                                 element.classList.add('animate');
                             }, 3000);
                         }
+
+
+                        // wheel 2
+                        const wordList = ["Slice 1", "Slice 2", "Slice 3", "Slice 4", "Slice 5", "Slice 6"];
+                        const wheel = document.getElementById('wheel');
+                        const totalSlices = wordList.length;
+                        const angle = 360 / totalSlices;
+
+                        wordList.forEach((word, index) => {
+                            const slice = document.createElement('div');
+                            slice.className = 'slice';
+                            slice.style.transform = `rotate(${angle * index}deg) skew(${angle}deg)`;
+                            slice.innerHTML = word;
+                            wheel.appendChild(slice);
+                        });
+
+                        const spinButton = document.createElement('button');
+                        spinButton.innerHTML = 'Spin';
+                        spinButton.addEventListener('click', () => {
+                            const randomDegree = Math.floor(Math.random() * 360);
+                            const randomDuration = Math.floor(Math.random() * 2000) + 1000; // Random duration between 1 to 3 seconds
+                            wheel.style.transition = `transform ${randomDuration}ms ease-in-out`;
+                            wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+                            // Reset the transition after the animation completes
+                            setTimeout(() => {
+                                wheel.style.transition = 'transform 3s ease-in-out';
+                            }, randomDuration);
+                        });
+
+                        wheel.appendChild(spinButton);
                         
 
                         </script>
