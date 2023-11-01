@@ -605,7 +605,7 @@ def make_a_train(num_people, level):
 
         # Check if there are variations available for the start
     if start_pass.variations:
-            variation_probability = min(1.0, 0.5 + (level - start_pass.level) * 0.15)
+            variation_probability = min(1.0, 0.5 + (level - start_pass.level) * 0.25)
             if random.random() < variation_probability:
                 variation = random.choice(start_pass.variations)
                 train.append(f"Person 1: {variation} - {start_pass.name}")
@@ -633,7 +633,7 @@ def make_a_train(num_people, level):
 
         # Check if there are variations available for the pass
         if pass_.variations:
-            variation_probability = min(1.0, 0.5 + (level - pass_.level) * 0.15)  # Adjust scaling factor as needed
+            variation_probability = min(1.0, 0.5 + (level - pass_.level) * 0.20)  # Adjust scaling factor as needed
             if random.random() < variation_probability:
                 variation = pass_.get_random_variation()
                 train.append(f"Person {i}: {variation} - {pass_.name}")
@@ -661,7 +661,7 @@ def make_a_train(num_people, level):
 
      # Check if there are variations available for the dunk
     if dunk.variations:
-            variation_probability = min(1.0, 0.65 + (level - dunk.level) * 0.15)
+            variation_probability = min(1.0, 0.65 + (level - dunk.level) * 0.3)
             if random.random() < variation_probability:
                 variation = dunk.get_random_variation()
                 train.append(f"Dunker: {variation} - {dunk.name}")
