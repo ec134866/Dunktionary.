@@ -109,12 +109,15 @@ passes = {
     "Rudi Bounce": [
         {"level": 2, "can_start": True},
         {"level": 3, "can_start": True},
-        {"level": 4, "can_start": True, "can_follow": True},
+        {"level": 4, "can_start": True},
+        {"level": 5, "can_start": True},
+        {"level": 6, "can_start": True, "can_follow": True},
     ],
     "Rudi Up (glass)": [
         {"level": 3, "can_start": True},
         {"level": 4, "can_start": True},
-        {"level": 5, "can_start": True, "can_follow": True},
+        {"level": 5, "can_start": True},
+        {"level": 6, "can_start": True, "can_follow": True},
     ],
     "Front Full off the Glass": [
         {"level": 4, "can_start": True},
@@ -134,12 +137,14 @@ passes = {
     "Randi Bounce": [
         {"level": 4, "can_start": True},
         {"level": 5, "can_start": True},
-        {"level": 6, "can_start": True, "can_follow": True},
+        {"level": 6, "can_start": True},
+        {"level": 7, "can_start": True, "can_follow": True},
     ],
     "Randi Up (glass)": [
         {"level": 5, "can_start": True},
         {"level": 6, "can_start": True},
-        {"level": 7, "can_start": True, "can_follow": True},
+        {"level": 7, "can_start": True},
+        {"level": 8, "can_start": True, "can_follow": True},
     ],
     "Leap Frog": [
         {"level": 1, "can_start": True},
@@ -166,7 +171,8 @@ passes = {
     ],
     "1 and 3 Bounce": [
         {"level": 4, "can_start": True},
-        {"level": 5, "can_start": True, "can_follow": True},
+        {"level": 5, "can_start": True},
+        {"level": 6, "can_start": True, "can_follow": True},
     ],
     "540 Turn and Bounce": [
         {"level": 3, "can_start": True},
