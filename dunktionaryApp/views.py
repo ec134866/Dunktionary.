@@ -52,8 +52,6 @@ def dunkPageView(request, dunk_altName):
         "dunks" : db_dunks2
     }
 
-    prereq_error = not db_dunks.prereq or db_dunks.prereq == "error_value"
-
     return render(request, "dunktionaryApp/dunk.html", context)
 
 def passPageView(request, pass_altName):

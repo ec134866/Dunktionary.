@@ -56,19 +56,11 @@
               </div>            
                 <h1>{{dunk.name | capfirst }} dunk </h1>
                 <h1>Hierarchy : {{dunk.hierarchy}} </h1>
-                {% if prereq_error %}
-                  <h1>
-                    <a href={% url 'passlib'%}{{pass.prereq}} class="text-dark text-decoration-none">
-                        Prerequisites: {{ dunk.prereq|replace_underscore }}
-                    </a>
-                  </h1>
-                {% else %}
-                  <h1>
-                    <a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-                      Prerequisites: {{ dunk.prereq|replace_underscore }}
-                    </a>
-                  </h1>
-                {% endif %}
+                <h1>
+                  <a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+                    Prerequisites: {{ dunk.prereq|replace_underscore }}
+                  </a>
+                </h1>
                 <h1>Dunker : {{dunk.dunker}} </h1>
             </div>
           </div>
@@ -96,6 +88,12 @@
         {% comment %} video.controls = false; {% endcomment %}
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
+            
+            if (rate === 0.25 || rate === 0.5) {
+              video.muted = true;
+            } else {
+              video.muted = false;
+            }
         }
         
         function togglePlay() {
@@ -110,17 +108,14 @@
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
-            video.muted = false
         });
     
         document.getElementById('playbackButton0.5x').addEventListener('click', function () {
             setPlaybackRate(0.5);
-            video.muted = true
         });
     
         document.getElementById('playbackButton0.25x').addEventListener('click', function () {
             setPlaybackRate(0.25);
-            video.muted = true
         });
   
 
