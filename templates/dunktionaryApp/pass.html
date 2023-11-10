@@ -64,24 +64,25 @@
                     <h1>Passer : {{pass.dunker}} </h1>
                 </div>
               </div>
-              <div class = "col-sm-4" align=right>
-                    <div class= "row">
-                      {% for pass in passes %}
-                              <a href= {% url 'passlib' %}{{pass.altName}}>
-                                    <div class="card" style= "width: 17vw; height: 8vw" align=center>
-                                      <img class="card-img" src={{pass.image}} alt={{pass.name}}>
-                                      <div class="card-img-overlay position-absolute top-50 start-50 translate-middle text-white">
-                                          <p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{pass.name}}<p>
-                                      </div>
+              <div class = "col-sm-4">
+                <div class= "row" align=right>
+                  {% for pass in passes %}
+                          <a href= {% url 'passlib'%}{{pass.altName}}>
+                              <div class="card" style= "width: 17vw; height: 8vw" align=center>
+                                  <img class="card-img" src={{pass.image}} alt={{pass.name}}>
+                                  <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
+                                    <p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{pass.name}}<p>
                                   </div>
-                              </a>
-                      {% endfor %}
-                    </div>       
-              </div>    
+                              </div>
+                          </a>
+                  {% endfor %}
+                </div>       
+              </div>   
           </div>
       </div>
+      
       <script>
-        var video = document.getElementById('{{dunk.name}}');
+        var video = document.getElementById('{{pass.name}}');
         var playPauseButton = document.getElementById('playPauseButton');
         var playPauseText = document.getElementById('playPauseText');
         {% comment %} video.controls = false; {% endcomment %}
