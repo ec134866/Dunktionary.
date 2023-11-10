@@ -86,7 +86,6 @@
         var playPauseButton = document.getElementById('playPauseButton');
         var playPauseText = document.getElementById('playPauseText');
         var playbackRate = 1.0;
-        var isFirstPlay = true;
         {% comment %} video.controls = false; {% endcomment %}
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
@@ -95,12 +94,10 @@
         
         function togglePlay() {
             if (video.paused) {
-                if (isFirstPlay) {
-                    setPlaybackRate(1.0);
-                    isFirstPlay = false;
-                } else {
+                if (playbackRate === 1.0) {
                     setPlaybackRate(0.25);
-                    isFirstPlay = true;
+                } else {
+                    setPlaybackRate(1.0);
                 }
     
                 video.play();
@@ -112,11 +109,16 @@
         }
 
         video.addEventListener('ended', function () {
-            isFirstPlay = true;
+            if (playbackRate === 1.0) {
+                setPlaybackRate(0.25);
+            } else {
+                setPlaybackRate(1.0);
+            }
+    
             playPauseText.innerText = 'Play';
         });
 
-        setPlaybackRate(1.0);
+        {% comment %} setPlaybackRate(1.0); {% endcomment %}
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
