@@ -89,24 +89,18 @@
         {% comment %} video.controls = false; {% endcomment %}
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
-            playbackRate = rate;
         }
         
         function togglePlay() {
-            if (video.paused) {
-                if (playbackRate === 1.0) {
-                    setPlaybackRate(0.25);
-                } else {
-                    setPlaybackRate(1.0);
-                }
-    
-                video.play();
-                playPauseText.innerText = 'Pause';
-            } else {
-                video.pause();
-                playPauseText.innerText = 'Play';
-            }
+          if (video.paused) {
+              video.play();
+              playPauseText.innerText = 'Pause';
+          } else {
+              video.pause();
+              playPauseText.innerText = 'Play';
+          }
         }
+
 
         video.addEventListener('ended', function () {
             if (playbackRate === 1.0) {
@@ -117,8 +111,6 @@
     
             playPauseText.innerText = 'Play';
         });
-
-        setPlaybackRate(1.0);
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
