@@ -85,20 +85,38 @@
         var video = document.getElementById('{{dunk.name}}');
         var playPauseButton = document.getElementById('playPauseButton');
         var playPauseText = document.getElementById('playPauseText');
+        var playbackRate = 1.0;
+        var isFirstPlay = true;
         {% comment %} video.controls = false; {% endcomment %}
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
+            playbackRate = rate;
         }
         
         function togglePlay() {
-          if (video.paused) {
-              video.play();
-              playPauseText.innerText = 'Pause';
-          } else {
-              video.pause();
-              playPauseText.innerText = 'Play';
-          }
+            if (video.paused) {
+                if (isFirstPlay) {
+                    setPlaybackRate(1.0);
+                    isFirstPlay = false;
+                } else {
+                    setPlaybackRate(0.25);
+                    isFirstPlay = true;
+                }
+    
+                video.play();
+                playPauseText.innerText = 'Pause';
+            } else {
+                video.pause();
+                playPauseText.innerText = 'Play';
+            }
         }
+
+        video.addEventListener('ended', function () {
+            isFirstPlay = true;
+            playPauseText.innerText = 'Play';
+        });
+
+        setPlaybackRate(1.0);
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
