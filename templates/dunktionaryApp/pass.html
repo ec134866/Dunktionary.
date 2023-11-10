@@ -88,6 +88,12 @@
         {% comment %} video.controls = false; {% endcomment %}
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
+
+            if (rate === 0.25 || rate === 0.5) {
+              video.muted = true;
+            } else {
+              video.muted = false;
+            }
         }
         
         function togglePlay() {
