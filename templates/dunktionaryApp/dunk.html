@@ -99,6 +99,11 @@
               playPauseText.innerText = 'Play';
           }
         }
+        
+        function replayAtHalfSpeed() {
+            setPlaybackRate(0.5);
+            video.play();
+        }
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
@@ -111,6 +116,11 @@
         document.getElementById('playbackButton0.25x').addEventListener('click', function () {
             setPlaybackRate(0.25);
         });
+
+        video.addEventListener('ended', function () {
+            replayAtHalfSpeed();
+        });
+  
 
         video.play();
       </script>
