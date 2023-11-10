@@ -49,7 +49,7 @@
             </div>      
             <div class="row justify-content-center">
               <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-                <video id="{{dunk.name}}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls loop>
+                <video id="{{dunk.name}}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
                     <source src="{{dunk.video}}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -85,6 +85,7 @@
         var video = document.getElementById('{{dunk.name}}');
         var playPauseButton = document.getElementById('playPauseButton');
         var playPauseText = document.getElementById('playPauseText');
+        var playbackRate = 1.0;
         {% comment %} video.controls = false; {% endcomment %}
         function setPlaybackRate(rate) {
             video.playbackRate = rate;
@@ -99,11 +100,11 @@
               playPauseText.innerText = 'Play';
           }
         }
-        
+{% comment %}         
         function replayAtHalfSpeed() {
             setPlaybackRate(0.5);
             video.play();
-        }
+        } {% endcomment %}
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
@@ -118,7 +119,14 @@
         });
 
         video.addEventListener('ended', function () {
-            replayAtHalfSpeed();
+          if (playbackRate === 1.0) {
+              setPlaybackRate(0.25);
+          } else {
+              setPlaybackRate(1.0);
+          }
+            video.currentTime = 0;
+            video.play();
+            playPauseText.innerText = 'Play';
         });
   
 
