@@ -31,20 +31,38 @@
                     </ul>
                 </div>
               <div class = "col-sm-6">
-                <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-                  <video style="width: 100%; height: auto; display: block;" controls loop>
-                      <source src="{{pass.video}}" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                </div>   
-                  <h1>{{pass.name | capfirst }} pass </h1>
-                  <h1>Hierarchy : {{pass.hierarchy}} </h1>
-                  <h1>
-                    <a href={% url 'passlib'%}{{pass.prereq}} class="text-dark text-decoration-none">
-                        Prerequisites: {{ pass.prereq|replace_underscore }}
-                    </a>
-                  </h1>
-                  <h1>Passer : {{pass.dunker}} </h1>
+                <div class="container-fluid">
+                  <button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
+                    <span id="playPauseText">Play</span>
+                  </button>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
+                        <input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
+                    </label>
+                    <label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
+                        <input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
+                    </label>
+                    <label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
+                        <input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
+                    </label>
+                  </div>
+                </div>    
+                <div class="row justify-content-center">
+                  <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
+                    <video id="{{pass.name}}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
+                        <source src="{{pass.video}}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </div>            
+                    <h1>{{pass.name | capfirst }} dunk </h1>
+                    <h1>Hierarchy : {{pass.hierarchy}} </h1>
+                    <h1>
+                      <a href={% url 'passlib'%}{{pass.prereq}} class="text-dark text-decoration-none">
+                          Prerequisites: {{ pass.prereq|replace_underscore }}
+                      </a>
+                    </h1>
+                    <h1>Passer : {{pass.dunker}} </h1>
+                </div>
               </div>
               <div class = "col-sm-4" align=right>
                     <div class= "row">
@@ -62,6 +80,40 @@
               </div>    
           </div>
       </div>
+      <script>
+        var video = document.getElementById('{{dunk.name}}');
+        var playPauseButton = document.getElementById('playPauseButton');
+        var playPauseText = document.getElementById('playPauseText');
+        {% comment %} video.controls = false; {% endcomment %}
+        function setPlaybackRate(rate) {
+            video.playbackRate = rate;
+        }
+        
+        function togglePlay() {
+          if (video.paused) {
+              video.play();
+              playPauseText.innerText = 'Pause';
+          } else {
+              video.pause();
+              playPauseText.innerText = 'Play';
+          }
+        }
+
+        document.getElementById('playbackButton1x').addEventListener('click', function () {
+            setPlaybackRate(1.0);
+        });
+    
+        document.getElementById('playbackButton0.5x').addEventListener('click', function () {
+            setPlaybackRate(0.5);
+        });
+    
+        document.getElementById('playbackButton0.25x').addEventListener('click', function () {
+            setPlaybackRate(0.25);
+        });
+  
+
+        video.play();
+      </script>
     </body>
   </main>
 {% endblock %}
