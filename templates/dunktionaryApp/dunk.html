@@ -102,14 +102,17 @@
 
         document.getElementById('playbackButton1x').addEventListener('click', function () {
             setPlaybackRate(1.0);
+            video.muted = false
         });
     
         document.getElementById('playbackButton0.5x').addEventListener('click', function () {
             setPlaybackRate(0.5);
+            video.muted = true
         });
     
         document.getElementById('playbackButton0.25x').addEventListener('click', function () {
             setPlaybackRate(0.25);
+            video.muted = true
         });
   
 
