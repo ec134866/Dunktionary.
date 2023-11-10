@@ -59,7 +59,7 @@
                 {% if prereq_error %}
                   <h1>
                     <a href={% url 'passlib'%}{{pass.prereq}} class="text-dark text-decoration-none">
-                        Prerequisites: {{ pass.prereq|replace_underscore }}
+                        Prerequisites: {{ dunk.prereq|replace_underscore }}
                     </a>
                   </h1>
                 {% else %}
