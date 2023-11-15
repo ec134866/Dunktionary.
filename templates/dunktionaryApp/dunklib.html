@@ -32,16 +32,18 @@
                     <br><br><br><br>
                     <div class= "row">
                         {% for dunk in dunks %}
-                            <div class = "col-sm-4">
-                                <a href= ../Dunks/{{dunk.altName}}>
-                                    <div class="card">
-                                        <img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
-                                        <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
-                                            <h4 class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}</h4>
+                            {% if dunk.image %} 
+                                <div class = "col-sm-4">
+                                    <a href= ../Dunks/{{dunk.altName}}>
+                                        <div class="card">
+                                            <img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
+                                            <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
+                                                <h4 class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}</h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                            {% endif %} 
                         {% endfor %}
                     </div>       
                 </div> 
