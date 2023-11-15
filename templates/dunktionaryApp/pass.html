@@ -66,7 +66,7 @@
               </div>
               <div class = "col-sm-4">
                 <div class= "row" style="overflow: hidden;" align=right>
-                  {% for pass in passes |shuffle|slice:":7" %}
+                  {% for pass in passes|shuffle|slice:":7" %}
                     {% if pass.image %}
                           <a href= {% url 'passlib'%}{{pass.altName}}>
                               <div class="card" style= "width: 17vw; height: 8vw" align=center>
