@@ -20,9 +20,16 @@
 						<h4 style= "font-size:1.5vw"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
 						<h4 style= "font-size:1.5vw"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
 						<h4 style= "font-size:1.5vw"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
-						<form method ="get" action="{% url 'search' %}">
-							<input type="text" id="name" placeholder="Search..." name = "name">
-						</form>
+						<form method="get" action="{% url 'search' %}" style="position: relative; width: 100%;">
+							<input type="text" id="name" placeholder="Search..." name="name"
+								   style="width: 100%; padding: 8px 30px 8px 10px; 
+										  border: 1px solid #ccc; border-radius: 4px; 
+										  background-color: #f0f0f0;">
+							<span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); 
+										 pointer-events: none; font-size: 14px; color: #666;">
+							  🔍
+							</span>
+						  </form>
 						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
 					</ul>
 				</div>
