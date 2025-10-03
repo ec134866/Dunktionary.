@@ -78,38 +78,38 @@
 <body data-new-gr-c-s-check-loaded="14.1087.0" data-gr-ext-installed="">
 <header>
 	<div class="bg-dark collapse" id="navbarHeader" style="">
-	<div class="container">
-		<div class="row">
-		<div class="col-sm-4 offset-md-1 py-4">
-			<ul class="list-unstyled">
-			<h5><a href={% url 'passlib'%} class="text-white text-decoration-none">Passes</a></h5>
-			<h5><a href={% url 'dunklib'%} class="text-white text-decoration-none">Dunks</a></h5>
-			<h5><a href={% url 'makeATrain'%} class="text-white text-decoration-none">Train Maker</a></h5>
-			{% comment %} <h5><a href={% url 'dunkTheory'%} class="text-white text-decoration-none">Dunk Theory</a></h5> {% endcomment %}
-			</ul>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4 offset-md-1 py-4">
+					<ul class="list-unstyled">
+					<h5><a href={% url 'passlib'%} class="text-white text-decoration-none">Passes</a></h5>
+					<h5><a href={% url 'dunklib'%} class="text-white text-decoration-none">Dunks</a></h5>
+					<h5><a href={% url 'makeATrain'%} class="text-white text-decoration-none">Train Maker</a></h5>
+					{% comment %} <h5><a href={% url 'dunkTheory'%} class="text-white text-decoration-none">Dunk Theory</a></h5> {% endcomment %}
+					</ul>
+				</div>
+				<div class= "col-md-12 text-right">
+					<a class="btn text-white" href={% url 'index'%}admin role="button">login</a>
+				</div> 
+			</div>
 		</div>
-		<div class= "col-md-12 text-right">
-			<a class="btn text-white" href={% url 'index'%}admin role="button">login</a>
-		</div> 
-		</div>
-	</div>
 	</div>
 	<div class="navbar navbar-dark bg-dark box-shadow">
-	<div class="container d-flex justify-content-between">
-		{% comment %} Logo {% endcomment %}
-		<a href={% url 'index'%} class="navbar-brand d-flex align-items-center">
-			<img class="h-50 img-responsive" style="height: 30px; width: 30px; display: block;"
-		src="https://i.imgur.com/eMgCvAH.png">
-		<strong>Dunktionary</strong>
-		</a>
-		<div class="ml-auto mr-2">
-			{% block search %}
-			{% endblock %}
+		<div class="container d-flex justify-content-between">
+			{% comment %} Logo {% endcomment %}
+			<a href={% url 'index'%} class="navbar-brand d-flex align-items-center">
+				<img class="h-50 img-responsive" style="height: 30px; width: 30px; display: block;"
+			src="https://i.imgur.com/eMgCvAH.png">
+			<strong>Dunktionary</strong>
+			</a>
+			<div class="ml-auto mr-2">
+				{% block search %}
+				{% endblock %}
+			</div>
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
 		</div>
-		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-	</div>
 	</div>
 </header>
 
