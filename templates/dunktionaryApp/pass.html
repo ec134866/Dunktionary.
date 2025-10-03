@@ -26,101 +26,61 @@
 						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
 					</ul>
 				</div>
-			<div class = "col-sm-6">
-				<div class="container-fluid">
-					{% comment %} <button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
-						<span id="playPauseText">Play</span>
-					</button>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
-							<input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
-						</label>
-						<label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
-							<input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
-						</label>
-						<label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
-							<input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
-						</label>
-					</div> {% endcomment %}
-				</div>	
-				<div class="row justify-content-center">
-					<div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-						<video id="{{ pass.name }}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
-							<source src="{{ pass.video }}" type="video/mp4">
-							Your browser does not support the video tag.
-						</video>
-					</div>  
+				<div class = "col-sm-6">
+					{% comment %} <div class="container-fluid">
+						<button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
+							<span id="playPauseText">Play</span>
+						</button>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
+								<input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
+							</label>
+							<label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
+								<input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
+							</label>
+							<label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
+								<input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
+							</label>
+						</div> 
+					</div>	{% endcomment %}
+					<div class="row justify-content-center">
+						<div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
+							<video id="{{ pass.name }}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
+								<source src="{{ pass.video }}" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</div>  
+					</div>
+					<div style="max-width: 800px; margin: 20px auto 0; text-align: left;">
+						<h1><strong>{{ pass.name | capfirst }}</strong></h1>
+						<h3>
+							<strong>Prerequisites:</strong> 
+							<a href="{% url 'passlib' %}{{ pass.prereq }}" class="text-dark text-decoration-none">
+								{{ pass.prereq|replace_underscore }}
+							</a>
+						</h3>
+						<h3><strong>Passer:</strong> {{ pass.dunker }}</h3>
+					</div>
 				</div>
-				<div style="max-width: 800px; margin: 20px auto 0; text-align: left;">
-					<h1><strong>{{ pass.name | capfirst }}</strong></h1>
-					<h3>
-						<strong>Prerequisites:</strong> 
-						<a href="{% url 'passlib' %}{{ pass.prereq }}" class="text-dark text-decoration-none">
-							{{ pass.prereq|replace_underscore }}
-						</a>
-					</h3>
-					<h3><strong>Passer:</strong> {{ pass.dunker }}</h3>
+				<div class="col-sm-4 d-flex flex-column align-items-end">
+					<div class="row" style="overflow: hidden; width: 100%;">
+						{% for pass in passes|slice:":16"%}
+							{% if pass.image %}
+								<a href="{% url 'passlib'%}{{pass.altName}}">
+									<div class="card" style="width: 17vw; height: 8vw;">
+										<img class="card-img" src="{{pass.image}}" alt="{{pass.name}}">
+										<div class="card-img-overlay position-absolute top-50 start-50 translate-middle text-white">
+											<p class="card-title" style="text-shadow: 2px 1px 2px black;">{{pass.name}}</p>
+										</div>
+									</div>
+								</a>
+								<br>
+							{% endif %}
+						{% endfor %}
+					</div>	   
 				</div>
 			</div>
-			<div class = "col-sm-4">
-				<div class= "row" style="overflow: hidden;" align=right>
-				{% for pass in passes|slice:":16"%}
-					{% if pass.image %}
-						<a href= {% url 'passlib'%}{{pass.altName}}>
-							<div class="card" style= "width: 17vw; height: 8vw" align=center>
-								<img class="card-img" src={{pass.image}} alt={{pass.name}}>
-								<div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
-									<p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{pass.name}}<p>
-								</div>
-							</div>
-						</a>
-					{% endif %}
-				{% endfor %}
-			</div>	   
-			</div>   
 		</div>
-	</div>
-	
-	<script>
-		var video = document.getElementById('{{pass.name}}');
-		var playPauseButton = document.getElementById('playPauseButton');
-		var playPauseText = document.getElementById('playPauseText');
-		{% comment %} video.controls = false; {% endcomment %}
-		function setPlaybackRate(rate) {
-			video.playbackRate = rate;
-
-			if (rate === 0.25 || rate === 0.5) {
-			video.muted = true;
-			} else {
-			video.muted = false;
-			}
-		}
-		
-		function togglePlay() {
-		if (video.paused) {
-			video.play();
-			playPauseText.innerText = 'Pause';
-		} else {
-			video.pause();
-			playPauseText.innerText = 'Play';
-		}
-		}
-
-		document.getElementById('playbackButton1x').addEventListener('click', function () {
-			setPlaybackRate(1.0);
-		});
-		
-		document.getElementById('playbackButton0.5x').addEventListener('click', function () {
-			setPlaybackRate(0.5);
-		});
-		
-		document.getElementById('playbackButton0.25x').addEventListener('click', function () {
-			setPlaybackRate(0.25);
-		});
-
-
-		video.play();
-	</script>
 	</body>
 </main>
 {% endblock %}
