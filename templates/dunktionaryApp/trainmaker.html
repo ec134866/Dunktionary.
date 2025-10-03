@@ -28,168 +28,161 @@
 					</ul>
 				</div>
 				<div class = "col-sm-6">
-					<br><br><br><br><br>
+					<br><br><br><br>
+					<form method="post" id='train'>
+						{% csrf_token %}
+						<div class="form-group row">
+							<label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
+							<div class="col-sm-6">
+								<div class="input-group input-group-sm">
+									<span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'0' }}</span>
+									<div class="input-group-append">
+										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
+										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
+									</div>
+								</div>
+								<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'0' }}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
+							<div class="col-sm-6">
+								<div class="input-group input-group-sm">
+									<span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'0' }}</span>
+									<div class="input-group-append">
+										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
+										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
+									</div>
+								</div>
+								<input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'0' }}">
+							</div>
+						</div>
+						<div id="HIDDEN_custom_train_text">
+							{% comment %} the script {% endcomment %}
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
+							<div class="col-sm-6">
+								<input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
+							</div>
+						</div>
+						<br>
+						<input type="submit" value="Generate Train" class="btn btn-primary">
+					</form>
+					<br><br>
 					<h4>
-					{% if train %}
-						<ul>
-							{% for item in train %}
-							<li>{{ item }}</li>
-							{% endfor %}
-						</ul>
-					{% else %}
-						{% if custom_train_names %}
+						{% if train %}
 							<ul>
-								{% for name in custom_train_names %}
-								<li>{{ name }}</li>
+								{% for item in train %}
+								<li>{{ item }}</li>
 								{% endfor %}
 							</ul>
 						{% else %}
-							<p>No valid train could be generated.</p>
-						{% endif %}
-			{% endif %}									
+							{% if custom_train_names %}
+								<ul>
+									{% for name in custom_train_names %}
+									<li>{{ name }}</li>
+									{% endfor %}
+								</ul>
+							{% else %}
+								<p>No valid train could be generated.</p>
+							{% endif %}
+						{% endif %}									
 					</h4>
-					<div id="custom_train_text">
-					</div>
+					<div id="custom_train_text"></div>
 					<br>
 					<h4>Total Score: {{ total_score|floatformat:2 }}</h4>
-					<br><br><br><br><br><br><br><br><br><br>
-					
 				</div>
 				<div class = "col-sm-4">
-						<br><br><br><br>
-						<form method="post" id='train'>
-							{% csrf_token %}
-							<div class="form-group row">
-								<label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
-								<div class="col-sm-6">
-									<div class="input-group input-group-sm">
-										<span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'0' }}</span>
-										<div class="input-group-append">
-											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
-											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
-										</div>
-									</div>
-									<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'0' }}">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
-								<div class="col-sm-6">
-									<div class="input-group input-group-sm">
-										<span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'0' }}</span>
-										<div class="input-group-append">
-											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
-											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
-										</div>
-									</div>
-									<input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'0' }}">
-								</div>
-							</div>
-							<div id="HIDDEN_custom_train_text">
-								{% comment %} the script {% endcomment %}
-							</div>
-							<div class="form-group row">
-								<label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
-								<div class="col-sm-6">
-									<input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
-								</div>
-							</div>
-							<br>
-							<input type="submit" value="Generate Train" class="btn btn-primary">
-						</form>
-								
-						<script>
-						function incrementNumber(inputId) {
-							var inputDisplayElement = document.getElementById(inputId + "_display");
-							var inputElement = document.getElementById(inputId);
-							var currentValue = parseInt(inputElement.value);
-							inputElement.value = currentValue + 1;
-							inputDisplayElement.innerText = currentValue + 1;
-						}
-					
-						function decrementNumber(inputId) {
-							var inputDisplayElement = document.getElementById(inputId + "_display");
-							var inputElement = document.getElementById(inputId);
-							var currentValue = parseInt(inputElement.value);
-							if (currentValue > 0) {
-								inputElement.value = currentValue - 1;
-								inputDisplayElement.innerText = currentValue - 1;
-							}
-						}
-
-						document.getElementById("custom_train_checkbox").addEventListener("change", function () {
-							var CustomTrainText = document.getElementById("custom_train_text");
-							var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
-							var numPeople = parseInt(document.getElementById("num_people").value);
-							var trainForm = document.getElementById('train');
-						
-							if (this.checked) {
-								// CustomTrainText.innerHTML = "";
-								// HIDDENCustomTrainText.innerHTML = ""; 
-								for (var i = 1; i <= numPeople; i++) {
-									var input = document.createElement("input");
-									input.type = "text";
-									input.name = "custom_train_" + i;
-						
-									var div = document.createElement("div");
-									div.appendChild(input);
-						
-									CustomTrainText.appendChild(div);
-						
-									var hiddenInput = document.createElement("input");
-									hiddenInput.type = "hidden";
-									hiddenInput.name = "hidden_custom_train_" + i;
-									div = document.createElement("div");
-									div.appendChild(hiddenInput);
-									HIDDENCustomTrainText.appendChild(div);
-								}
-								CustomTrainText.style.display = "block";
-								HIDDENCustomTrainText.style.display = "none";
-							} else {
-								CustomTrainText.innerHTML = "";
-								HIDDENCustomTrainText.innerHTML = "";
-								CustomTrainText.style.display = "none";
-								HIDDENCustomTrainText.style.display = "none";
-							}
-						});
-
-						function copyTextToHiddenInputs() {
-							var numPeople = parseInt(document.getElementById("num_people").value);
-							for (var i = 1; i <= numPeople; i++) {
-								var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
-								var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
-								if (customTrainInput && hiddenInput) {
-									hiddenInput.value = customTrainInput.value;
-								}
-							}
-						}
-						
-						document.getElementById('train').addEventListener('submit', function() {
-							copyTextToHiddenInputs();
-						});
-						
-
-						// spin wheel
-						function rotateFunction() {
-							var min = 1024;
-							var max = 9999;
-							var deg = Math.floor(Math.random() * (max - min)) + min;
-							document.getElementById('spinbox').style.transform = "rotate(" + deg + "deg";
-				
-							var element = document.getElementById('mainspinbox');
-							element.classList.remove('animate');
-							setTimeout(function () {
-								element.classList.add('animate');
-							}, 3000);
-						}
-
-
-						
-
-						</script>
+					{% comment %} placeholder {% endcomment %}
 				</div>		  
 			</div>
 		</div>
+		<script>
+			function incrementNumber(inputId) {
+				var inputDisplayElement = document.getElementById(inputId + "_display");
+				var inputElement = document.getElementById(inputId);
+				var currentValue = parseInt(inputElement.value);
+				inputElement.value = currentValue + 1;
+				inputDisplayElement.innerText = currentValue + 1;
+			}
+		
+			function decrementNumber(inputId) {
+				var inputDisplayElement = document.getElementById(inputId + "_display");
+				var inputElement = document.getElementById(inputId);
+				var currentValue = parseInt(inputElement.value);
+				if (currentValue > 0) {
+					inputElement.value = currentValue - 1;
+					inputDisplayElement.innerText = currentValue - 1;
+				}
+			}
+
+			document.getElementById("custom_train_checkbox").addEventListener("change", function () {
+				var CustomTrainText = document.getElementById("custom_train_text");
+				var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
+				var numPeople = parseInt(document.getElementById("num_people").value);
+				var trainForm = document.getElementById('train');
+			
+				if (this.checked) {
+					// CustomTrainText.innerHTML = "";
+					// HIDDENCustomTrainText.innerHTML = ""; 
+					for (var i = 1; i <= numPeople; i++) {
+						var input = document.createElement("input");
+						input.type = "text";
+						input.name = "custom_train_" + i;
+			
+						var div = document.createElement("div");
+						div.appendChild(input);
+			
+						CustomTrainText.appendChild(div);
+			
+						var hiddenInput = document.createElement("input");
+						hiddenInput.type = "hidden";
+						hiddenInput.name = "hidden_custom_train_" + i;
+						div = document.createElement("div");
+						div.appendChild(hiddenInput);
+						HIDDENCustomTrainText.appendChild(div);
+					}
+					CustomTrainText.style.display = "block";
+					HIDDENCustomTrainText.style.display = "none";
+				} else {
+					CustomTrainText.innerHTML = "";
+					HIDDENCustomTrainText.innerHTML = "";
+					CustomTrainText.style.display = "none";
+					HIDDENCustomTrainText.style.display = "none";
+				}
+			});
+
+			function copyTextToHiddenInputs() {
+				var numPeople = parseInt(document.getElementById("num_people").value);
+				for (var i = 1; i <= numPeople; i++) {
+					var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
+					var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
+					if (customTrainInput && hiddenInput) {
+						hiddenInput.value = customTrainInput.value;
+					}
+				}
+			}
+			
+			document.getElementById('train').addEventListener('submit', function() {
+				copyTextToHiddenInputs();
+			});
+			
+
+			// spin wheel
+			function rotateFunction() {
+				var min = 1024;
+				var max = 9999;
+				var deg = Math.floor(Math.random() * (max - min)) + min;
+				document.getElementById('spinbox').style.transform = "rotate(" + deg + "deg";
+	
+				var element = document.getElementById('mainspinbox');
+				element.classList.remove('animate');
+				setTimeout(function () {
+					element.classList.add('animate');
+				}, 3000);
+			}
+		</script>
 	</body>
 </main>
 {% endblock %}
