@@ -45,19 +45,21 @@
 				</div>	
 				<div class="row justify-content-center">
 					<div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-						<video id="{{pass.name}}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
-							<source src="{{pass.video}}" type="video/mp4">
+						<video id="{{ pass.name }}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
+							<source src="{{ pass.video }}" type="video/mp4">
 							Your browser does not support the video tag.
 						</video>
-					</div>	
-					<h1>{{pass.name | capfirst }} </h1>
-					{% comment %} <h1>Hierarchy : {{pass.hierarchy}} </h1> {% endcomment %}
+					</div>  
+				</div>
+				<div style="max-width: 800px; margin: 20px auto 0; text-align: left;">
+					<h1><strong>{{ pass.name | capfirst }}</strong></h1>
 					<h3>
-						<a href={% url 'passlib'%}{{pass.prereq}} class="text-dark text-decoration-none">
-							Prerequisites: {{ pass.prereq|replace_underscore }}
+						<strong>Prerequisites:</strong> 
+						<a href="{% url 'passlib' %}{{ pass.prereq }}" class="text-dark text-decoration-none">
+							{{ pass.prereq|replace_underscore }}
 						</a>
 					</h3>
-					<h3>Passer : {{pass.dunker}} </h3>
+					<h3><strong>Passer:</strong> {{ pass.dunker }}</h3>
 				</div>
 			</div>
 			<div class = "col-sm-4">
