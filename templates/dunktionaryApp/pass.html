@@ -74,7 +74,10 @@
 								<div class="col-12 mb-4">
 									<a href="{% url 'passlib'%}{{pass.altName}}">
 										<div class="card" style="width: 17vw; height: 100%; margin-left: auto;">
-											<img class="card-img" src="{{pass.image}}" alt="{{pass.name}}">
+											<img class="card-img-top" src="{{ pass.image }}" alt="{{ pass.name }}" 
+												style="width: 100%; height: 100%; object-fit: cover;">
+											<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+												background-color: rgba(0, 0, 0, 0.1);"></div>
 											<div class="card-img-overlay d-flex justify-content-center align-items-center text-white">
 												<h2 class="card-title w-100"
 													style="text-shadow: 2px 1px 2px black;
