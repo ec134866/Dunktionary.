@@ -76,7 +76,7 @@
 					<div class="row" style="width: 100%;">
 						{% for dunk in dunks|slice:":10" %}
 							{% if dunk.image %}
-								<div class="col-12 mb-2">
+								<div class="col-12 mb-4">
 									<a href="{% url 'dunklib'%}{{dunk.altName}}">
 										<div class="card" style="width: 17vw; height: 100%; margin-left: auto; overflow: hidden;">
 											<img class="card-img-top" src="{{ dunk.image }}" alt="{{ dunk.name }}" 
