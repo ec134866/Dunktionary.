@@ -1,268 +1,195 @@
 {% extends 'base.html'%}
-      
-        {% block title %}
-          <title> Train Maker </title>
-        {% endblock %}
-        
-        {% block search %}
-        <h1> Search </h1>
-          <form method ="get" action="{% url 'search' %}">
-              <label for= "name"> Dunk Name </label>
-              <input type="text" id="name" placeholder="Search..." name = "name">
-          </form>
-        {% endblock %}
+	
+		{% block title %}
+		<title> Train Maker </title>
+		{% endblock %}
+		
+		{% block search %}
+		<form method ="get" action="{% url 'search' %}">
+			<input type="text" id="name" placeholder="Search..." name = "name">
+		</form>
+		{% endblock %}
 
 {% block content %}
-  <main>
-    <body>
-        <div class= "container">
-            <div class = "row">
-                <div class = "col-sm-2">
-                    <ul class="list-unstyled">
-                        <br>
-                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h4>
-                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h4>
-                            <br>
-                            <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
-                            <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
-                            <h6 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
-                    </ul>
-                </div>
-                <div class = "col-sm-6">
-                      <br><br><br><br><br>
-                    <h4>
-                    {% if train %}
-                        <ul>
-                            {% for item in train %}
-                            <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        {% if custom_train_names %}
-                            <ul>
-                                {% for name in custom_train_names %}
-                                <li>{{ name }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p>No valid train could be generated.</p>
-                        {% endif %}
-                    {% endif %}                                  
-                    </h4>
-                    <div id="custom_train_text">
-                    </div>
-                    <br>
-                    <h4>Total Score: {{ total_score|floatformat:2 }}</h4>
-                    <br><br><br><br><br><br><br><br><br><br>
-                    <h4>~ Test Spin Wheel ~</h4>
-                    <br><br><br><br><br><br><br><br><br><br>
-                    <div id="mainspinbox" class="mainspinbox" style="position: relative; width: 500px; height: 500px;">
-                        <div id="spinbox" class="spinbox">
-                            <div class="spinbox1">
-                                <span class="spinspan1" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(0 92%, 100% 50%, 0 8%); background-color: #003DA5; top: 120px; left: 0;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(185deg);">Turn and Bounce</b>
-                                </span>
-                                <span class="spinspan2" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(100% 92%, 0 50%, 100% 8%); background-color: #BDD6E5; top: 120px; right: 0;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(185deg);">Turn and Bounce</b>
-                                </span>
-                                <span class="spinspan3" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(50% 0%, 8% 100%, 92% 100%); background-color: #E6E6E6; bottom: 0; left: 120px;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-270deg);">Barani Bounce</b>
-                                </span>
-                                <span class="spinspan4" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(50% 100%, 92% 0, 8% 0); background-color: #6E7CA0; top: 0; left: 120px;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-85deg);">Barani Float</b>
-                                </span>
-                            </div>
-                            <div class="spinbox2" style="width: 100%; height: 100%; transform: rotate(-135deg);">
-                                <span class="spinspan1" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(0 92%, 100% 50%, 0 8%); background-color: #003DA5; top: 120px; left: 0;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(185deg);">Barani Up</b>
-                                </span>
-                                <span class="spinspan2" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(100% 92%, 0 50%, 100% 8%); background-color: #BDD6E5; top: 120px; right: 0;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(185deg);">Rudi Bounce</b>
-                                </span>
-                                <span class="spinspan3" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(50% 0%, 8% 100%, 92% 100%); background-color: #E6E6E6; bottom: 0; left: 120px;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-270deg);">Front off the Glass</b>
-                                </span>
-                                <span class="spinspan4" style="width: 50%; height: 50%; display: inline-block; position: absolute; clip-path: polygon(50% 100%, 92% 0, 8% 0); background-color: #6E7CA0; top: 0; left: 120px;">
-                                    <b style="font-size: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-85deg);">Front Float</b>
-                                </span>
-                            </div>
-                            <button class="spin" onclick="rotateFunction()">
-                                SPIN
-                            </button>
-                        </div>
-                    </div>
-                    <br><br><br><br><br>
-                    {% comment %} <div class="wheel-container" id="wheel">
-                        <script>
-                            const wordList = ["Slice 1", "Slice 2", "Slice 3", "Slice 4", "Slice 5", "Slice 6"];
-                            const wheel = document.getElementById('wheel');
-                            const totalSlices = wordList.length;
-                            const angle = 360 / totalSlices;
-                
-                            wordList.forEach((word, index) => {
-                                const slice = document.createElement('div');
-                                slice.className = 'slice';
-                                slice.style.transform = `rotate(${angle * index}deg)`;
-                                slice.innerHTML = word;
-                                wheel.appendChild(slice);
-                            });
-                
-                            const spinButton = document.createElement('button');
-                            spinButton.className = 'buttonWheel';
-                            spinButton.innerHTML = 'Spin';
-                            spinButton.addEventListener('click', () => {
-                                const randomDegree = Math.floor(Math.random() * 360);
-                                const randomDuration = Math.floor(Math.random() * 2000) + 1000; // Random duration between 1 to 3 seconds
-                                wheel.style.transition = `transform ${randomDuration}ms ease-in-out`;
-                                wheel.style.transform = `rotate(${randomDegree}deg`;
-                
-                                // Reset the transition after the animation completes
-                                setTimeout(() => {
-                                    wheel.style.transition = 'transform 3s ease-in-out';
-                                }, randomDuration);
-                            });
-                
-                            wheel.appendChild(spinButton);
-                        </script>
-                    </div> {% endcomment %}
-                    
-                    
-                  </div>
-                  <div class = "col-sm-4">
-                          <br><br><br><br>
-                          <form method="post" id='train'>
-                            {% csrf_token %}
-                            <div class="form-group row">
-                                <label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
-                                <div class="col-sm-6">
-                                    <div class="input-group input-group-sm">
-                                        <span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'0' }}</span>
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'0' }}">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
-                                <div class="col-sm-6">
-                                    <div class="input-group input-group-sm">
-                                        <span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'0' }}</span>
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'0' }}">
-                                </div>
-                            </div>
-                            <div id="HIDDEN_custom_train_text">
-                                {% comment %} the script {% endcomment %}
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
-                                <div class="col-sm-6">
-                                    <input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
-                                </div>
-                            </div>
-                            <br>
-                            <input type="submit" value="Generate Train" class="btn btn-primary">
-                        </form>
-                                
-                        <script>
-                          function incrementNumber(inputId) {
-                            var inputDisplayElement = document.getElementById(inputId + "_display");
-                            var inputElement = document.getElementById(inputId);
-                            var currentValue = parseInt(inputElement.value);
-                            inputElement.value = currentValue + 1;
-                            inputDisplayElement.innerText = currentValue + 1;
-                        }
-                    
-                        function decrementNumber(inputId) {
-                            var inputDisplayElement = document.getElementById(inputId + "_display");
-                            var inputElement = document.getElementById(inputId);
-                            var currentValue = parseInt(inputElement.value);
-                            if (currentValue > 0) {
-                                inputElement.value = currentValue - 1;
-                                inputDisplayElement.innerText = currentValue - 1;
-                            }
-                        }
+<main>
+	<body>
+		<div class= "container">
+			<div class = "row">
+				<div class = "col-sm-2">
+					<ul class="list-unstyled">
+						<br>
+						<h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h4>
+						<h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h4>
+						<h4 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h4>
+						<form method ="get" action="{% url 'search' %}">
+							<input type="text" id="name" placeholder="Search..." name = "name">
+						</form>
+						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
+					</ul>
+				</div>
+				<div class = "col-sm-6">
+					<br><br><br><br><br>
+					<h4>
+					{% if train %}
+						<ul>
+							{% for item in train %}
+							<li>{{ item }}</li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						{% if custom_train_names %}
+							<ul>
+								{% for name in custom_train_names %}
+								<li>{{ name }}</li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p>No valid train could be generated.</p>
+						{% endif %}
+			{% endif %}									
+					</h4>
+					<div id="custom_train_text">
+					</div>
+					<br>
+					<h4>Total Score: {{ total_score|floatformat:2 }}</h4>
+					<br><br><br><br><br><br><br><br><br><br>
+					
+				</div>
+				<div class = "col-sm-4">
+						<br><br><br><br>
+						<form method="post" id='train'>
+							{% csrf_token %}
+							<div class="form-group row">
+								<label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
+								<div class="col-sm-6">
+									<div class="input-group input-group-sm">
+										<span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'0' }}</span>
+										<div class="input-group-append">
+											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
+											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
+										</div>
+									</div>
+									<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'0' }}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
+								<div class="col-sm-6">
+									<div class="input-group input-group-sm">
+										<span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'0' }}</span>
+										<div class="input-group-append">
+											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
+											<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
+										</div>
+									</div>
+									<input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'0' }}">
+								</div>
+							</div>
+							<div id="HIDDEN_custom_train_text">
+								{% comment %} the script {% endcomment %}
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
+								<div class="col-sm-6">
+									<input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
+								</div>
+							</div>
+							<br>
+							<input type="submit" value="Generate Train" class="btn btn-primary">
+						</form>
+								
+						<script>
+						function incrementNumber(inputId) {
+							var inputDisplayElement = document.getElementById(inputId + "_display");
+							var inputElement = document.getElementById(inputId);
+							var currentValue = parseInt(inputElement.value);
+							inputElement.value = currentValue + 1;
+							inputDisplayElement.innerText = currentValue + 1;
+						}
+					
+						function decrementNumber(inputId) {
+							var inputDisplayElement = document.getElementById(inputId + "_display");
+							var inputElement = document.getElementById(inputId);
+							var currentValue = parseInt(inputElement.value);
+							if (currentValue > 0) {
+								inputElement.value = currentValue - 1;
+								inputDisplayElement.innerText = currentValue - 1;
+							}
+						}
 
-                        document.getElementById("custom_train_checkbox").addEventListener("change", function () {
-                            var CustomTrainText = document.getElementById("custom_train_text");
-                            var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
-                            var numPeople = parseInt(document.getElementById("num_people").value);
-                            var trainForm = document.getElementById('train');
-                        
-                            if (this.checked) {
-                                // CustomTrainText.innerHTML = "";
-                                // HIDDENCustomTrainText.innerHTML = ""; 
-                                for (var i = 1; i <= numPeople; i++) {
-                                    var input = document.createElement("input");
-                                    input.type = "text";
-                                    input.name = "custom_train_" + i;
-                        
-                                    var div = document.createElement("div");
-                                    div.appendChild(input);
-                        
-                                    CustomTrainText.appendChild(div);
-                        
-                                    var hiddenInput = document.createElement("input");
-                                    hiddenInput.type = "hidden";
-                                    hiddenInput.name = "hidden_custom_train_" + i;
-                                    div = document.createElement("div");
-                                    div.appendChild(hiddenInput);
-                                    HIDDENCustomTrainText.appendChild(div);
-                                }
-                                CustomTrainText.style.display = "block";
-                                HIDDENCustomTrainText.style.display = "none";
-                            } else {
-                                CustomTrainText.innerHTML = "";
-                                HIDDENCustomTrainText.innerHTML = "";
-                                CustomTrainText.style.display = "none";
-                                HIDDENCustomTrainText.style.display = "none";
-                            }
-                        });
+						document.getElementById("custom_train_checkbox").addEventListener("change", function () {
+							var CustomTrainText = document.getElementById("custom_train_text");
+							var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
+							var numPeople = parseInt(document.getElementById("num_people").value);
+							var trainForm = document.getElementById('train');
+						
+							if (this.checked) {
+								// CustomTrainText.innerHTML = "";
+								// HIDDENCustomTrainText.innerHTML = ""; 
+								for (var i = 1; i <= numPeople; i++) {
+									var input = document.createElement("input");
+									input.type = "text";
+									input.name = "custom_train_" + i;
+						
+									var div = document.createElement("div");
+									div.appendChild(input);
+						
+									CustomTrainText.appendChild(div);
+						
+									var hiddenInput = document.createElement("input");
+									hiddenInput.type = "hidden";
+									hiddenInput.name = "hidden_custom_train_" + i;
+									div = document.createElement("div");
+									div.appendChild(hiddenInput);
+									HIDDENCustomTrainText.appendChild(div);
+								}
+								CustomTrainText.style.display = "block";
+								HIDDENCustomTrainText.style.display = "none";
+							} else {
+								CustomTrainText.innerHTML = "";
+								HIDDENCustomTrainText.innerHTML = "";
+								CustomTrainText.style.display = "none";
+								HIDDENCustomTrainText.style.display = "none";
+							}
+						});
 
-                        function copyTextToHiddenInputs() {
-                            var numPeople = parseInt(document.getElementById("num_people").value);
-                            for (var i = 1; i <= numPeople; i++) {
-                                var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
-                                var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
-                                if (customTrainInput && hiddenInput) {
-                                    hiddenInput.value = customTrainInput.value;
-                                }
-                            }
-                        }
-                        
-                        document.getElementById('train').addEventListener('submit', function() {
-                            copyTextToHiddenInputs();
-                        });
-                        
+						function copyTextToHiddenInputs() {
+							var numPeople = parseInt(document.getElementById("num_people").value);
+							for (var i = 1; i <= numPeople; i++) {
+								var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
+								var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
+								if (customTrainInput && hiddenInput) {
+									hiddenInput.value = customTrainInput.value;
+								}
+							}
+						}
+						
+						document.getElementById('train').addEventListener('submit', function() {
+							copyTextToHiddenInputs();
+						});
+						
 
-                        // spin wheel
-                        function rotateFunction() {
-                            var min = 1024;
-                            var max = 9999;
-                            var deg = Math.floor(Math.random() * (max - min)) + min;
-                            document.getElementById('spinbox').style.transform = "rotate(" + deg + "deg";
-                
-                            var element = document.getElementById('mainspinbox');
-                            element.classList.remove('animate');
-                            setTimeout(function () {
-                                element.classList.add('animate');
-                            }, 3000);
-                        }
+						// spin wheel
+						function rotateFunction() {
+							var min = 1024;
+							var max = 9999;
+							var deg = Math.floor(Math.random() * (max - min)) + min;
+							document.getElementById('spinbox').style.transform = "rotate(" + deg + "deg";
+				
+							var element = document.getElementById('mainspinbox');
+							element.classList.remove('animate');
+							setTimeout(function () {
+								element.classList.add('animate');
+							}, 3000);
+						}
 
 
-                        
+						
 
-                        </script>
-                  </div>          
-            </div>
-        </div>
-    </body>
-  </main>
+						</script>
+				</div>		  
+			</div>
+		</div>
+	</body>
+</main>
 {% endblock %}

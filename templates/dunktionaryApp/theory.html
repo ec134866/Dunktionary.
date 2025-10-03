@@ -1,86 +1,85 @@
 {% extends 'base.html'%}
-      
-        {% block title %}
-          <title> Dunk Theory & Safety </title>
-        {% endblock %}
-        
-        {% block search %}
-        <h1> Search </h1>
-          <form method ="get" action="{% url 'search' %}">
-              <label for= "name"> Dunk Name </label>
-              <input type="text" id="name" placeholder="Search..." name = "name">
-          </form>
-        {% endblock %}
+	
+		{% block title %}
+		<title> Dunk Theory & Safety </title>
+		{% endblock %}
+		
+		{% block search %}
+		<form method ="get" action="{% url 'search' %}">
+			<input type="text" id="name" placeholder="Search..." name = "name">
+		</form>
+		{% endblock %}
 
 {% block content %}
-  <main>
-    <body>
-        <div class= "container">
-            <div class = "row">
-                <div class = "col-sm-2">
-                    <ul class="list-unstyled">
-                        <br>
-                        <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
-                        <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
-                            <br>
-                            <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
-                            <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
-                            <h6 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
-                    </ul>
-                </div>
-                <div class = "col-sm-6">
-                    <br><br><br><br><br>
-                    <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-                        <video id="approachVid" style="width: 100%; height: auto; display: block;" controls loop>
-                            <source src="https://i.imgur.com/f3L7zk3.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>                 
-                    <h1> Good approach </h1>
-                    <h3> Long hurdle, legs in front, powerful run </h3>
-                    <br><br><br><br><br><br>
-                    <h5 style="text-align: center;"> Following passes: </h5>
-                    <div class = "row">
-                        <div class = "col-sm-3 text-center">
-                            <h5> Turn Bounce </h5>
-                        </div>
-                        <div class = "col-sm-3 text-center">
-                            <h5> Turn Float </h5>
-                        </div>
-                        <div class = "col-sm-3 text-center">
-                            <h5> Off the Glass </h5>
-                        </div>
-                        <div class = "col-sm-3 text-center">
-                            <h5> Barani Bounce </h5>
-                        </div>
-                    </div>
-                    <div class = "row">
-                        <div class = "col-sm-3 text-center">
-                            <h5> 3 </h5>
-                        </div>
-                        <div class = "col-sm-3 text-center">
-                            <h5> 2 </h5>
-                        </div>
-                        <div class = "col-sm-3 text-center">
-                            <h5> 3 </h5>
-                        </div>
-                        <div class = "col-sm-3 text-center">
-                            <h5> 4 </h5>
-                        </div>
-                    </div>
-                    <br><br><br><br><br>
-                </div>
-                <div class = "col-sm-4">
-                </div>          
-            </div>
-        </div>
-        
-        
-        <script>
-            var video = document.getElementById('approachVid');
-            video.playbackRate = 0.5;
-            video.currentTime = 1;
-        </script>
-    </body>
-  </main>
+<main>
+	<body>
+		<div class= "container">
+			<div class = "row">
+				<div class = "col-sm-2">
+					<ul class="list-unstyled">
+						<br>
+						<h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
+						<h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
+						<h4 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h4>
+						<form method ="get" action="{% url 'search' %}">
+							<input type="text" id="name" placeholder="Search..." name = "name">
+						</form>
+						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
+					</ul>
+				</div>
+				<div class = "col-sm-6">
+					<br><br><br><br><br>
+					<div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
+						<video id="approachVid" style="width: 100%; height: auto; display: block;" controls loop>
+							<source src="https://i.imgur.com/f3L7zk3.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</div>				 
+					<h1> Good approach </h1>
+					<h3> Long hurdle, legs in front, powerful run </h3>
+					<br><br><br><br><br><br>
+					<h5 style="text-align: center;"> Following passes: </h5>
+					<div class = "row">
+						<div class = "col-sm-3 text-center">
+							<h5> Turn Bounce </h5>
+						</div>
+						<div class = "col-sm-3 text-center">
+							<h5> Turn Float </h5>
+						</div>
+						<div class = "col-sm-3 text-center">
+							<h5> Off the Glass </h5>
+						</div>
+						<div class = "col-sm-3 text-center">
+							<h5> Barani Bounce </h5>
+						</div>
+					</div>
+					<div class = "row">
+						<div class = "col-sm-3 text-center">
+							<h5> 3 </h5>
+						</div>
+						<div class = "col-sm-3 text-center">
+							<h5> 2 </h5>
+						</div>
+						<div class = "col-sm-3 text-center">
+							<h5> 3 </h5>
+						</div>
+						<div class = "col-sm-3 text-center">
+							<h5> 4 </h5>
+						</div>
+					</div>
+					<br><br><br><br><br>
+				</div>
+				<div class = "col-sm-4">
+			</div>		  
+			</div>
+		</div>
+		
+		
+		<script>
+			var video = document.getElementById('approachVid');
+			video.playbackRate = 0.5;
+			video.currentTime = 1;
+		</script>
+	</body>
+</main>
 {% endblock %}

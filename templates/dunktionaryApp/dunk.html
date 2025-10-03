@@ -1,130 +1,129 @@
 {% extends 'base.html'%}
 {% load custom_filters %}
-      
-        {% block title %}
-          <title> {{dunk.name}} Dunk </title>
-        {% endblock %}
-        
-        {% block search %}
-        <h1> Search </h1>
-          <form method ="get" action="{% url 'search' %}">
-              <label for= "name"> Dunk Name </label>
-              <input type="text" id="name" placeholder="Search..." name = "name">
-          </form>
-        {% endblock %}
+	
+		{% block title %}
+		<title> {{dunk.name}} Dunk </title>
+		{% endblock %}
+		
+		{% block search %}
+		<form method ="get" action="{% url 'search' %}">
+			<input type="text" id="name" placeholder="Search..." name = "name">
+		</form>
+		{% endblock %}
 
 {% block content %}
-  <main>
-    <body>
-      <br><br>
-      <div class= "container">
-        <div class = "row">
-          <div class = "col-sm-2">
-              <ul class="list-unstyled">
-                  <br>
-                  <h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
-                  <h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
-                      <br>
-                      <h5 style= "color:dark-grey; font-size:1.25vw"> Other </h5>
-                      <h6 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h6>
-                      <h6 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h6>
-              </ul>
-          </div>
-          <div class = "col-sm-6">
-            <div class="container-fluid">
-              <button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
-                <span id="playPauseText">Play</span>
-              </button>
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
-                    <input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
-                </label>
-                <label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
-                    <input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
-                </label>
-                <label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
-                    <input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
-                </label>
-              </div>
-            </div>      
-            <div class="row justify-content-center">
-              <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
-                <video id="{{dunk.name}}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
-                    <source src="{{dunk.video}}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-              </div>            
-                <h1>{{dunk.name | capfirst }} dunk </h1>
-                <h1>Hierarchy : {{dunk.hierarchy}} </h1>
-                <h1>
-                  <a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-                    Prerequisites: {{ dunk.prereq|replace_underscore }}
-                  </a>
-                </h1>
-                <h1>Dunker : {{dunk.dunker}} </h1>
-            </div>
-          </div>
-          <div class = "col-sm-4">
-            <div class= "row" style="overflow: hidden;" align=right>
-              {% for dunk in dunks|slice:":16" %}
-                {% if dunk.image %}
-                      <a href= {% url 'dunklib'%}{{dunk.altName}}>
-                          <div class="card" style= "width: 17vw; height: 8vw" align=center>
-                              <img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
-                              <div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
-                                <p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}<p>
-                              </div>
-                          </div>
-                      </a>
-                {% endif %}
-              {% endfor %}
-            </div>       
-          </div>    
-        </div>
-      </div>
+<main>
+	<body>
+	<br><br>
+	<div class= "container">
+		<div class = "row">
+		<div class = "col-sm-2">
+			<ul class="list-unstyled">
+				<br>
+				<h4 style= "font-size:1.5vw"><a href={% url 'passlib'%} class="text-dark text-decoration-none">Passes</a></h5>
+				<h4 style= "font-size:1.5vw"><a href={% url 'dunklib'%} class="text-dark text-decoration-none">Dunks</a></h5>
+				<h4 style= "font-size:1vw"><a href={% url 'makeATrain'%} class="text-decoration-none" style= "color:#444444">Train Maker</a></h4>
+				<form method ="get" action="{% url 'search' %}">
+					<input type="text" id="name" placeholder="Search..." name = "name">
+				</form>
+				{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
+			</ul>
+		</div>
+		<div class = "col-sm-6">
+			<div class="container-fluid">
+			<button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
+				<span id="playPauseText">Play</span>
+			</button>
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
+					<input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
+				</label>
+				<label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
+					<input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
+				</label>
+				<label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
+					<input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
+				</label>
+			</div>
+		</div>	  
+			<div class="row justify-content-center">
+			<div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden;">
+				<video id="{{dunk.name}}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
+					<source src="{{dunk.video}}" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</div>			
+				<h1>{{dunk.name | capfirst }} dunk </h1>
+				<h1>Hierarchy : {{dunk.hierarchy}} </h1>
+				<h1>
+				<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+					Prerequisites: {{ dunk.prereq|replace_underscore }}
+				</a>
+				</h1>
+				<h1>Dunker : {{dunk.dunker}} </h1>
+			</div>
+		</div>
+		<div class = "col-sm-4">
+			<div class= "row" style="overflow: hidden;" align=right>
+			{% for dunk in dunks|slice:":16" %}
+				{% if dunk.image %}
+					<a href= {% url 'dunklib'%}{{dunk.altName}}>
+						<div class="card" style= "width: 17vw; height: 8vw" align=center>
+							<img class="card-img" src={{dunk.image}} alt={{dunk.name}}>
+							<div class="card-img-overlay position-absolute top-50 start-50  translate-middle text-white">
+								<p class="card-title" style = "text-shadow: 2px 1px 2px black;">{{dunk.name}}<p>
+							</div>
+						</div>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div>	   
+		</div>	
+		</div>
+	</div>
 
-      <script>
-        var video = document.getElementById('{{dunk.name}}');
-        var playPauseButton = document.getElementById('playPauseButton');
-        var playPauseText = document.getElementById('playPauseText');
-        {% comment %} video.controls = false; {% endcomment %}
-        function setPlaybackRate(rate) {
-            video.playbackRate = rate;
-            
-            if (rate === 0.25 || rate === 0.5) {
-              video.muted = true;
-            } else {
-              video.muted = false;
-            }
-        }
-        
-        function togglePlay() {
-          if (video.paused) {
-              video.play();
-              playPauseText.innerText = 'Pause';
-          } else {
-              video.pause();
-              playPauseText.innerText = 'Play';
-          }
-        }
+	<script>
+		var video = document.getElementById('{{dunk.name}}');
+		var playPauseButton = document.getElementById('playPauseButton');
+		var playPauseText = document.getElementById('playPauseText');
+		{% comment %} video.controls = false; {% endcomment %}
+		function setPlaybackRate(rate) {
+			video.playbackRate = rate;
+			
+			if (rate === 0.25 || rate === 0.5) {
+			video.muted = true;
+			} else {
+			video.muted = false;
+			}
+		}
+		
+		function togglePlay() {
+		if (video.paused) {
+			video.play();
+			playPauseText.innerText = 'Pause';
+		} else {
+			video.pause();
+			playPauseText.innerText = 'Play';
+		}
+		}
 
-        document.getElementById('playbackButton1x').addEventListener('click', function () {
-            setPlaybackRate(1.0);
-        });
-    
-        document.getElementById('playbackButton0.5x').addEventListener('click', function () {
-            setPlaybackRate(0.5);
-        });
-    
-        document.getElementById('playbackButton0.25x').addEventListener('click', function () {
-            setPlaybackRate(0.25);
-        });
-  
-
-        video.play();
-      </script>
+		document.getElementById('playbackButton1x').addEventListener('click', function () {
+			setPlaybackRate(1.0);
+		});
+		
+		document.getElementById('playbackButton0.5x').addEventListener('click', function () {
+			setPlaybackRate(0.5);
+		});
+		
+		document.getElementById('playbackButton0.25x').addEventListener('click', function () {
+			setPlaybackRate(0.25);
+		});
 
 
-    </body>
-  </main>
+		video.play();
+	</script>
+
+
+	</body>
+</main>
 {% endblock %}
