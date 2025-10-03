@@ -49,7 +49,7 @@
 					</div>	{% endcomment %}
 					<div class="row justify-content-center">
 						<div style="position: relative; width: 100%; margin: 0 auto; overflow: hidden;">
-							<video id="{{ pass.name }}" style="width: 100%; height: auto; display: block;" controlsList="nodownload,nofullscreen,nopupvolume,noduration" controls>
+							<video id="{{ pass.name }}" style="width: 100%; height: auto; display: block;" controls controlsList="nodownload,nofullscreen,nopupvolume,noduration" autoplay muted loop>
 								<source src="{{ pass.video }}" type="video/mp4">
 								Your browser does not support the video tag.
 							</video>
