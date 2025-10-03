@@ -63,21 +63,22 @@
 					</div>
 				</div>
 				<div class="col-sm-4 d-flex flex-column align-items-end">
-					<div class="row" style="overflow: hidden; width: 100%;">
-						{% for pass in passes|slice:":16"%}
+					<div class="row" style="width: 100%;">
+						{% for pass in passes|slice:":10" %}
 							{% if pass.image %}
-								<a href="{% url 'passlib'%}{{pass.altName}}">
-									<div class="card" style="width: 8vw; height: 8vw;">
-										<img class="card-img" src="{{pass.image}}" alt="{{pass.name}}">
-										<div class="card-img-overlay position-absolute top-50 start-50 translate-middle text-white">
-											<p class="card-title" style="text-shadow: 2px 1px 2px black;">{{pass.name}}</p>
+								<div class="col-12 mb-2">
+									<a href="{% url 'passlib'%}{{pass.altName}}">
+										<div class="card" style="width: 100%; max-width: 200px; margin-left: auto;">
+											<img class="card-img" src="{{pass.image}}" alt="{{pass.name}}">
+											<div class="card-img-overlay d-flex justify-content-center align-items-center text-white">
+												<p class="card-title" style="text-shadow: 2px 1px 2px black;">{{pass.name}}</p>
+											</div>
 										</div>
-									</div>
-								</a>
-								<br>
+									</a>
+								</div>
 							{% endif %}
 						{% endfor %}
-					</div>	   
+					</div>
 				</div>
 			</div>
 		</div>
