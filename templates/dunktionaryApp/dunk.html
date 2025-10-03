@@ -71,6 +71,7 @@
 					</div>
 				</div>
 				<div class="col-sm-3 d-flex flex-column align-items-end">
+					<br> <br> <br> <br>
 					<div class="row" style="width: 100%;">
 						{% for dunk in dunks|slice:":10" %}
 							{% if dunk.image %}
@@ -84,7 +85,7 @@
 													style="text-shadow: 2px 1px 2px black;
 														   text-transform: uppercase;
 														   text-align: center;
-														   font-size: clamp(2rem, 2vw, 1.5vw);
+														   font-size: clamp(1rem, 2vw, 1.5vw);
 														   line-height: 1.2;
 														   word-wrap: break-word;">
 													{{dunk.name}}
