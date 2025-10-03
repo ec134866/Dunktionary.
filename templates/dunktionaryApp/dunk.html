@@ -72,7 +72,7 @@
 						{% for pass in passes|slice:":16"%}
 							{% if pass.image %}
 								<a href="{% url 'passlib'%}{{pass.altName}}">
-									<div class="card" style="width: 17vw; height: 8vw;">
+									<div class="card" style="width: 8vw; height: 8vw;">
 										<img class="card-img" src="{{pass.image}}" alt="{{pass.name}}">
 										<div class="card-img-overlay position-absolute top-50 start-50 translate-middle text-white">
 											<p class="card-title" style="text-shadow: 2px 1px 2px black;">{{pass.name}}</p>
