@@ -16,13 +16,13 @@ class VariationAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 class PassLevelAdmin(admin.ModelAdmin):
-    list_display = ("pass_ref", "level", "can_start", "can_follow", "variations",)
+    list_display = ("pass_ref", "level", "can_start", "can_follow")
     list_filter = ("level", "can_start", "can_follow", "pass_ref__name",)
     search_fields = ("pass_ref__name",)
     filter_horizontal = ("variations",)
 
 class DunkLevelAdmin(admin.ModelAdmin):
-    list_display = ("dunk_ref", "level", "variations",)
+    list_display = ("dunk_ref", "level")
     list_filter = ("level",)
     search_fields = ("dunk_ref__name",)
     filter_horizontal = ("variations",)
