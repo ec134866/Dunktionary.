@@ -41,9 +41,13 @@
 						<h1><strong>{{ dunk.name | capfirst }}</strong></h1>
 						<h3>
 							<strong>Prerequisites:</strong> 
-							<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-								{{ dunk.prereq|replace_underscore }}
-							</a>
+							{% if dunk.prereq %}
+								<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+									{{ dunk.prereq|replace_underscore }}
+								</a>
+							{% else %}
+								None
+							{% endif %}
 						</h3>
 						<h3><strong>Dunker:</strong> {{ dunk.dunker }}</h3>
 					</div>
