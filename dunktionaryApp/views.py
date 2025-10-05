@@ -10,124 +10,124 @@ from django.db.models import Q
 
 
 def indexPageView(request):
-    db_dunks = Dunk.objects.all()
+	db_dunks = Dunk.objects.all()
 
-    context = {
-        "dunk" : db_dunks
-    }
+	context = {
+		"dunk" : db_dunks
+	}
 
-    return render(request, 'dunktionaryApp/index.html', context)
+	return render(request, 'dunktionaryApp/index.html', context)
 
 
 
 
 
 def passLibPageView(request):
-    db_passes = Pass.objects.all()
+	db_passes = Pass.objects.all()
 
-    context = {
-        "passes" : db_passes
-    }
+	context = {
+		"passes" : db_passes
+	}
 
-    return render(request, 'dunktionaryApp/passlib.html',context)
+	return render(request, 'dunktionaryApp/passlib.html',context)
 
 def dunkLibPageView(request):
-    db_dunks = Dunk.objects.all()
+	db_dunks = Dunk.objects.all()
 
-    context = {
-        "dunks" : db_dunks
-    }
+	context = {
+		"dunks" : db_dunks
+	}
 
-    return render(request, 'dunktionaryApp/dunklib.html', context)
+	return render(request, 'dunktionaryApp/dunklib.html', context)
 
 
 
 
 def dunkPageView(request, dunk_altName):
-    db_dunks = Dunk.objects.get(altName=dunk_altName)
-    db_dunks2 = Dunk.objects.all()
-    
-    context = {
-        "dunk" : db_dunks,
-        "dunks" : db_dunks2
-    }
+	db_dunks = Dunk.objects.get(altName=dunk_altName)
+	db_dunks2 = Dunk.objects.all()
+		
+	context = {
+		"dunk" : db_dunks,
+		"dunks" : db_dunks2
+	}
 
-    return render(request, "dunktionaryApp/dunk.html", context)
+	return render(request, "dunktionaryApp/dunk.html", context)
 
 def passPageView(request, pass_altName):
-    db_passes = Pass.objects.get(altName=pass_altName)
-    db_passes2 = Pass.objects.all()
+	db_passes = Pass.objects.get(altName=pass_altName)
+	db_passes2 = Pass.objects.all()
 
-    context = {
-        "pass" : db_passes,
-        "passes" : db_passes2,
-    }
+	context = {
+		"pass" : db_passes,
+		"passes" : db_passes2,
+	}
 
-    return render(request, "dunktionaryApp/pass.html", context)
+	return render(request, "dunktionaryApp/pass.html", context)
 
 
 def searchPageView(request): 
-    try: 
-        name = request.GET['name']
-        
-        db_dunks = Dunk.objects.filter(name__icontains=name) 
-        
-    except: 
-        db_dunks = Dunk.objects.all()
-    
-    try: 
-        name = request.GET['name']
-        
-        db_passes = Pass.objects.filter(name__icontains=name) 
-        
-    except: 
-        db_passes = Pass.objects.all()
-    
-    
+	try: 
+		name = request.GET['name']
+		
+		db_dunks = Dunk.objects.filter(name__icontains=name) 
+		
+	except: 
+		db_dunks = Dunk.objects.all()
+		
+	try: 
+		name = request.GET['name']
+		
+		db_passes = Pass.objects.filter(name__icontains=name) 
+		
+	except: 
+		db_passes = Pass.objects.all()
+		
+		
 
-    context = {
-        'dunks' : db_dunks,
-        'passes' : db_passes
-    }
+	context = {
+		'dunks' : db_dunks,
+		'passes' : db_passes
+	}
 
-    return render(request, "dunktionaryApp/search.html", context)
+	return render(request, "dunktionaryApp/search.html", context)
 
-    
+
 
 def trainPageView(request):
-    if request.method == 'POST':
-        num_people = int(request.POST.get('num_people', '0'))
-        level = int(request.POST.get('level', '0'))
-        train = [] 
-        total_score = 0  
-        not_found_passes = [] 
-        context = {'train': train, 'total_score': total_score, 'not_found_custom_passes': [], 'num_people_range': range(num_people)}
-        custom_train_names = []
+	if request.method == 'POST':
+		num_people = max(1, min(int(request.POST.get('num_people', 1)), 10))
+		level = max(0, min(int(request.POST.get('level', 0)), 9))
+		train = [] 
+		total_score = 0  
+		not_found_passes = [] 
+		context = {'train': train, 'total_score': total_score, 'not_found_custom_passes': [], 'num_people_range': range(num_people)}
+		custom_train_names = []
 
-        if 'custom_train' in request.POST:
-            custom_train_names = [request.POST.get(f'hidden_custom_train_{i}', '') for i in range(1, num_people + 1)]
-            print(custom_train_names)
+		if 'custom_train' in request.POST:
+			custom_train_names = [request.POST.get(f'hidden_custom_train_{i}', '') for i in range(1, num_people + 1)]
+			print(custom_train_names)
 
-            total_score, not_found_passes = custom_train(custom_train_names)
-            context['custom_train_names'] = custom_train_names
-        else:
-            train, total_score = make_a_train(num_people, level)
+			total_score, not_found_passes = custom_train(custom_train_names)
+			context['custom_train_names'] = custom_train_names
+		else:
+			train, total_score = make_a_train(num_people, level)
 
-        context['total_score'] = total_score
-        context['train'] = train
-        # context['pass_names'] = get_pass_wheel(level)
-        print("Here is the total score: ", total_score, "Here are the not found passes: ", not_found_passes)
-        return render(request, 'dunktionaryApp/trainmaker.html', context)
-    
-    else:
-        return render(request, 'dunktionaryApp/trainmaker.html')
-    
+		context['total_score'] = total_score
+		context['train'] = train
+		# context['pass_names'] = get_pass_wheel(level)
+		print("Here is the total score: ", total_score, "Here are the not found passes: ", not_found_passes)
+		return render(request, 'dunktionaryApp/trainmaker.html', context)
+		
+	else:
+		return render(request, 'dunktionaryApp/trainmaker.html')
+		
 
 def theoryPageView(request):
-    db_dunks = Dunk.objects.all()
+	db_dunks = Dunk.objects.all()
 
-    context = {
-        "dunk" : db_dunks
-    }
+	context = {
+		"dunk" : db_dunks
+	}
 
-    return render(request, 'dunktionaryApp/theory.html', context)
+	return render(request, 'dunktionaryApp/theory.html', context)
