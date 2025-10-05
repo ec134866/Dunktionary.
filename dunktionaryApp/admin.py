@@ -17,7 +17,7 @@ class VariationAdmin(admin.ModelAdmin):
 
 class PassLevelAdmin(admin.ModelAdmin):
     list_display = ("pass_ref", "level", "can_start", "can_follow")
-    list_filter = ("level", "can_start", "can_follow")
+    list_filter = ("level", "can_start", "can_follow", "pass_ref__name",)
     search_fields = ("pass_ref__name",)
     filter_horizontal = ("variations",)
 
