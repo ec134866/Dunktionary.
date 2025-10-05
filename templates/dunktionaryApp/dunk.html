@@ -42,9 +42,19 @@
 						<h3>
 							<strong>Prerequisites:</strong> 
 							{% if dunk.prereq %}
-								<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-									{{ dunk.prereq|replace_underscore }}
-								</a>
+								{% if dunk.prereq_classification == "Pass" %}
+									<a href="{% url 'passlib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+										{{ dunk.prereq|replace_underscore }}
+									</a>
+								{% elif dunk.prereq_classification == "Dunk" %}
+									<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+										{{ dunk.prereq|replace_underscore }}
+									</a>
+								{% else %}
+									<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+										{{ dunk.prereq|replace_underscore }}
+									</a>
+								{% endif %}
 							{% else %}
 								None
 							{% endif %}
