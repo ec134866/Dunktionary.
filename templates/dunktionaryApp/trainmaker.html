@@ -166,21 +166,6 @@
 			document.getElementById('train').addEventListener('submit', function() {
 				copyTextToHiddenInputs();
 			});
-			
-
-			// spin wheel
-			function rotateFunction() {
-				var min = 1024;
-				var max = 9999;
-				var deg = Math.floor(Math.random() * (max - min)) + min;
-				document.getElementById('spinbox').style.transform = "rotate(" + deg + "deg";
-	
-				var element = document.getElementById('mainspinbox');
-				element.classList.remove('animate');
-				setTimeout(function () {
-					element.classList.add('animate');
-				}, 3000);
-			}
 		</script>
 	</body>
 </main>
