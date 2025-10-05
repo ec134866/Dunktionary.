@@ -107,6 +107,7 @@
 				var inputElement = document.getElementById(inputId);
 				var currentValue = parseInt(inputElement.value);
 
+				// update to min/max also needed in views.py 
 				if(inputId === 'level' && currentValue >= 9) return;
 				inputElement.value = currentValue + 1;
 				inputDisplayElement.innerText = currentValue + 1;
