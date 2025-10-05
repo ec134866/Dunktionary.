@@ -109,6 +109,8 @@
 
 				// update to min/max also needed in views.py 
 				if(inputId === 'level' && currentValue >= 9) return;
+				if(inputId === 'num_people' && currentValue >= 30) return;
+
 				inputElement.value = currentValue + 1;
 				inputDisplayElement.innerText = currentValue + 1;
 			}
