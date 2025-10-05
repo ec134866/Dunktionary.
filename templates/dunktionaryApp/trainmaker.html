@@ -41,7 +41,8 @@
 										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
 									</div>
 								</div>
-								<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'1' }}">
+								{% comment %} also update clamp here {% endcomment %}
+								<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'2' }}">
 							</div>
 						</div>
 						<div class="form-group row">
