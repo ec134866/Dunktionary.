@@ -59,11 +59,16 @@ class PassLevel(models.Model):
     
     class Meta:
         db_table = "pass_levels"
-        unique_together = ['pass_ref', 'level']
         ordering = ['level', 'pass_ref__name']
     
     def __str__(self):
-        return f"{self.pass_ref.name} - Level {self.level}"
+        flags = []
+        if self.can_start:
+            flags.append("start")
+        if self.can_follow:
+            flags.append("follow")
+        flag_str = f" ({'/'.join(flags)})" if flags else ""
+        return f"{self.pass_ref.name} - Level {self.level}{flag_str}"
 
 class DunkLevel(models.Model):
     dunk_ref = models.ForeignKey(Dunk, on_delete=models.CASCADE, related_name='levels')
@@ -72,7 +77,6 @@ class DunkLevel(models.Model):
     
     class Meta:
         db_table = "dunk_levels"
-        unique_together = ['dunk_ref', 'level']
         ordering = ['level', 'dunk_ref__name']
     
     def __str__(self):
