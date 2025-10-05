@@ -29,22 +29,6 @@
 				</div>
 				<div class = "col-12 col-lg-7">
 					<br> <br>
-					{% comment %} <div class="container-fluid" style="padding-left: 2vw; padding-right: 2vw;">
-						<button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
-							<span id="playPauseText">Play</span>
-						</button>
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-secondary active" onclick="setPlaybackRate(1.0)">
-								<input type="radio" name="playbackOptions" autocomplete="off" checked> 1x
-							</label>
-							<label class="btn btn-secondary" onclick="setPlaybackRate(0.5)">
-								<input type="radio" name="playbackOptions" autocomplete="off"> 0.5x
-							</label>
-							<label class="btn btn-secondary" onclick="setPlaybackRate(0.25)">
-								<input type="radio" name="playbackOptions" autocomplete="off"> 0.25x
-							</label>
-						</div> 
-					</div>	{% endcomment %}
 					<div class="row justify-content-center">
 						<div style="position: relative; width: 100%; margin: 0 auto; overflow: hidden;">
 							<video id="{{ pass.name }}" style="width: 100%; height: auto; display: block;" controls autoplay muted loop>
