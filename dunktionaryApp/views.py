@@ -96,7 +96,7 @@ def searchPageView(request):
 
 def trainPageView(request):
 	if request.method == 'POST':
-		# update to min/max also needed in trainmaker.html 
+		# update to min/max also needed in trainmaker.html , this updates what the actual script can run  
 		num_people = max(1, min(int(request.POST.get('num_people', 1)), 30))
 		level = max(0, min(int(request.POST.get('level', 1)), 9))
 		train = [] 

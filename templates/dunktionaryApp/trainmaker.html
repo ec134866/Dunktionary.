@@ -107,7 +107,7 @@
 				var inputElement = document.getElementById(inputId);
 				var currentValue = parseInt(inputElement.value);
 
-				// update to min/max also needed in views.py 
+				// update to min/max also needed in views.py , this just updates the visual option in html
 				if(inputId === 'level' && currentValue >= 9) return;
 				if(inputId === 'num_people' && currentValue >= 30) return;
 
