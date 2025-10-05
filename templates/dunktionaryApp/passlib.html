@@ -4,7 +4,11 @@
 		<title> Pass Library </title>
 		{% endblock %}
 		{% block search %}
-		
+		<form method ="get" action="{% url 'search' %}">
+			<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" 
+			style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px); 
+			border: 1px solid #ccc; border-radius: 4px; background-color: #f0f0f0;">
+		</form>
 		{% endblock %}
 		
 {% block content %}
@@ -18,13 +22,6 @@
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
-						<br>
-						<form method="get" action="{% url 'search' %}" style="position: relative; width: 100%;">
-							<input type="text" id="name" placeholder="Search..." name="name"
-								   style="width: 60%; padding: 8px 30px 8px 10px; 
-										  border: 1px solid #ccc; border-radius: 4px; 
-										  background-color: #f0f0f0;">
-						</form>
 						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
 					</ul>
 				</div>

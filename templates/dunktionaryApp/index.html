@@ -5,7 +5,9 @@
 		
 		{% block search %}
 		<form method ="get" action="{% url 'search' %}">
-			<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px);  border-radius: 4px;">
+			<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" 
+			style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px); 
+			border: 1px solid #ccc; border-radius: 4px; background-color: #f0f0f0;">
 		</form>
 		{% endblock %}
 		
