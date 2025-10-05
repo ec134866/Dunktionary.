@@ -121,7 +121,7 @@
 				var currentValue = parseInt(inputElement.value);
 
 				if(inputId === 'level' && currentValue <= 1) return;
-				if(inputId === 'num_people' && currentValue <= 1) return;
+				if(inputId === 'num_people' && currentValue <= 2) return;
 
 				inputElement.value = currentValue - 1;
 				inputDisplayElement.innerText = currentValue - 1;
