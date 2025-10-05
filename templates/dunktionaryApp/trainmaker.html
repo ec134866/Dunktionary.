@@ -117,7 +117,7 @@
 				var inputElement = document.getElementById(inputId);
 				var currentValue = parseInt(inputElement.value);
 
-				if(inputId === 'level' && currentValue <= 0) return;
+				if(inputId === 'level' && currentValue <= 1) return;
 				if(inputId === 'num_people' && currentValue <= 1) return;
 
 				inputElement.value = currentValue - 1;
