@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Import your existing data
-        from trainmaker import passes, dunks, scoring_table
+        from dunktionaryApp.trainmaker import passes, dunks, scoring_table
         
         self.stdout.write('Clearing existing train data...')
         PassLevel.objects.all().delete()
