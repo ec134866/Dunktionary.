@@ -39,3 +39,52 @@ class Pass(models.Model):
 
      class Meta:
         db_table = "passes"
+
+class Variation(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    
+    class Meta:
+        db_table = "variations"
+        ordering = ['name']
+    
+    def __str__(self):
+        return self.name
+
+class PassLevel(models.Model):
+    pass_ref = models.ForeignKey(Pass, on_delete=models.CASCADE, related_name='levels')
+    level = models.IntegerField()
+    can_start = models.BooleanField(default=False)
+    can_follow = models.BooleanField(default=False)
+    variations = models.ManyToManyField(Variation, blank=True, related_name='pass_levels')
+    
+    class Meta:
+        db_table = "pass_levels"
+        unique_together = ['pass_ref', 'level']
+        ordering = ['level', 'pass_ref__name']
+    
+    def __str__(self):
+        return f"{self.pass_ref.name} - Level {self.level}"
+
+class DunkLevel(models.Model):
+    dunk_ref = models.ForeignKey(Dunk, on_delete=models.CASCADE, related_name='levels')
+    level = models.IntegerField()
+    variations = models.ManyToManyField(Variation, blank=True, related_name='dunk_levels')
+    
+    class Meta:
+        db_table = "dunk_levels"
+        unique_together = ['dunk_ref', 'level']
+        ordering = ['level', 'dunk_ref__name']
+    
+    def __str__(self):
+        return f"{self.dunk_ref.name} - Level {self.level}"
+
+class TrickScore(models.Model):
+    trick_name = models.CharField(max_length=250, unique=True, db_index=True)
+    score_value = models.FloatField()
+    
+    class Meta:
+        db_table = "trick_scores"
+        ordering = ['trick_name']
+    
+    def __str__(self):
+        return f"{self.trick_name}: {self.score_value}"
