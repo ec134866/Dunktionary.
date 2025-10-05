@@ -71,18 +71,18 @@
 					<br><br>
 					<h4>
 						{% if train %}
-							<ul>
+							<ol>
 								{% for item in train %}
 								<li>{{ item }}</li>
 								{% endfor %}
-							</ul>
+							</ol>
 						{% else %}
 							{% if custom_train_names %}
-								<ul>
+								<ol>
 									{% for name in custom_train_names %}
 									<li>{{ name }}</li>
 									{% endfor %}
-								</ul>
+								</ol>
 							{% else %}
 								<p>No valid train could be generated.</p>
 							{% endif %}
