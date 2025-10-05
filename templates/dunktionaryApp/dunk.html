@@ -66,14 +66,14 @@
 						<h3><strong>Dunker:</strong> {{ dunk.dunker }}</h3>
 					</div>
 				</div>
-				<div class="col-sm-3 d-flex flex-column align-items-end">
+				<div class="col-sm-12 col-md-3 d-flex flex-column align-items-center">
 					<br> <br>
-					<div class="row" style="width: 100%;">
+					<div class="row" style="width: 80%;">
 						{% for dunk in dunks|slice:":10" %}
 							{% if dunk.image %}
-								<div class="col-12 mb-4">
+								<div class="col-12 mb-4 d-flex justify-content-center">
 									<a href="{% url 'dunklib'%}{{dunk.altName}}">
-										<div class="card" style="width: 17vw; height: 100%; margin-left: auto; overflow: hidden;">
+										<div class="card" style="width: 100%; height: 100%;">
 											<img class="card-img-top" src="{{ dunk.image }}" alt="{{ dunk.name }}" 
 												style="width: 100%; height: 100%; object-fit: cover;">
 											<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
