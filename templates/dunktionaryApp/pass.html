@@ -15,7 +15,7 @@
 			<div class = "row">
 				<div class = "col-sm-2">
 					<ul class="list-unstyled">
-						<br> <br> <br> <br>
+						<br> <br>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
@@ -30,7 +30,7 @@
 					</ul>
 				</div>
 				<div class = "col-sm-7">
-					<br> <br> <br> <br>
+					<br> <br>
 					{% comment %} <div class="container-fluid" style="padding-left: 2vw; padding-right: 2vw;">
 						<button class="btn btn-primary" id="playPauseButton" onclick="togglePlay()">
 							<span id="playPauseText">Play</span>
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				<div class="col-sm-3 d-flex flex-column align-items-end">
-					<br> <br> <br> <br>
+					<br> <br>
 					<div class="row" style="width: 100%;">
 						{% for pass in passes|slice:":10" %}
 							{% if pass.image %}

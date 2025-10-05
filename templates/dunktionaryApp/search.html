@@ -14,7 +14,7 @@
 			<div class = "row">
 				<div class = "col-sm-2">
 					<ul class="list-unstyled">
-						<br> <br> <br> <br>
+						<br> <br>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
 						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
@@ -29,7 +29,7 @@
 					</ul>
 				</div>
 				<div class = "col-sm-10">
-					<br><br><br><br>
+					<br> <br>
 					<div class= "row">
 						{% if dunks|length == 0 %}
 							{% if passes|length == 0 %}
