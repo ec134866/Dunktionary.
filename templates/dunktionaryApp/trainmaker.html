@@ -1,185 +1,181 @@
 {% extends 'base.html'%}
 	
-		{% block title %}
-		<title> Train Maker </title>
-		{% endblock %}
-		
-		{% block search %}
-		<form method ="get" action="{% url 'search' %}">
-			<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" 
-			style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px); 
-			border: 1px solid #ccc; border-radius: 4px; background-color: #f0f0f0;">
-		</form>
-		{% endblock %}
+{% block title %}
+<title> Train Maker </title>
+{% endblock %}
+
+{% block search %}
+<form method ="get" action="{% url 'search' %}">
+	<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" 
+	style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px); 
+	border: 1px solid #ccc; border-radius: 4px; background-color: #f0f0f0;">
+</form>
+{% endblock %}
 
 {% block content %}
-<main>
-	<body>
-		<div class= "container-fluid" style="padding-left: 2vw; padding-right: 2vw;">
-			<div class = "row">
-				<div class = "col-md-2 d-none d-md-block">
-					<ul class="list-unstyled">
-						<br> <br>
-						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
-						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
-						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
-						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
-					</ul>
-				</div>
-				<div class = "col-12 col-lg-7">
-					<br> <br>
-					<form method="post" id='train'>
-						{% csrf_token %}
-						<div class="form-group row">
-							<label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
-							<div class="col-sm-6">
-								<div class="input-group input-group-sm">
-									{% comment %} adjust clamp in views.py and trainmaker script below {% endcomment %}
-									<span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'2' }}</span>
-									<div class="input-group-append">
-										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
-									</div>
-								</div>
-								{% comment %} also update clamp here {% endcomment %}
-								<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'2' }}">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
-							<div class="col-sm-6">
-								<div class="input-group input-group-sm">
-									<span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'1' }}</span>
-									<div class="input-group-append">
-										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
-									</div>
-								</div>
-								<input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'1' }}">
-							</div>
-						</div>
-						<div id="HIDDEN_custom_train_text">
-							{% comment %} the script {% endcomment %}
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
-							<div class="col-sm-6">
-								<input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
-							</div>
-						</div>
-						<br>
-						<input type="submit" value="Generate Train" class="btn btn-primary">
-					</form>
-					<br><br>
-					<h4>
-						{% if train %}
-							<ol>
-								{% for item in train %}
-								<li>{{ item }}</li>
-								{% endfor %}
-							</ol>
-						{% else %}
-							{% if custom_train_names %}
-								<ol>
-									{% for name in custom_train_names %}
-									<li>{{ name }}</li>
-									{% endfor %}
-								</ol>
-							{% else %}
-								<p>No valid train could be generated.</p>
-							{% endif %}
-						{% endif %}									
-					</h4>
-					<div id="custom_train_text"></div>
-					<br>
-					<h4>Total Score: {{ total_score|floatformat:2 }}
-						<small style="font-size: 0.8rem;">
-							(based on <a href="https://drive.google.com/file/d/1atnUVpJGtzBruAKBXZ6W65XalClskX-V/view?usp=drive_link" target="_blank">Budunkfest scoring table</a>)
-						</small>
-					</h4>
-				</div>
-				<div class = "col-12 col-lg-3 d-flex flex-column align-items-center">
-					{% comment %} placeholder {% endcomment %}
-				</div>		  
-			</div>
+<div class= "container-fluid" style="padding-left: 2vw; padding-right: 2vw;">
+	<div class = "row">
+		<div class = "col-md-2 d-none d-md-block">
+			<ul class="list-unstyled">
+				<br> <br>
+				<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
+				<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
+				<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
+				{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
+			</ul>
 		</div>
-		<script>
-			function incrementNumber(inputId) {
-				var inputDisplayElement = document.getElementById(inputId + "_display");
-				var inputElement = document.getElementById(inputId);
-				var currentValue = parseInt(inputElement.value);
+		<div class = "col-12 col-lg-7">
+			<br> <br>
+			<form method="post" id='train'>
+				{% csrf_token %}
+				<div class="form-group row">
+					<label for="num_people" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Number of People:</label>
+					<div class="col-sm-6">
+						<div class="input-group input-group-sm">
+							{% comment %} adjust clamp in views.py and trainmaker script below {% endcomment %}
+							<span id="num_people_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.num_people|default:'2' }}</span>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('num_people')">▲</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('num_people')">▼</button>
+							</div>
+						</div>
+						{% comment %} also update clamp here {% endcomment %}
+						<input type="hidden" id="num_people" name="num_people" value="{{ request.POST.num_people|default:'2' }}">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="level" class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Level:</label>
+					<div class="col-sm-6">
+						<div class="input-group input-group-sm">
+							<span id="level_display" class="form-control border-0" style="font-size: 14px;">{{ request.POST.level|default:'1' }}</span>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-sm btn-outline-secondary" onclick="incrementNumber('level')">▲</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary" onclick="decrementNumber('level')">▼</button>
+							</div>
+						</div>
+						<input type="hidden" id="level" name="level" value="{{ request.POST.level|default:'1' }}">
+					</div>
+				</div>
+				<div id="HIDDEN_custom_train_text">
+					{% comment %} the script {% endcomment %}
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-6 col-form-label font-weight-bold" style="font-size: 14px;">Custom Train:</label>
+					<div class="col-sm-6">
+						<input type="checkbox" id="custom_train_checkbox" name="custom_train" value="1">
+					</div>
+				</div>
+				<br>
+				<input type="submit" value="Generate Train" class="btn btn-primary">
+			</form>
+			<br><br>
+			<h4>
+				{% if train %}
+					<ol>
+						{% for item in train %}
+						<li>{{ item }}</li>
+						{% endfor %}
+					</ol>
+				{% else %}
+					{% if custom_train_names %}
+						<ol>
+							{% for name in custom_train_names %}
+							<li>{{ name }}</li>
+							{% endfor %}
+						</ol>
+					{% else %}
+						<p>No valid train could be generated.</p>
+					{% endif %}
+				{% endif %}									
+			</h4>
+			<div id="custom_train_text"></div>
+			<br>
+			<h4>Total Score: {{ total_score|floatformat:2 }}
+				<small style="font-size: 0.8rem;">
+					(based on <a href="https://drive.google.com/file/d/1atnUVpJGtzBruAKBXZ6W65XalClskX-V/view?usp=drive_link" target="_blank">Budunkfest scoring table</a>)
+				</small>
+			</h4>
+		</div>
+		<div class = "col-12 col-lg-3 d-flex flex-column align-items-center">
+			{% comment %} placeholder {% endcomment %}
+		</div>		  
+	</div>
+</div>
+<script>
+	function incrementNumber(inputId) {
+		var inputDisplayElement = document.getElementById(inputId + "_display");
+		var inputElement = document.getElementById(inputId);
+		var currentValue = parseInt(inputElement.value);
 
-				// update to min/max also needed in views.py and visual above in html form, this just updates the visual option in html
-				if(inputId === 'level' && currentValue >= 9) return;
-				if(inputId === 'num_people' && currentValue >= 30) return;
+		// update to min/max also needed in views.py and visual above in html form, this just updates the visual option in html
+		if(inputId === 'level' && currentValue >= 9) return;
+		if(inputId === 'num_people' && currentValue >= 30) return;
 
-				inputElement.value = currentValue + 1;
-				inputDisplayElement.innerText = currentValue + 1;
+		inputElement.value = currentValue + 1;
+		inputDisplayElement.innerText = currentValue + 1;
+	}
+
+	function decrementNumber(inputId) {
+		var inputDisplayElement = document.getElementById(inputId + "_display");
+		var inputElement = document.getElementById(inputId);
+		var currentValue = parseInt(inputElement.value);
+
+		if(inputId === 'level' && currentValue <= 1) return;
+		if(inputId === 'num_people' && currentValue <= 2) return;
+
+		inputElement.value = currentValue - 1;
+		inputDisplayElement.innerText = currentValue - 1;
+	}
+
+	document.getElementById("custom_train_checkbox").addEventListener("change", function () {
+		var CustomTrainText = document.getElementById("custom_train_text");
+		var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
+		var numPeople = parseInt(document.getElementById("num_people").value);
+		var trainForm = document.getElementById('train');
+	
+		if (this.checked) {
+			// CustomTrainText.innerHTML = "";
+			// HIDDENCustomTrainText.innerHTML = ""; 
+			for (var i = 1; i <= numPeople; i++) {
+				var input = document.createElement("input");
+				input.type = "text";
+				input.name = "custom_train_" + i;
+	
+				var div = document.createElement("div");
+				div.appendChild(input);
+	
+				CustomTrainText.appendChild(div);
+	
+				var hiddenInput = document.createElement("input");
+				hiddenInput.type = "hidden";
+				hiddenInput.name = "hidden_custom_train_" + i;
+				div = document.createElement("div");
+				div.appendChild(hiddenInput);
+				HIDDENCustomTrainText.appendChild(div);
 			}
-		
-			function decrementNumber(inputId) {
-				var inputDisplayElement = document.getElementById(inputId + "_display");
-				var inputElement = document.getElementById(inputId);
-				var currentValue = parseInt(inputElement.value);
+			CustomTrainText.style.display = "block";
+			HIDDENCustomTrainText.style.display = "none";
+		} else {
+			CustomTrainText.innerHTML = "";
+			HIDDENCustomTrainText.innerHTML = "";
+			CustomTrainText.style.display = "none";
+			HIDDENCustomTrainText.style.display = "none";
+		}
+	});
 
-				if(inputId === 'level' && currentValue <= 1) return;
-				if(inputId === 'num_people' && currentValue <= 2) return;
-
-				inputElement.value = currentValue - 1;
-				inputDisplayElement.innerText = currentValue - 1;
+	function copyTextToHiddenInputs() {
+		var numPeople = parseInt(document.getElementById("num_people").value);
+		for (var i = 1; i <= numPeople; i++) {
+			var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
+			var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
+			if (customTrainInput && hiddenInput) {
+				hiddenInput.value = customTrainInput.value;
 			}
-
-			document.getElementById("custom_train_checkbox").addEventListener("change", function () {
-				var CustomTrainText = document.getElementById("custom_train_text");
-				var HIDDENCustomTrainText = document.getElementById("HIDDEN_custom_train_text");
-				var numPeople = parseInt(document.getElementById("num_people").value);
-				var trainForm = document.getElementById('train');
-			
-				if (this.checked) {
-					// CustomTrainText.innerHTML = "";
-					// HIDDENCustomTrainText.innerHTML = ""; 
-					for (var i = 1; i <= numPeople; i++) {
-						var input = document.createElement("input");
-						input.type = "text";
-						input.name = "custom_train_" + i;
-			
-						var div = document.createElement("div");
-						div.appendChild(input);
-			
-						CustomTrainText.appendChild(div);
-			
-						var hiddenInput = document.createElement("input");
-						hiddenInput.type = "hidden";
-						hiddenInput.name = "hidden_custom_train_" + i;
-						div = document.createElement("div");
-						div.appendChild(hiddenInput);
-						HIDDENCustomTrainText.appendChild(div);
-					}
-					CustomTrainText.style.display = "block";
-					HIDDENCustomTrainText.style.display = "none";
-				} else {
-					CustomTrainText.innerHTML = "";
-					HIDDENCustomTrainText.innerHTML = "";
-					CustomTrainText.style.display = "none";
-					HIDDENCustomTrainText.style.display = "none";
-				}
-			});
-
-			function copyTextToHiddenInputs() {
-				var numPeople = parseInt(document.getElementById("num_people").value);
-				for (var i = 1; i <= numPeople; i++) {
-					var customTrainInput = document.querySelector("input[name='custom_train_" + i + "']");
-					var hiddenInput = document.querySelector("input[name='hidden_custom_train_" + i + "']");
-					if (customTrainInput && hiddenInput) {
-						hiddenInput.value = customTrainInput.value;
-					}
-				}
-			}
-			
-			document.getElementById('train').addEventListener('submit', function() {
-				copyTextToHiddenInputs();
-			});
-		</script>
-	</body>
-</main>
+		}
+	}
+	
+	document.getElementById('train').addEventListener('submit', function() {
+		copyTextToHiddenInputs();
+	});
+</script>
 {% endblock %}
