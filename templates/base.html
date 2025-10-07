@@ -116,6 +116,74 @@
 	{% block content %}
 	{% endblock %}
 
+	<section class="about-section py-5 bg-dark text-white">
+		<div class="container">
+			<div class="row align-items-start">
+				<div class="col-lg-3 col-md-4 mb-4 mb-md-0 text-center">
+					<img 
+					src="https://drive.google.com/uc?id=1RDpx7qQqpBzNI58Gnnsv5pnNe1IgCmsI&export=download"
+					alt="About The Dunktionary" 
+					class="img-fluid rounded shadow"
+					style="max-height: 250px; object-fit: cover;">
+				</div>
+				<div class="col-lg-5 col-md-8 mb-4 mb-lg-0">
+					<h3 class="mb-3">About The Dunktionary</h3>
+					<p class="mb-0">
+					The Dunktionary is a community-driven guide to the world of acrobatic dunking —
+					documenting passes, dunks, and trains from across the globe. 
+					It aims to celebrate creativity and progression in tricking and dunk culture.
+					<br><br>
+					<em>
+						This site is not affiliated with or officially endorsed by any University, NBA, 
+						or Acrobatic Dunk team.
+					</em>
+					</p>
+				</div>
+				<div class="col-lg-4 col-12 text-center">
+					<h4 class="text-uppercase font-weight-bold mb-3">Submit an Element</h4>
+					<p style="color: #ccc; font-size: 0.95rem;">
+					Can't find a pass or see a missing element?
+					Help improve the Dunktionary! Submit new elements, 
+					report broken links, alternate names, or share feedback.
+					</p>
+					<button 
+					type="button" 
+					class="btn btn-primary btn-block mb-3" 
+					data-toggle="modal" 
+					data-target="#submitFormModal">
+					Submit a Trick / Element
+					</button>
+			
+					<p style="font-size: 0.85rem; color: #bbb;">
+					Want to submit multiple elements?<br>
+					Contact <a href="mailto:evan@TheDunktionary.org" class="text-white">evan@TheDunktionary.org</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width: 90%;">
+			<div class="modal-content">
+				<div class="modal-header bg-dark text-white">
+					<h5 class="modal-title" id="submitFormModalLabel">Submit a New Element</h5>
+					<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="padding: 0;">
+					<iframe 
+					src="https://docs.google.com/forms/d/e/1FAIpQLSfNIvrbLgUbj7xsW7-ACoiEzqxHkwcT54rMypwpgF0o-okRQA/viewform?embedded=true" 
+					width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0"
+					style="border: none;">
+					Loading…
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
