@@ -75,7 +75,7 @@
 	</style>
 </head>
 
-<body data-new-gr-c-s-check-loaded="14.1087.0" data-gr-ext-installed="">
+<body class="d-flex flex-column min-vh-100">
 <header>
 	<div class="bg-dark collapse" id="navbarHeader" style="">
 		<div class="container-fluid justify-content-between" style="padding-left: 2vw; padding-right: 2vw;">
@@ -113,8 +113,10 @@
 	</div>
 </header>
 
-	{% block content %}
-	{% endblock %}
+	<main class="flex-grow-1">
+		{% block content %}
+		{% endblock %}
+	</main>
 
 	<div style="min-height: 90vh;"></div>
 	<section class="about-section py-5 bg-dark text-white">
