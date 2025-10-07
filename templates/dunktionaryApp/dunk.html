@@ -1,100 +1,96 @@
 {% extends 'base.html'%}
 {% load custom_filters %}
 	
-		{% block title %}
-		<title> {{dunk.name}} Dunk </title>
-		{% endblock %}
-		
-		{% block search %}
-		<form method ="get" action="{% url 'search' %}">
-			<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" 
-			style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px); 
-			border: 1px solid #ccc; border-radius: 4px; background-color: #f0f0f0;">
-		</form>
-		{% endblock %}
+{% block title %}
+<title> {{dunk.name}} Dunk </title>
+{% endblock %}
+
+{% block search %}
+<form method ="get" action="{% url 'search' %}">
+	<input type="text" id="name" placeholder="Search Dunktionary..." name = "name" 
+	style="font-size: 0.7rem; height: 2rem; width: clamp(50px, 15vw, 150px); 
+	border: 1px solid #ccc; border-radius: 4px; background-color: #f0f0f0;">
+</form>
+{% endblock %}
 
 {% block content %}
-<main>
-	<body>
-		<div class= "container-fluid" style="padding-left: 2vw; padding-right: 2vw;">
-			<div class = "row">
-				<div class = "col-md-2 d-none d-md-block">
-					<ul class="list-unstyled">
-						<br> <br>
-						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
-						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
-						<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
-						{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
-					</ul>
-				</div>
-				<div class = "col-12 col-lg-7">
-					<br> <br>
-					<div class="row justify-content-center">
-						<div style="position: relative; width: 100%; margin: 0 auto; overflow: hidden;">
-							<video id="{{ dunk.name }}" style="width: 100%; height: auto; display: block;" controls autoplay muted loop>
-								<source src="{{ dunk.video }}" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-						</div>  
-					</div>
-					<div style="margin-top: 2vh; text-align: left;">
-						<h1><strong>{{ dunk.name | capfirst }}</strong></h1>
-						<h3>
-							<strong>Prerequisites:</strong> 
-							{% if dunk.prereq %}
-								{% if dunk.prereq_classification == "Pass" %}
-									<a href="{% url 'passlib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-										{{ dunk.prereq|replace_underscore }}
-									</a>
-								{% elif dunk.prereq_classification == "Dunk" %}
-									<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-										{{ dunk.prereq|replace_underscore }}
-									</a>
-								{% else %}
-									<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
-										{{ dunk.prereq|replace_underscore }}
-									</a>
-								{% endif %}
-							{% else %}
-								None
-							{% endif %}
-						</h3>
-						<h3><strong>Dunker:</strong> {{ dunk.dunker }}</h3>
-					</div>
-				</div>
-				<hr class="d-block d-lg-none" style="width: 100%; border-top: 2px solid #ccc; margin-top: 4rem; margin-bottom: 0;">
-				<div class="col-12 col-lg-3 d-flex flex-column align-items-center">
-					<br> <br>
-					<div class="row" style="width: 80%;">
-						{% for dunk in dunks|slice:":10" %}
-							{% if dunk.image %}
-								<div class="col-12 mb-4 d-flex justify-content-center">
-									<a href="{% url 'dunklib'%}{{dunk.altName}}">
-										<div class="card" style="width: 100%; height: 100%;">
-											<img class="card-img-top" src="{{ dunk.image }}" alt="{{ dunk.name }}" 
-												style="width: 100%; height: 100%; object-fit: cover;">
-											<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-												background-color: rgba(0, 0, 0, 0.3);"></div>
-											<div class="card-img-overlay d-flex justify-content-center align-items-center text-white">
-												<h2 class="card-title w-100"
-													style="text-shadow: 2px 1px 2px black;
-														   text-transform: uppercase;
-														   text-align: center;
-														   font-size: clamp(1rem, 2vw, 1.5vw);
-														   line-height: 1.2;
-														   word-wrap: break-word;">
-													{{dunk.name}}
-												</h2>
-											</div>
-										</div>
-									</a>
-								</div>
-							{% endif %}
-						{% endfor %}
-					</div>
-				</div>
+<div class= "container-fluid" style="padding-left: 2vw; padding-right: 2vw;">
+	<div class = "row">
+		<div class = "col-md-2 d-none d-md-block">
+			<ul class="list-unstyled">
+				<br> <br>
+				<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'passlib' %} class="text-dark text-decoration-none">Passes</a></h4>
+				<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'dunklib' %} class="text-dark text-decoration-none">Dunks</a></h4>
+				<h4 style= "font-size: clamp(3rem, 3vw, 2.5vw)"><a href={% url 'makeATrain' %} class="text-dark text-decoration-none">Train Maker</a></h4>
+				{% comment %} <h4 style= "font-size:1vw"><a href={% url 'dunkTheory'%} class="text-decoration-none" style= "color:#444444">Dunk Theory</a></h4> {% endcomment %}
+			</ul>
+		</div>
+		<div class = "col-12 col-lg-7">
+			<br> <br>
+			<div class="row justify-content-center">
+				<div style="position: relative; width: 100%; margin: 0 auto; overflow: hidden;">
+					<video id="{{ dunk.name }}" style="width: 100%; height: auto; display: block;" controls autoplay muted loop>
+						<source src="{{ dunk.video }}" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>  
+			</div>
+			<div style="margin-top: 2vh; text-align: left;">
+				<h1><strong>{{ dunk.name | capfirst }}</strong></h1>
+				<h3>
+					<strong>Prerequisites:</strong> 
+					{% if dunk.prereq %}
+						{% if dunk.prereq_classification == "Pass" %}
+							<a href="{% url 'passlib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+								{{ dunk.prereq|replace_underscore }}
+							</a>
+						{% elif dunk.prereq_classification == "Dunk" %}
+							<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+								{{ dunk.prereq|replace_underscore }}
+							</a>
+						{% else %}
+							<a href="{% url 'dunklib' %}{{ dunk.prereq }}" class="text-dark text-decoration-none">
+								{{ dunk.prereq|replace_underscore }}
+							</a>
+						{% endif %}
+					{% else %}
+						None
+					{% endif %}
+				</h3>
+				<h3><strong>Dunker:</strong> {{ dunk.dunker }}</h3>
 			</div>
 		</div>
-	</body>
-</main>
+		<hr class="d-block d-lg-none" style="width: 100%; border-top: 2px solid #ccc; margin-top: 4rem; margin-bottom: 0;">
+		<div class="col-12 col-lg-3 d-flex flex-column align-items-center">
+			<br> <br>
+			<div class="row" style="width: 80%;">
+				{% for dunk in dunks|slice:":10" %}
+					{% if dunk.image %}
+						<div class="col-12 mb-4 d-flex justify-content-center">
+							<a href="{% url 'dunklib'%}{{dunk.altName}}">
+								<div class="card" style="width: 100%; height: 100%;">
+									<img class="card-img-top" src="{{ dunk.image }}" alt="{{ dunk.name }}" 
+										style="width: 100%; height: 100%; object-fit: cover;">
+									<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+										background-color: rgba(0, 0, 0, 0.3);"></div>
+									<div class="card-img-overlay d-flex justify-content-center align-items-center text-white">
+										<h2 class="card-title w-100"
+											style="text-shadow: 2px 1px 2px black;
+													text-transform: uppercase;
+													text-align: center;
+													font-size: clamp(1rem, 2vw, 1.5vw);
+													line-height: 1.2;
+													word-wrap: break-word;">
+											{{dunk.name}}
+										</h2>
+									</div>
+								</div>
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
